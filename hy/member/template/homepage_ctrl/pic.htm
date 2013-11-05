@@ -1,0 +1,55 @@
+<!--
+<?php
+print <<<EOT
+-->
+<style type="text/css">
+    .hint {color:#CCC;}
+    .save {padding-left:66px;}
+</style>
+
+        <table width="100%"  cellpadding="5" cellspacing="1" bgcolor="#CCCCCC" class="posttable">
+          <tr>
+            <td width="5%" rowspan="3" align="left" valign="top" bgcolor="#F9F9F9">            </td>
+            <td width="95%" align="left" bgcolor="#F9F9F9"><br/><a href="?atn=pic_upload&uid=$uid"></a><strong>添加图集</strong></td>
+          </tr>
+          
+          <tr>
+            <td bgcolor="#F9F9F9"><br/><form id="form2" name="form2" method="post" action="?">
+              <input name="psid" type="hidden" id="psid" value="$edit_psid" />
+              <input name="uid" type="hidden" id="uid" value="$uid" />
+              <input name="atn" type="hidden" id="atn" value="save_picsort" />
+              图集名称：&nbsp;<input name="name" type="text" id="name" value="$rsdb[name]" size="20" />
+                <span class="hint">2-8个字</span>
+  <br /><br />
+              图集描述：
+  <textarea name="remarks" cols="20" rows="3" id="remarks">$rsdb[remarks]</textarea>
+                <span class="hint">0-50个字</span>
+  <br /><br />
+              图集排序：
+  <input name="orderlist" type="text" id="orderlist" value="$rsdb[orderlist]" size="5" />
+                <span class="hint">填写数字，数字大在前</span><br />
+  <br />
+  <div class="save"><input type="submit" name="Submit" value="保 存" /></div>
+            </form>
+<!--
+EOT;
+foreach($listdb as $rs){
+print <<<EOT
+-->
+                <div style="float:left; width:130px; height:140px; text-align:center; padding:5px; margin:10px;padding-left:35px;"> <a href="?atn=piclist&amp;uid=$uid&amp;psid=$rs[psid]"><img src="$rs[faceurl].gif"  style="border:2px #CCCCCC solid;" width="90" height="90" onerror="this.src='$Murl/images/default/userpicsortdefault.gif';"/> <br />
+                    <strong>$rs[name]</strong></a><strong></strong> <br />
+                    <a href="?atn=pic&amp;edit_psid=$rs[psid]&uid=$uid">编辑</a> <a href="?atn=del_picsort&amp;psid=$rs[psid]&uid=$uid" onclick="return confirm('确定删除{$rs[name]}吗？');">删除</a></div>
+                <!--
+EOT;
+}
+print <<<EOT
+--></td>
+          </tr>
+          <tr>
+            <td height="90" valign="middle" align="left" style="padding-left:63px;" bgcolor="#F9F9F9"><a href="?atn=pic_upload&amp;uid=$uid"><img src="$Murl/images/default/userpicupload.gif"  border="0"/></a></td>
+          </tr>
+        </table>
+<!--
+EOT;
+?>
+-->

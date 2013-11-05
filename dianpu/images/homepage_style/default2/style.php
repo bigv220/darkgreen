@@ -1,0 +1,4 @@
+<?php
+$homepage_tpl['default2']="Ä¬ÈÏ·ç¸ñ";
+
+?>

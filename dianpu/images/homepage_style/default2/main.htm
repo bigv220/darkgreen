@@ -1,0 +1,167 @@
+<!--
+<?php
+$renzhengdb=array(
+	0=>'<font color="#cccccc">普通会员</font>',
+	1=>'<font color="#000000">普通会员</font>',
+	2=>'<font color="#9a0000">商务通会员</font>',
+	3=>'<font color="#FF0000">VIP会员</font>',
+);
+$renzhengdbname=$renzhengdb[$rsdb[renzheng]];
+$renzhengdbsm=array(
+	0=>'还未进行认证',
+	1=>'已通过实名认证',
+	2=>'已通过实名认证',
+	3=>'已通过实名认证',
+);
+$renzhengdbnamesm=$renzhengdbsm[$rsdb[renzheng]];
+if (!empty($rsdb['qq'])) {
+    $qq = '';
+} else {
+    $qq= '<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:11531263:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a>';
+}
+function ytime($d){
+$Date_1=date("Y-m-d");
+$Date_2=$d;
+$Date_List_a1=explode("-",$Date_1);
+$Date_List_a2=explode("-",$Date_2);
+$d1=mktime(0,0,0,$Date_List_a1[1],$Date_List_a1[2],$Date_List_a1[0]);
+$d2=mktime(0,0,0,$Date_List_a2[1],$Date_List_a2[2],$Date_List_a2[0]);
+return round(($d1-$d2)/3600/24/365);}
+$my_t=getdate($rsdb[posttime]);
+$my_t1=$my_t[year].'-'.$my_t[mon].'-'.$my_t[mday];
+$yetimest=ytime($my_t1);
+print <<<EOT
+-->
+<div class="lysw_main_l heightbox">
+
+    <div class="ly_shop_left">
+    <font style=" font-size:14px; font-weight:bold;">{$renzhengdbname}</font>&nbsp;&nbsp;<font style=" color:#009900;font-size:12px; font-weight:bold;">第 $yetimest 年</font><br /><br />店铺类型：<font style=" color:#009900;">{$rsdb[qy_cate]}</font><br />
+    登记时间：<font style=" color:#009900;">$rsdb[qy_createtime]</font><br />
+    经营模式：$rsdb[qy_saletype]<br />
+    身份信息：<font style=" color:#009900;">{$renzhengdbnamesm}</font><br />
+    所在地区：$rsdb[qy_address]<br /><br />
+    联系人：$rsdb[qy_contact]<br /><img src="images/shangmao_w.jpg" />
+        <a href="http://gogo.darkgreen.cn" target="_blank"><img src="../images/default/GOGO.jpg"  style="border:1px solid gray;margin:2px 0 2px 0;"/></a>
+ $qq
+    </div>
+
+    <!--主体-左边部分-->
+<!--include
+EOT;
+$mod_in='left';
+foreach($conf[index_left] as $file){
+	get_homepage_module($file);
+}
+print <<<EOT
+include-->
+
+
+</div>
+
+  <div class="lysw_main_r heightbox">
+
+  <div class="lysw_main_r_tit_shop">
+    <!--
+EOT;
+$mm=$_GET[m];
+if($mm==''){$mm='home';}
+$i=0;
+foreach($h_menu as $key =>$rs){
+$i++;
+if(strstr($rs[url],$mm))
+$begin="class=lysw_main_r_tit_shopon";
+else
+$begin='';
+print<<<EOT
+-->
+    <li $begin><a href="$webdb[www_url]/shome/$rs[url] $mm1" style="display:block" class="homemenu">$rs[title]</a></li>
+<!--
+EOT;
+}
+print<<<EOT
+-->
+  </div>
+  <div class="lysw_main_r_tit_shop_banner">
+
+<!--
+EOT;
+$queryproaa = $db->query("SELECT * FROM {$_pre}pic WHERE uid='$uid' AND psid=0 ORDER BY orderlist ASC");
+while($keycen = $db->fetch_array($queryproaa)){
+$cenlist=$keycen[url];
+}
+if($cenlist){
+print <<<EOT
+-->
+
+
+<div class="SlideCont">
+                	<script src="/images/default/jquery.js" type="text/javascript"></script>
+ <ul class="slidePic">
+<!--
+EOT;
+$pici=0;
+$querypro = $db->query("SELECT * FROM {$_pre}pic WHERE uid='$uid' AND psid=0 ORDER BY orderlist ASC");
+while($key = $db->fetch_array($querypro)){
+$pici++;
+if($pici<2)
+$classty='class=cur';
+else
+$classty='';
+print <<<EOT
+-->
+    <li $classty><IMG border="0" title="$key[title]" alt="$key[title]" src="/upload_files/$key[url]" width="1000" height="200" /></li>
+
+<!--
+EOT;
+}
+print <<<EOT
+-->
+
+  </ul>
+  <ul class="slideTxt">
+<!--
+EOT;
+$pici=0;
+$querypro = $db->query("SELECT * FROM {$_pre}pic WHERE uid='$uid' AND psid=0 ORDER BY orderlist ASC");
+while($key = $db->fetch_array($querypro)){
+$pici++;
+if($pici<2)
+$classty='class=cur';
+else
+$classty='';
+print <<<EOT
+-->
+    <li $classty><a href="#" title="$key[title]">$pici</a></li>
+
+<!--
+EOT;
+}
+print <<<EOT
+-->
+  </ul>
+<script type="text/javascript" src="/images/default/slide.js"></script>
+                </div>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+  </div>
+  <!--主体-右边部分-->
+<!--include
+EOT;
+$mod_in='right';
+if($m=='home'){
+    foreach($conf[index_right] as $file){
+        get_homepage_module($file);
+    }
+}else{
+	get_homepage_module($m);
+}
+print <<<EOT
+include-->
+  </div>
+<!--
+EOT;
+?>
+-->

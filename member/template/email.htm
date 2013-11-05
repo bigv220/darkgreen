@@ -1,0 +1,313 @@
+<!--
+<?php
+if($job=='reg'){
+print <<<EOT
+-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+  <tr> 
+    <td height="100" valign="top" class="Main"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable">
+        <tr> 
+          <td class="head">启用免费邮箱</td>
+        </tr>
+        <tr> 
+          <td class="middle"> 
+
+         
+            <table width="100%" border="0" cellspacing="5" cellpadding="5">
+              <form name="form4Start" method="post" action="?job=reg&" enctype="multipart/form-data" onsubmit="return ckregdatapost();">
+                <tr> 
+                  <td height="25"> 
+                    <table width="100%" border="0" cellspacing="1" cellpadding="6">
+                      <tr> 
+                        <td colspan="2" style="border-bottom:1px solid #ccc;background:#eee;line-height:21px; padding: 3px 7px;">以下为重要信息</td>
+                      </tr>
+                      <tr> 
+                        <td height="40" align="right" style="width: 200px;">账号：</td>
+                        <td> $lfjid </td>
+                      </tr>
+                      <tr> 
+                        <td height="40" align="right">选择邮箱：</td>
+                        <td class="">
+                        <select name="email" id="email">
+                          <option value="green-cc.com">$lfjid@green-cc.com</option>
+                          <option value="blove-cc.com">$lfjid@blove-cc.com</option>
+                          <option value="red-cc.com">$lfjid@red-cc.com</option>
+                        </select>
+&nbsp;&nbsp;&nbsp;<font style="color:#8f5154">red-cc.com</font>&nbsp;&nbsp;<font style="color:#74bab8">blove-cc.com</font>&nbsp;&nbsp;<font style="color:#558668">green-cc.com</font>&nbsp;&nbsp;<font style="color:#949494">这三种不同的邮箱域名，可供选择</font></td>
+                      </tr>
+                      <tr> 
+                        <td height="40" align="right">大小：</td>
+                        <td class="">
+                        <select name="emailsize" id="emailsize">
+                          <option value="100">100M</option>
+                          <option value="200">200M</option>
+                          <option value="300">300M</option>
+                          <option value="400">400M</option>
+                          <option value="500">500M</option>
+                        </select>
+                         </td>
+                      </tr>
+                      <tr> 
+                        <td height="40" align="right">密码设置：</td>
+                        <td class="">
+                          <input type="password" name="password" style="width:130px;"> &nbsp;&nbsp;&nbsp;&nbsp;
+                          <font style="color:#949494">邮箱内有重新设置密码的功能</font> </td>
+                      </tr>
+                      <tr>
+                        <td height="40" align="right">&nbsp;</td>
+                        <td class="">
+                            <a href="http://www.darkgreen.cn/do/reg1.html" target="_blank">已阅读并同意用户协议</a>&nbsp;
+                            <input id="proChk" name="" type="checkbox" value="" checked="checked" />&nbsp;&nbsp;
+                            <input type="button" id="Submit3" name="Submit3" value="提 交" onclick="doSubmit1()" style="cursor: pointer;">
+                            <input type="hidden" name="step" value="2">
+                            <input type="hidden" name="emailname" value="$lfjid">&nbsp;&nbsp;
+                            <font style="color:#949494">点击提交后，您的绿页邮箱,在一个工作日后就可以使用了</font>
+                        </td>
+                      </tr>
+                      <tr> 
+                        <td colspan="2">
+                        <script src="$webdb[www_url]/images/default/setday.js"></script>
+                        <script language="JavaScript">
+						<!--
+						function doSubmit1() {
+							if (!document.getElementById("proChk").checked) {
+								alert("您只有在已阅读并同意用户协议的前提下，才可以申请！");
+								return;
+							}
+							document.form4Start.submit();
+						}
+                        function doSubmit2() {
+                            if (!document.getElementById("buyChk").checked) {
+                                alert("您只有在已阅读并同意用户协议的前提下，才可以购买！");
+                                return;
+                            }
+                            document.form4Buy.submit();
+                        }
+						var filed_id='';
+						var filed_name='';
+						function ckregdata(a,b){
+						    filed_id=a;
+						    filed_name=b;
+						}
+						function ckregdatapost(){
+						    id_array=filed_id.split(',');
+						    name_array=filed_name.split(',');
+						    for(var i=0;i<id_array.length;i++){
+						        if(id_array[i]!=''&&document.getElementById(id_array[i]).value==''){
+						            alert("“"+name_array[i]+'”不能为空');
+						            document.getElementById(id_array[i]).focus();
+						            return false;
+						        }
+						    }
+						}
+						
+						/*如要为页面布局考虑的话，您可以把template\default\regfield.htm里边的内容复制过来，然后把以下两行删除即可*/
+						document.write('<div id="showRegDiv"></div>');
+						AJAX.get("showRegDiv","$webdb[www_url]/do/regfield.php?job=reg");
+						//-->
+                        </script></td>
+                      </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr> 
+                        <td align="center"> 
+                          
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </form>
+            </table>
+            
+          </td>
+        </tr>
+        <tr>
+          <td class="foot">
+            <h3 class="L"></h3>
+            <h3 class="R"></h3>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+  <tr> 
+    <td height="100" valign="top" class="Main"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable">
+        <tr> 
+          <td class="head">自动设置，启用绿页商务信箱</td>
+        </tr>
+        <tr> 
+          <td class="middle"> 
+
+         
+            <table width="100%" border="0" cellspacing="5" cellpadding="5">
+              <form name="form4Buy" method="post" action="?job=buy&" enctype="multipart/form-data">
+               <script language="javascript">
+
+                function mailsizeselect(){
+                    var sizevalue=document.form2.mailsize.value;
+                    document.form2.mailpirce.value=sizevalue;
+                    var mailallpircev=sizevalue*document.form2.mailnum.value*document.form2.mailtime.value;
+                    document.form2.mailallpirce.value=mailallpircev;
+                    if(mailallpircev>$lfjdb[money]){
+                        document.getElementById("yebz").innerHTML="<a href=/member/money.php?job=list><font style=color:#ff0000>余额不足，请充值！</font></a>";
+                        document.form2.Submit3.disabled = true; 
+                    }
+                    if(mailallpircev<=$lfjdb[money]){
+                        document.getElementById("yebz").innerHTML="";
+                        document.form2.Submit3.disabled = false; 
+                    }
+                }
+                function mailnumselect(){
+                    var mailallpircev=document.form2.mailpirce.value*document.form2.mailnum.value*document.form2.mailtime.value;
+                    document.form2.mailallpirce.value=mailallpircev;
+                    if(mailallpircev>$lfjdb[money]){
+                        document.getElementById("yebz").innerHTML="<a href=/member/money.php?job=list><font style=color:#ff0000>余额不足，请充值！</font></a>";
+                        document.form2.Submit3.disabled = true; 
+                    }
+                    if(mailallpircev<=$lfjdb[money]){
+                        document.getElementById("yebz").innerHTML="";
+                        document.form2.Submit3.disabled = false; 
+                    }
+                }
+                function mailtimeselect(){
+                    var mailallpircev=document.form2.mailpirce.value*document.form2.mailnum.value*document.form2.mailtime.value;
+                    document.form2.mailallpirce.value=mailallpircev;
+                    if(mailallpircev>$lfjdb[money]){
+                        document.getElementById("yebz").innerHTML="<a href=/member/money.php?job=list><font style=color:#ff0000>余额不足，请充值！</font></a>";
+                        document.form2.Submit3.disabled = true; 
+                    }
+                    if(mailallpircev<=$lfjdb[money]){
+                        document.getElementById("yebz").innerHTML="";
+                        document.form2.Submit3.disabled = false; 
+                    }
+                }
+                
+                function mailonselect(){
+                    var mailallpircebv=500;
+                    if(mailallpircebv>$lfjdb[money]){
+                        document.getElementById("yebz").innerHTML="<a href=/member/money.php?job=list><font style=color:#ff0000>余额不足，请充值！</font></a>";
+                        document.form2.Submit3.disabled = true; 
+                    }
+                    if(mailallpircebv<=$lfjdb[money]){
+                        document.getElementById("yebz").innerHTML="";
+                        document.form2.Submit3.disabled = false; 
+                    }
+                }
+                </script>
+                
+                <tr> 
+                  <td height="25"> 
+                    <table width="100%" border="0" cellspacing="1" cellpadding="6">
+                      <tr> 
+                        <td colspan="2" style="border-bottom:1px solid #ccc;background:#eee;line-height:21px;  padding: 3px 7px;">以下为重要信息</td>
+                      </tr>
+                      <tr> 
+                        <td style="width: 200px;" height="40" align="right">账号：</td>
+                        <td> $lfjid </td>
+                      </tr>
+                      <tr> 
+                        <td height="40" align="right">写入邮箱域名：</td>
+                        <td class=""><input type="text" name="domain" style="width:130px;" id="domain" /></td>
+                      </tr>
+                      <tr> 
+                        <td height="40" align="right">&nbsp;</td>
+                        <td class=""><font style="color:#949494">此域名是您自行注册的，必须是已解析的有效域名。如还没有域名，可登录专业网站自助办理，按要求完成解析后，填加在这里。</font></td>
+                      </tr>
+                      <tr>
+                        <td height="40" align="right">选择需要的容量：</td>
+                        <td class="">
+	                        <select name="mailsize" id="mailsize" onchange="mailsizeselect();">
+	                          <option value="50">100M</option>
+	                          <option value="100">200M</option>
+	                          <option value="250">500M</option>
+	                          <option value="500">1000M</option>
+	                          <option value="1000">2000M</option>
+	                          <option value="1500">3000M</option>
+	                        </select> 本容量邮箱的单价：                        
+	                        <input name="mailpirce" type="text" id="mailpirce" style="width:130px;" value="50" readonly="readonly" /> 元/年
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="40" align="right">选择邮箱的数量：</td>
+                        <td class=""><select name="mailnum" id="mailnum" onchange="mailnumselect();">
+                          <option value="10">10</option>
+                          <option value="30">30</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                          <option value="500">500</option>
+                        </select></td>
+                      </tr>
+                      <tr>
+                        <td height="40" align="right">使用时间：</td>
+                        <td class=""><select name="mailtime" id="mailtime" onchange="mailtimeselect();">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select> 年</td>
+                      </tr>
+                      <tr>
+                        <td height="40" align="right">总价：</td>
+                        <td class="">
+                            <input name="mailallpirce" type="text" id="mailallpirce" style="width:130px;" value="500" readonly="readonly" /> 元
+                        </td>
+                      </tr>
+                      <tr>
+                        <td height="40" align="right">余额：</td>
+                        <td class=""><font style="color:#F00">{$lfjdb[money]}</font> <span id="yebz"></span></td>
+                      </tr>
+                      <tr> 
+                        <td height="40" align="right">备注：</td>
+                        <td class=""><label for="remark"></label>
+                          <label for="remark2"></label>
+                        <textarea name="remark" id="remark2" cols="45" rows="5"></textarea></td>
+                      </tr>
+                      <tr>
+                        <td height="40" align="right">&nbsp;</td>
+                        <td class="">
+                            <a href="http://www.darkgreen.cn/do/reg1.html" target="_blank">已阅读并同意用户协议</a>&nbsp;
+                            <input id="buyChk" name="" type="checkbox" value="" checked="checked" />&nbsp;&nbsp;
+                            <input type="button" id="Submit3" name="Submit3" value="现在购买" onclick="doSubmit2()" style="cursor: pointer;">
+                            <input type="hidden" name="step" value="2">
+                            <input type="hidden" name="emailname" value="$lfjid">&nbsp;&nbsp;
+                            <font style="color:#949494">点击购买后，您的绿页邮箱,在一个工作日后就可以使用了</font>
+                        </td>
+                      </tr>
+                      
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr> 
+                        <td align="center"> 
+                          
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </form>
+            </table>
+            
+          </td>
+        </tr>
+        <tr>
+          <td class="foot">
+            <h3 class="L"></h3>
+            <h3 class="R"></h3>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!--
+EOT;
+}
+?>
+-->

@@ -1,0 +1,74 @@
+<!--
+<?php
+print <<<EOT
+-->
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+  <tr> 
+    <td height="100" valign="top" class="Main"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable" >
+        <tr> 
+          <td class="head">绿页商务信箱管理 </td>
+        </tr>
+        <tr> 
+          <td class="middle"> 
+            <br /><br />
+            <table width="98%" border="0" cellspacing="1" cellpadding="3" style='TABLE-LAYOUT: fixed;WORD-WRAP: break-word' align="center">
+              <tr><td colspan="4" width="100%"><font style="color:#949494">说明：设置完成，您的邮箱将在1个工作日后正式启用，绿页商务平台客服人员随时恭候您的咨询。400-0532-796</font></td></tr>
+              <tr align="center" class="head_in"> <td width="52%">邮箱用户名</td>
+                <td width="19%">邮箱密码</td>
+                <td width="19%">备注</td>
+                <td width="10%">操作</td>
+              </tr>
+              <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+$isopen='';
+if($rs[isopen]==0)$isopen='等待开通...';
+print <<<EOT
+-->
+              <tr class='trA' onMouseOver="this.className='trB'" onMouseOut="this.className='trA'">  
+              <td align="left" width="52%">$rs[userid]&nbsp;&nbsp;<font style="color:#F00">$isopen</font></td>
+                <td  align="center" width="19%">$rs[userpass] </td>
+                <td  align="center" width="19%">$rs[remark] </td>
+                <td align="center" width="10%"><a href="?act=del&id=$rs[id]">删除</a></td>
+              </tr>
+              <!--
+EOT;
+}print <<<EOT
+-->
+              <tr align="center"> 
+                <td colspan="5">$showpage</td>
+              </tr>
+              <form name="form1" method="post" action="?act=add&" enctype="multipart/form-data" onsubmit="return ckregdatapost();">
+             
+              <tr class='trA' onMouseOver="this.className='trB'" onMouseOut="this.className='trA'">  
+              <td align="left" width="52%"><input type="text" name="userid" style="width:130px; border:none; border-bottom:1px solid #666;" id="userid" /></td>
+                <td  align="center" width="19%"><input type="text" name="userpass" style="width:130px;border:none; border-bottom:1px solid #666;" id="userpass" /></td>
+                <td  align="center" width="19%"><input type="text" name="remark" style="width:130px;border:none; border-bottom:1px solid #666;" id="remark" /></td>
+                <td align="center" width="10%"><input type="hidden" name="mailuserid" value="$id"><input type="submit" id="Submit3" name="Submit3" value="添 加"></td>
+              </tr>
+              
+              
+              </form>
+              
+              <tr><td colspan="4" width="100%"><br /><font style="color:#949494">信息管理小贴士：1.重要的信息资料，请及时下载、贮存到自己的U盘、移动
+
+硬盘中的专项文件夹中。
+2.邮箱中的资料，应阶段性整理、删除。不再使用的邮箱应及时全部删除个
+
+人或办公信息。</font><br /><br /></td></tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="foot"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!--
+EOT;
+?>
+-->

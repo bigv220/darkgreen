@@ -1,0 +1,167 @@
+<!--
+<?php
+print <<<EOT
+-->
+<link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/default/gutai/css/style.css">
+<SCRIPT LANGUAGE="JavaScript" src="$webdb[www_url]/images/default/default.js"></SCRIPT>
+<div class="w1000 mg_at clearfix">
+    <div class="orderList fl">
+        <ul>
+            <li  class="on"><a href="$webdb[www_url]/shop/gutai_config.php" class="oList">基本设置</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_pay.php?job=list" class="oList">终止和付款</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_money.php" class="oList">现有余额</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_trade.php" class="oList">交易采购单</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_paper.php" class="oList">采购协议文本</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_faq.php" class="oList">服务说明</a></li>
+            <li><a href="http://www.darkgreen.cn/chatwithgogo.php" class="oList">客服GOGO</a></li
+
+        </ul>
+    </div><div class="rtWrap fr mt">
+    <div class="gutaiform">
+    <form name="gutaibank_form" method="post" enctype="multipart/form-data" action="?action=gutaibank_set">
+<table width="100%" border="0" cellspacing="1" cellpadding="3" height="100%">
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'><div class="pay_right">商户编号：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input type='text' size='40' value='$gutai_conf[gutai_id]' name='postdb[gutai_id]'>
+                绿页登录号码
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'><div class="pay_right" style="display:inline;">支付密码：</div>
+<!--
+EOT;
+if($gutai_conf[gutai_pwd]) {
+print <<<EOT
+-->
+<span style="color:green;float:right;padding-right:10px;">已完成设置</span>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+            </td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input type='password' size='40' value='$gutai_conf[gutai_pwd]' name='postpwd[gutai_pwd]'>
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'><div class="pay_right">再次输入支付密码：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input type='password' size='40' value='$gutai_conf[gutai_pwd]' name='postpwd[gutai_repwd]'>
+                <a href="javascript:void(0);" onclick="displayOldPassword();">更改</a>
+                <a href="javascript:void(0);" onclick="retrivepassword();">找回</a>
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'>
+                <div class="pay_right">责任人姓名：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input    type='text' size='40' value='$gutai_conf[gutai_name]' name='postdb[gutai_name]'>
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'>
+                <div class="pay_right">手机号码：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input    type='text' size='40' value='$gutai_conf[gutai_mobile]' name='postdb[gutai_mobile]'>
+                <input type="button" class="btnSend" value="发送" id="send_validate_code"  onclick="send_order_sms('$webdb[www_url]', 2);"/>
+                <span class="ml30 sGray">写入收到的验证码</span>
+                <input type="text" name="yznum"  id="yznum" class="yzIpt"/><input type="button" value="确定" id="confirm_phone" onclick="confirm_sms_code('$webdb[www_url]');"/>
+<!--
+EOT;
+if (get_cookie("valid_phone")) {
+print <<<EOT
+-->
+<span id="verified" class="sGreen ok_marker"><img src="$webdb[www_url]/images/default/ok.png"> 完成验证</span>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+                <input type="hidden" id="validate_code_already" value="" datatype='LimitB' min="9" max="9" msg='请验证手机号码'/>
+                <span  id="need_verify" class="sGray fail_marker"><br/>验证码错误</span>
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'>
+                <div class="pay_right">电话号码：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input    type='text' size='40' value='$gutai_conf[gutai_phone]' name='postdb[gutai_phone]'>
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'>
+                <div class="pay_right">身份证号码：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input    type='text' size='40' value='$gutai_conf[gutai_card_id]' name='postdb[gutai_card_id]'>
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF' valign="top">
+                <div class="pay_right">上传身份证：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input    type='file' size='40' name='postcard'>
+<!--
+EOT;
+if($gutai_conf["upload_card"]) {
+print <<<EOT
+-->
+                <br /><img src='$gutai_conf[upload_card]'  width='200px' />
+<!--
+EOT;
+}
+print <<<EOT
+-->
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'>
+                <div class="pay_right">邮箱号码：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input    type='text' size='40' value='$gutai_conf[gutai_email]' name='postdb[gutai_email]'>
+            </td>
+        </tr>
+
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'>
+                <div class="pay_right">账号银行：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input    type='text' size='40' value='$gutai_conf[gutai_bankid]' name='postdb[gutai_bankid]'>
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'>
+                <div class="pay_right">预留账号：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <input    type='text' size='40' value='$gutai_conf[gutai_obligate_account]' name='postdb[gutai_obligate_account]'>
+            </td>
+        </tr>
+        <tr>
+            <td width='28%' bgcolor='#FFFFFF'>
+                <div class="pay_right">预留信息：</div></td>
+            <td colspan='2' bgcolor='#FFFFFF'>
+                <textarea   type='text' size='40' value='$gutai_conf[gutai_obligate_msg]' name='postdb[gutai_obligate_msg]'></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td width="27%" align="center">&nbsp;</td>
+            <td width="73%">
+                <input type="submit" name="Submit" value="确定内容" style="background-color: #f7e0aa;border:1px solid darkorange;">
+                <br/><br/>
+            </td>
+        </tr>
+
+</table>
+    </form>
+    </div>
+</div>
+        </div>
+        </div>
+<!--
+EOT;
+?>
+-->

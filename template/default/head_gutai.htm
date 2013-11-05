@@ -1,0 +1,70 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<?php
+$GuideFid[$fid]=str_replace("<a href='$webdb[www_url]' class='guide_menu'>&gt;首页</a>","",$GuideFid[$fid]);
+$fupId=intval($fupId);
+$topMenu[$fupId]='ck';
+$bodyondblclick = (function_exists('label_array')&&$web_admin&&!$MakeIndex) ?"dblclick_label();":"";
+print <<<EOT
+--><head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>$titleDB[title]</title>
+    <link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/default/gutai/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/default/gutai/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/default/gutai/css/style.css">
+    <link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/default/common.css">
+<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG_0.0.8a.js" ></script>
+<script type="text/javascript">
+    DD_belatedPNG.fix('img,div,button,input,a,p,ul,li');
+</script>
+<![endif]-->
+<link rel="shortcut icon" href="favicon.ico" />
+<meta name="keywords" content="$titleDB[keywords]">
+<meta name="description" content="$titleDB[description]">
+<script language="javascript">function killErr(){return true;}window.onerror=killErr;</script>
+<!--
+EOT;
+if($webdb[cookieDomain]){print <<<EOT
+-->
+<script language="javascript">
+//解决不同域名的框架跨域问题
+document.domain = "$webdb[cookieDomain]";
+</script>
+<!--
+EOT;
+}print <<<EOT
+-->
+<script language="javascript" src="$webdb[www_url]/images/default/jquery-1.2.6.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var g_domHeight=document.documentElement.clientHeight||document.body.clientHeight;
+        var fHt=$(".foot").height();
+        $(".main").css("min-height",g_domHeight-fHt-40);
+    })
+</script>
+<!--[if IE 6]>
+<script type="text/javascript">
+    $(function(){
+        var g_domHeight=document.documentElement.clientHeight||document.body.clientHeight;
+        var fHt=$(".foot").height();
+        $(".main").css("height",g_domHeight-fHt-40);
+    })
+</script>
+<![endif]-->
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" ondblclick="$bodyondblclick">
+<div class="main">
+    <div class="top">
+        <div class="w1000 mg_at clearfix">
+            <div class="logo fl"><a href="#"><img src="images/bg/logo.gif" width="114" height="42" /></a></div>
+            <div class="tWrap1 fl">收 贷 快 线</div>
+            <div class="tWrap2 fr tr">在线支付版</div>
+        </div>
+    </div>
+<!--
+EOT;
+?>
+-->
+

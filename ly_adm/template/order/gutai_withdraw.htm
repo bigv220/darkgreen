@@ -1,0 +1,60 @@
+<!--
+<?php
+print <<<EOT
+-->
+<script language="javascript" src="$webdb[www_url]/images/default/default.js"></script>
+<table width="100%" cellspacing="1" cellpadding="3" class="tablewidth">
+    <tbody><tr class="head">
+        <td colspan="8">
+            <div align="center"><font color="#FFFFFF">古太行提现</font></div>
+        </td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+        <td width="14%" align="left">日期</td>
+        <td width="14%" align="left">客户名称</td>
+        <td width="10%" align="left">客户确认</td>
+        <td width="17%" align="left">现有可提现余额(金点已换算加入)</td>
+        <td width="10%" align="left">提现金额</td>
+        <td width="14%" align="left">管理操作</td>
+        <td width="14%" align="left">简要备注</td>
+    </tr>
+<!--
+EOT;
+foreach($listdb as $key=>$value) {print <<<EOT
+-->
+    <tr bgcolor="#FFFFFF">
+        <td>{$value[posttime]}</td>
+        <td>{$value[username]}</td>
+        <td><img src="images/right.jpg" /></td>
+        <td>{$value[new_total]}</td>
+        <td>{$value[amount]}</td>
+        <td>
+            <!--
+EOT;
+if($value[admin_confirm] == 1) {print <<<EOT
+-->
+            已确认
+<!--
+EOT;
+} else {print <<<EOT
+-->
+            <div id="btnDdiv{$value[id]}">
+                <input type="button" id="confirmBtn" onclick="admin_confirm({$value[id]},'{$ajaxUlr}','withdraw_admin_confirm')" value="确认" />
+            </div>
+            <!--
+EOT;
+}print <<<EOT
+-->
+        </td>
+        <td>{$value[end_comment]}</td>
+    </tr>
+<!--
+EOT;
+}print <<<EOT
+-->
+    </tbody>
+</table>
+<!--
+EOT;
+?>
+-->

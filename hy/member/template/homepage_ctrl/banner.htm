@@ -1,0 +1,81 @@
+<!--
+<?php
+print <<<EOT
+-->
+        <table width="100%"  cellpadding="5" cellspacing="1" bgcolor="#CCCCCC" >
+          <tr>
+            <td height="450" align="left" valign="top" bgcolor="#FFFFFF"><!--
+EOT;
+for($i=1;$i<=$webdb[company_upload_max] ;$i++){
+print <<<EOT
+-->
+              <form name="userpostpic_$i" id="userpostpic_$i" action="?atn=banner_upload_save&uid=$uid&ind=$i" method="post" enctype="multipart/form-data" target="userpostpic_target"  style=" height:30px;padding:5px;">
+                图片{$i}：
+                <input type="file" name="postfile" size="20" />
+                标题：
+                <input type="text" name="title" value="" size="20" />
+                <span id="show_$i"></span>
+                <input type="hidden" name="psid_$i" id="psid_$i"  value="0"/>
+              </form>
+              <!--
+EOT;
+}
+print <<<EOT
+-->
+            </td>
+            <td width="250" valign="top" bgcolor="#F9F9F9" style="line-height:200%">
+             
+             <input type="hidden" name="psid" id="psid" value="10000000000" />
+             
+              
+              <br />
+              <strong>图片说明</strong><br />
+            
+              格式:gif jpg<br />
+              
+              推荐图片尺寸比列为1000*200像素<br />
+              标题最大长度为16个字<br />
+              
+              <br />
+              <strong>点击开始上传</strong><br />
+              <a href="javascript:" id="userpostpic_btn" style="color:#FF0000;"  ><img src="$Murl/images/default/userpicupload_do.gif" border="0"  onclick="userpost_pic_do(1);" /></a><br />
+              在上传过程中，请不要刷新本页<br />
+              如果不符合上传条件的图片将会被忽略<br />
+              标题过长系统将自动截取前16个字 <br />
+              <input type="button" name="button16" id="button16" value="返回修改" onclick="window.location='?atn=bannerlist&uid=$uid&psid=0';" />
+              <br />
+              <iframe name="userpostpic_target" src="" width="100" height="50" style="display:none"></iframe>
+              <script language="javascript">
+	function userpost_pic_do(ind){
+		if(ind<1) return false;
+		if(ind>$webdb[company_upload_max]) return false;
+			
+		document.getElementById('show_'+String(ind)).innerHTML='上传中...';
+		
+		var psd=document.getElementById('psid');
+		
+		//alert(document.getElementById('psid_'+String(ind)).value);
+		document.getElementById('userpostpic_btn').blur();
+		if(ind==$webdb[company_upload_max]){
+		document.getElementById('userpostpic_btn').innerHTML='点击此处继续上传';
+		document.getElementById('userpostpic_btn').href="?atn=$atn&uid=$uid&psid=$psid";
+		}else{
+		document.getElementById('userpostpic_btn').innerHTML='上传中，当前上传的是图片'+String(ind);
+		}
+		//提交咯
+		try{
+			document.getElementById('userpostpic_'+String(ind)).submit();	
+		}catch(e){
+			var forms=document.getElementsByTagName('form');
+			forms[(ind-1)].submit();
+		}
+	}
+
+</script>
+            </td>
+          </tr>
+        </table>
+<!--
+EOT;
+?>
+-->

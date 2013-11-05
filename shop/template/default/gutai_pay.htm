@@ -1,0 +1,138 @@
+<!--
+<?php
+print <<<EOT
+-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btn_use_gutai').click(function() {
+
+        })
+    });
+</script>
+<div class="w1000 mg_at clearfix">
+    <div class="orderList fl">
+        <ul>
+            <li><a href="$webdb[www_url]/shop/gutai_config.php" class="oList">基本设置</a></li>
+
+            <li  class="on"><a href="$webdb[www_url]/shop/gutai_pay.php?job=list" class="oList">终止和付款</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_money.php" class="oList">现有余额</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_trade.php" class="oList">交易采购单</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_paper.php" class="oList">采购协议文本</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_faq.php" class="oList">服务说明</a></li>
+            <li><a href="http://www.darkgreen.cn/chatwithgogo.php" class="oList">客服GOGO</a></li
+
+        </ul>
+    </div>
+    <div class="rtWrap fr mt">
+        <div class="typeMain">
+<!--
+EOT;
+if($job=='list' || $job=='send') {
+print <<<EOT
+-->
+            <div class="seller typeOn"><a href="$webdb[www_url]/shop/gutai_pay.php?job=list">我是卖家</a></div>
+            <div class="buyer"><a href="$webdb[www_url]/shop/gutai_pay.php?job=mylist">我是买家</a></div>
+<!--
+EOT;
+} else {
+print <<<EOT
+-->
+            <div class="seller "><a href="$webdb[www_url]/shop/gutai_pay.php?job=list">我是卖家</a></div>
+            <div class="buyer typeOn"><a href="$webdb[www_url]/shop/gutai_pay.php?job=mylist">我是买家</a></div>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+
+         </div>
+        <br/>
+        <ul class="oBox2">
+            <li>
+                <div class=" t2">
+                <span class="sGreen">手机验证</span><input type="text" style="display:none;" class="yzIpt" value="重新输入">
+                        <span class="ml30 sGray">输入您采购单中预留的手机号码 </span><input   type='text'  name='postdb[order_mobphone]' id='atc_order_mobphone'  value='$rsdb[order_mobphone]'>
+                        <input type="button" class="btnSend" value="发送" id="send_validate_code"  onclick="send_order_sms('$webdb[www_url]', 2);"/>
+                        <span class="ml30 sGray">写入收到的验证码</span>
+                        <input type="text" name="yznum"  id="yznum" class="yzIpt"/><input type="button" value="确定" id="confirm_phone" onclick="confirm_sms_code('$webdb[www_url]');"/>
+                        <span id="verified" class="sGreen ok_marker"><img src="$webdb[www_url]/images/default/ok.png"> 完成验证</span>
+                        <input type="hidden" id="validate_code_already" value="" datatype='LimitB' min="9" max="9" msg='请验证手机号码'/>
+                        <span  id="need_verify" class="sGray fail_marker"><br/>验证码错误</span>
+                </div>
+            </li>
+        </ul>
+        <div class="oBox3">
+            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr>
+                    <th width="140" scope="col">序号</th>
+                    <th width="140" scope="col">商品名称</th>
+                    <th width="100" scope="col">协约日期</th>
+                    <th width="120" scope="col">系统设置的付款日</th>
+                    <th width="80" scope="col">金额</th>
+                    <th width="60" scope="col">状态</th>
+                    <th width="80" scope="col">发货</th>
+                    <th width="80" scope="col">支付密码</th>
+                    <th width="60" scope="col">终止</th>
+<!--
+EOT;
+if($job=='mylist') {
+print <<<EOT
+-->
+                    <th width="80" scope="col">付款</th>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+                    <th scope="col">简要备注</th>
+                </tr>
+<!--
+EOT;
+foreach($listdb AS $key=>$rs){
+if($rs[shop][price]!=null) {
+print <<<EOT
+-->
+                <tr>
+                    <td><span >{$rs[id]}</span></td>
+                    <td><span >{$rs[shop][title]}</span></td>
+                    <td>$rs[posttime]</td>
+                    <td><span class="sBlue">$rs[posttime]</span></td>
+                    <td><span>{$rs[shop][price]}</span>元</td>
+                    <td><span  id="status{$rs[id]}">$rs[complete]</span></td>
+                    <td width="80" scope="col">$rs[send]</td>
+
+                    <td><input type="password" class="yzIpt " value="" id="pwd{$rs[id]}" ></td>
+<!--
+EOT;
+if($job=='mylist') {
+print <<<EOT
+-->
+                    <td><span class="sp2" style="cursor:pointer;" onclick="end_order({$rs[id]}, '$rs[ajaxurl]',0);">终止</span></td>
+                    <td><span class="sp1">$rs[pay]</span></td>
+<!--
+EOT;
+} else {
+print <<<EOT
+-->
+                    <td><span class="sp2" style="cursor:pointer;" onclick="end_order({$rs[id]}, '$rs[ajaxurl]',1);">终止</span></td>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+                    <td><input type="text" class="yzIpt" id="comment{$rs[id]}" value="$rs[end_comment]"></td>
+                </tr>
+<!--
+EOT;
+} }print <<<EOT
+-->
+</tbody></table>
+        </div>
+    </div>
+</div>
+</div>
+<script language="javascript" src="$webdb[www_url]/images/default/default.js"></script>
+<!--
+EOT;
+?>
+-->

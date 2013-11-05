@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9" />
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta name="keywords" content="$titleDB[keywords]" />
+    <meta name="description" content="$titleDB[description]" />
+    
+    <title>会员注册 绿页商务</title>
+    
+    <link rel="stylesheet" type="text/css" href="/images/default/common.css" />
+    <link rel="stylesheet" type="text/css" href="/images/default/reg/default.css" />
+    
+    <script language="javascript" src="/common/jquery-1.9.1.min.js"></script>
+    <script language="javascript" src="/images/default/inc.js"></script>
+    <script language="javascript" src="/images/default/default.js"></script>
+    <script language="javascript" src="/images/default/swfobject.js"></script>
+    <script language="javascript">
+        function killErr(){
+           return true;
+        }
+       window.onerror=killErr;
+    </script>
+</head>
+
+<body>
+<!--
+<?php
+$more_tag = $step ? "请注意：带<span>*</span>号的项目必须填写" : "";
+print <<<EOT
+-->
+<div id="ly_reg_top">
+  <div class="ly_reg_top_c">
+    <span style="font-size:12px; position: relative; top: 43px;">
+        <a href="/" class="logintop">返回平台</a>&nbsp;|&nbsp;<a href="/news/help-htm-fid-44.html" class="logintop">帮助中心</a>
+    </span>
+  </div>
+</div>
+<!--
+EOT;
+$_fromurl=urlencode($_fromurl);
+if(!$step){
+print <<<EOT
+-->
+<div id="ly_reg" class="heightbox">
+<div class="MainContainer">
+    <div class="Mcont" style="border:0px solid #CCC; padding:20px; border-top:0px;border-bottom:none; margin:80px 0px; ">
+
+        <ul class="regtype" style=" height:100px;padding-top:50px;" >
+            <li>
+                <div class="sub"><img onclick="window.location.href='?step=1&_fromurl=$_fromurl'" src="$webdb[www_url]/images/default/reg/reg1.gif"/></div>
+            </li>
+            <li>
+                <div class="sub"><img onclick="window.location.href='$webdb[www_url]/hy/reg.php'" src="$webdb[www_url]/images/default/reg/reg2.gif"/></div>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+
+<div style="clear: both; border-top: solid 1px #ccc;" > &nbsp;</div>
+<!--
+EOT;
+}if($step==1){
+print <<<EOT
+-->
+    <div id="ly_reg" class="heightbox">
+<div class="MainContainer" style="">
+    <div class="Mcontone" style="margin-top: 30px;">
+        <form name="form4Reg" method="post" action="?f">
+            <dl>
+                <dt><span>*</span>设置用户名</dt>
+                <dd style="width: 590px">
+                    <span class="input"><input type="text" name="username" id="reg_username" autocomplete="off" onblur="ckdata('reg_username','username_msg','name')" style="width:210px;height:21px;" class="inputbg"/></span> 
+                    <span style="font-size:12px;">3-15字符以内,可以是汉字,a-z,0-9及下划线</span>
+                    <span style="color: red; margin-left: 15px;">*</span>
+                    <span style="font-size:12px;">标识必填项</span>
+                </dd>
+            </dl>
+            <div id="username_msg" class="showinfo"></div>
+            <dl> 
+                <dt>&nbsp;&nbsp;性别</dt>
+                <dd> 
+                  <span class="radio"><input type="radio" name="sex" value="0" checked="checked" /></span>
+                  <span>不设置</span> 
+                  <span class="radio"><input type="radio" name="sex" value="1" /></span>
+                  <span>男</span> 
+                  <span class="radio"><input type="radio" name="sex" value="2" /></span>
+                  <span> 女</span> 
+                </dd>
+            </dl>
+            <div style="height: 30px; clear: both;">&nbsp;</div>
+            <dl>
+                <dt><span>*</span>设置密码</dt>
+                <dd>
+                    <span class="input"><input type="password" name="password" id="reg_password" autocomplete="off" onblur="ckdata('reg_password','password_msg','pwd')" style="width:210px;height:21px;" class="inputbg"/> </span>
+                </dd>
+            </dl>
+            <div id="password_msg" class="showinfo"></div>
+            <dl>
+                <dt><span>*</span>再输入一遍</dt>
+                <dd>
+                    <span class="input"><input type="password" name="password2" id="reg_password2" autocomplete="off" style="width:210px;height:21px;" class="inputbg"/></span>
+                </dd>
+            </dl>
+            <div style="height: 30px; clear: both;">&nbsp;</div>
+            <dl>
+                <dt><span>*</span>邮箱地址</dt>
+                <dd>
+                    <span class="input"><input type="text" name="email" id="reg_email" onblur="ckdata('reg_email','email_msg','email')" style="width:210px;height:21px;" class="inputbg"/></span>
+                    <span><font style="font-size:12px;">忘记密码时需要</font></span>
+                </dd>
+            </dl>
+            <div id="email_msg" class="showinfo"></div>
+            <!--<dl> 
+                <dt>您的QQ号码</dt>
+                <dd> 
+                  <span class="input"><input type="text" name="oicq" style="width:150px;height:18px;"></span>
+                </dd>
+            </dl>-->
+<!--
+EOT;
+if($webdb[yzNumReg] == 2){
+print <<<EOT
+-->
+            <dl> 
+                <dt><span>*</span> 手机验证码</dt>
+                <dd> 
+                  <span class="input"><input type="text" id="yznumMob" name="yznum" style="width:80px; height:21px;" class="inputbg"/></span>
+                  
+                  <span style="margin-left: 129px;"><font style="font-size:12px;">输入手机号</font></span>
+                  <span class="input"><input type="text" id="mobblenum"  class="inputbg" size="20" name="mobphone" style="width: 100px;" /></span>
+                  <span class="input"><input  value="点击发送" type="button"  onclick="sendsms(2);"/></span>
+                  <span><font style="font-size:12px;">获取验证码</font></span> 
+                </dd>
+            </dl>
+<!--
+EOT;
+}
+elseif($webdb[yzNumReg] == 1){
+print <<<EOT
+-->
+            <dl> 
+                <dt><span>*</span>邮件注册码</dt>
+                <dd> 
+                  <span class="input"><input type="text" name="yznum" style="width:80px; height:21px;" class="inputbg"/></span>
+                  <span>请点击发送邮件获取注册码</span> 
+                  <span class="input"><input  value="发送邮件" type="button"  onclick="sendsms(1);"/></span>
+                </dd>
+            </dl>        
+<!--
+EOT;
+}
+if($webdb[yzImgReg]){
+print <<<EOT
+-->
+          <dl>
+            <dt><span>*</span>验证码</dt>
+            <dd><span class="input"><input type="text" name="yzimg" style="height:21px;width:80px;" class="inputbg" /></span>
+<!-- 
+EOT;
+if($webdb[YzImg_voice]){
+print <<<EOT
+-->
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="0" height="0" id="code_play" align="middle">
+<param name="allowScriptAccess" value="always" />
+<param name="FlashVars" value="url=$webdb[www_url]/do/voice_code.php" />
+<param name="movie" value="$webdb[www_url]/images/default/code_play.swf"/>
+<param name="quality" value="high" />
+<param name="bgcolor" value="#ffffff" />
+<embed id="code_play" name="code_play" src="$webdb[www_url]/images/default/code_play.swf"  FlashVars="url=$webdb[www_url]/do/voice_code.php" quality="high" bgcolor="#ffffff" width="0" height="0" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+</object>
+<span class="img"><a href="javascript:void(0);" onclick="javascript:readVoiceCode();" style="color:blue" title="点击获取验证码"><img src="$webdb[www_url]/images/default/seccodeplayer.gif"/>获取验证码</a></span> <span>(请输入你听到的字符)</span>
+
+<script language="JavaScript">
+<!--
+function readVoiceCode()
+{
+    window.document.code_play.SetVariable("isPlay", "1");
+}
+//-->
+</script>
+<!--
+EOT;
+}else{
+print <<<EOT
+-->
+<script language="JavaScript">
+<!--
+document.write('<span class="img"><img border="0" name="imageField" onclick="this.src=this.src+Math.random();" src="$webdb[www_url]/do/yzimg.php?'+Math.random()+'"></span>');
+//-->
+</script>
+<!-- 
+EOT;
+}
+print <<<EOT
+-->
+            </dd>
+          </dl>          
+<!--
+EOT;
+}
+print <<<EOT
+-->
+<script language="JavaScript">
+<!--
+var filed_id='';
+var filed_name='';
+function ckregdata(a,b){
+    filed_id=a;
+    filed_name=b;
+}
+function ckregdatapost(){
+    id_array=filed_id.split(',');
+    name_array=filed_name.split(',');
+    for(var i=0;i<id_array.length;i++){
+        if(id_array[i]!=''&&document.getElementById(id_array[i]).value==''){
+            alert("“"+name_array[i]+'”不能为空');
+            document.getElementById(id_array[i]).focus();
+            return false;
+        }
+    }
+}
+document.write('<script src="$webdb[www_url]/images/default/setday.js"><\/script>');
+/*如要为页面布局考虑的话，你可以把template\default\regfield.htm里边的内容复制过来，然后把以下两行删除即可*/
+document.write('<div id="showRegDiv"></div>');
+AJAX.get("showRegDiv","$webdb[www_url]/do/regfield.php?job=reg");
+//-->
+</script>
+            
+           <!-- <dl> 
+                <dt>您的MSN</dt>
+                <dd> 
+                  <span class="input"><input type="text" name="msn" style="width:180px;height:18px;"></span>
+                </dd>
+            </dl> -->           
+            <div style="clear: both; height: 35px;">&nbsp;</div>
+            <div class="submits" style="clear: both; text-align: center;">
+                   <img id="submitImg" src="$webdb[www_url]/images/default/reg/reg1.gif" 
+                    style="cursor: pointer;"
+                    onclick="doSubmit()"/>&nbsp;&nbsp;
+                <span class="input"><input id="agreeChk" name="agree" type="checkbox" value="1" checked="checked" /></span>
+                <span>我已阅读并同意 <a href="reg1.html" target="_blank">会员注册协议</a></span>
+                <input type="hidden" name="step" value="2" />
+                <input type="hidden" value="$_fromurl" name="jumpto" />
+                <input type="hidden" value="$grouptype" name="grouptype" />
+            </div>
+            <div style="clear:both;height:20px;"></div>
+        </form>
+        <script language="JavaScript">
+        <!--
+        function doSubmit() {
+            if (regpost()) {
+                document.form4Reg.submit();
+            }
+        }
+        function regpost(){
+            if(document.getElementById('reg_username').value==''){
+                alert('用户名不能为空！');
+                document.getElementById('reg_username').focus();
+                return false;
+            }
+            if($('#reg_username').val().length < 3 || $('#reg_username').val().length > 30){
+                alert('用户名不能小于3个字符或大于30个字符，请重新输入！');
+                document.getElementById('reg_username').focus();
+                return false;
+            }
+            if(document.getElementById('reg_password').value==''){
+                alert('密码不能为空！');
+                document.getElementById('reg_password').focus();
+                return false;
+            }
+            if($('#reg_password').val().length < 6 || $('#reg_password').val().length > 30){
+                alert('密码不能小于6个字符或大于30个字符，请重新输入！');
+                document.getElementById('reg_password').focus();
+                return false;
+            }
+            if(document.getElementById('reg_password2').value==''){
+                alert('确认密码不能为空！');
+                document.getElementById('reg_password2').focus();
+                return false;
+            }
+            if($('#reg_password2').val() != $('#reg_password').val() ){
+                alert('确认密码与设置密码不同，请重新输入！');
+                document.getElementById('reg_password2').focus();
+                return false;
+            }
+            if(document.getElementById('reg_email').value==''){
+                alert('电子邮箱不能为空！');
+                document.getElementById('reg_email').focus();
+                return false;
+            }
+
+            var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!filter.test($("#reg_email").val())) {
+                alert('邮箱不符合规则，请重新输入！');
+                document.getElementById('reg_email').focus();
+                return false;
+            }
+            
+            if ("" == $("#mobblenum").val()) {
+                alert('手机号不能为空！');
+                document.getElementById('mobblenum').focus();
+                return false;
+            }
+            filter = /^1([0-9]{10})$/;
+            if (!filter.test($("#mobblenum").val())) {
+                alert('手机号不符合规则，请重新输入！');
+                document.getElementById('mobblenum').focus();
+                return false;
+            }
+            if ("" == $("#mobblenum").val()) {
+                alert('手机注册码不能为空！');
+                document.getElementById('mobblenum').focus();
+                return false;
+            }
+            if (!$("#agreeChk").prop("checked")) {
+                alert('您必须在已阅读并同意会员注册协议的前提下才可以注册！');
+                return false;
+            }
+            
+            if(ckregdatapost()==false){
+                return false;
+            }
+            return true;
+        }
+        function ckdata(a,b,c){
+            AJAX.get(b,"$webdb[www_url]/do/job.php?job=ckreg&name="+document.getElementById(a).value+"&type="+c);
+        }
+        function sendsms(type){
+            if(type == 2){
+                if(document.getElementById('mobblenum').value==''){
+                    alert('请输入手机号码');
+                    document.getElementById('mobblenum').focus();
+                    return false;
+                }
+                window.open("$webdb[www_url]/do/job.php?job=regsendnum&num="+document.getElementById('mobblenum').value+"&type="+type);
+            }    
+            if(type == 1){
+                if(document.getElementById('reg_email').value==''){
+                    alert('请输入邮箱帐号');
+                    document.getElementById('reg_email').focus();
+                    return false;
+                }
+                window.open("$webdb[www_url]/do/job.php?job=regsendnum&num="+document.getElementById('reg_email').value+"&type="+type);
+            }
+        }
+        //-->
+        </script>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+    </div>
+</div>
+</div>
+<div class="Agreement" id="Agreement" style="display:none;">
+    <div class="h"><span>绿页商务信息服务协议书
+</span><a href="javascript:;" onclick="hiddenAgreement()">关闭</a></div>
+    <div class="c">
+        <h3>您在使用绿页商务空间各项服务前，请务必仔细阅读并透彻理解本声明。“绿页商务空间”（以下简称绿页商务）是青岛麦野商务信息有限公司（以下简称麦野）推出的信息设备应用商务网站，为您提供行业、企业；物资、产品；商贸；店铺信息等多平台的信息商务应用服务。包括绿页商务网，域名为darkgreen.cn；绿页商务.com ; 绿页商务.net; 红色信箱、蓝色信箱、绿色信箱：red-cc.com; blove-cc.com;green-cc.com。
+
+一. 服务条款：
+
+   您使用绿页商务，即您的使用行为将被视为对本声明全部内容的认可。
+
+   绿页商务提供的服务属于一般的承诺信息“公告牌服务”，应遵守与麦野的商业约定。平台上关于绿页商务会员或其发布的相关商品（包括但不限于店铺名称、公司名称、联系人及联络信息，产品的描述和说明，相关图片、视讯等）的信息均由会员自行提供，会员依法应对其提供的任何信息承担全部责任。在您使用服务提供商通过绿页商务所提供服务过程中，麦野有权判定您的行为是否符合绿页商务服务条款的要求，如果您的行为违反了服务条款的规定，麦野有权要求服务提供商中断或者终止对您提供服务。
+
+   任何单位或个人认为绿页平台所载内容（包括但不限于绿页平台会员发布的商品信息）可能涉嫌侵犯其合法权益，应该及时向麦野协商，提出书面权利通知，并提供身份证明、权属证明、具体链接（URL）及详细侵权情况证明。麦野在收到上述法律文件后，将会依法尽快移除相关涉嫌侵权的内容。
+
+    绿页平台转载作品（包括论坛、信息采集内容）出于传递多维度价值信息之目的，并不意味绿页（包括绿页关联企业）赞同其观点或已证实其内容的可靠性。由于地址不明等原因，绿页平台使用部分文字、摄影作品报酬未能及时支付，在此深表歉意，相关权利人可与麦野服务中心联系协助解决。
+
+地址：青岛市市北区威海路332#美宁商务楼，电话：0532 8302 9613 
+
+二、用户责任
+
+    您在使用服务提供商通过绿页商务提供的服务时必须保证：
+
+1、 遵守国家有关法律、法规的规定；
+
+2、 不利用服务做非法用途；
+
+3、 不干扰服务的正常进行；
+
+4、 遵守所有与使用服务有关的网络协议、规定、程序和惯例。
+
+5、 不得以任何形式侵犯麦野的知识产权。
+
+6、 遵守与麦野的商业约定。
+
+    您承诺不传输、传播任何非法、骚扰性、侮辱、诽谤他人、恐吓性、庸俗和淫秽的信息、资料。您也不传输、传播任何教唆他人实施犯罪行为的信息、资料；不得传输、传播助长国内不利条件和涉及国家安全的信息、资料；不得传输、传播任何法律、法规禁止传播的其他信息、资料。
+
+三、担保责任
+
+    您与客商、服务提供应商通过绿页商务进行交易或买卖服务产生的任何争议与纠纷，是您与提供争议服务的服务提供商之间的争议或纠纷，与麦野及绿页商务无关。麦野对您与客商、服务提供商发生的交易和行为不承担任何直接、间接、附带或衍生的损失和责任。
+
+    麦野不保证您下载的任何服务提供商通过绿页商务提供服务的合法性、准确性、安全性和完整性，也不承担您因使用这些下载应用而造成的任何形式的损失和损害。麦野不担保服务提供商通过绿页商务提供的服务一定能满足您的要求，不担保服务提供商不会中断和终止服务。
+
+四、知识产权声明
+
+   绿页拥有绿页网站内相关信息内容（除绿页会员发布的商品信息外，包括但不限于文字、图片、软件、音频、视频）的版权。也更主动地向投资者、职员、原料供应商、顾客、环境、社会6方面提供公共交流、交换的平台服务，实践以信息、文化支持产业系统服务的价值。
+
+   任何被授权的浏览、复制、打印和传播属于绿页网站内信息都不得用于非良好目的，且所有信息内容及其任何部分的使用都必须包括此版权声明；我们与合作方的共同利益是目标创新和营销。
+
+   绿页商务属于麦野知识产权。 “绿页商务”、 “绿页信箱”、 绿页其他产品服务名称及相关图形、标识等已为麦野商务信息有限公司的市场运营商标的部分。未经麦野商务信息有限公司许可，任何人不得擅自（包括但不限于：以非法的方式复制、传播、展示、镜像、上载、下载）使用。否则，麦野商务将保留提醒依法追究法律责任的权利。
+
+   由上文确定以下文，您使用绿页商务（或观察者），既已赞同“麦野商务信息”即时对所载、所谓知识产权拥有优先解释权并已赞同绿页的相关协商预案和行为。
+
+五、用户隐私：
+
+   麦野尊重用户个人隐私，未经您授权不公开、编辑或透露您的个人资料和绿页商务为您保存的非公开内容，除非法律、法规或政府有关部门要求，以及麦野本着诚信使用原则认为披露这些资料是必要的。仅有义务提示您，在正使用的终端机器上安装杀毒软件并及时升级，使用更好的硬件设备和设置。商务交往中仅在必要的情况下向他人提供个人资料，同时妥善维护好个人信息权益。
+
+   为了给您提供更及时、更专业化的服务，绿页会按照本隐私权政策的规定使用您的个人信息。
+
+   您在同意麦野服务协议之时，即视为您已经同意本隐私权政策此时的全部内容。
+
+   本隐私权政策属于绿页服务协议不可分割的一部分。
+
+1. 适用范围
+
+a）在您注册绿页账户时，您根据绿页要求提供的个人注册信息（绿页商家应法律、法规要求需公示的企业名称及相关工商注册信息除外）；
+
+b）在您使用绿页平台服务，或访问绿页平台网页时，绿页自动接收并记录的您的浏览器和计算机上的信息，（包括但不限于您的IP地址、浏览器的类型、使用的语言、访问日期和时间、软硬件特征信 息及您需求的网页记录等数据）
+
+c）绿页通过合法途径从商业伙伴处取得的用户个人数据。 
+
+   您了解并同意，以下信息不适用本隐私权政策：
+
+a）您在使用绿页平台提供的搜索服务时输入的关键字信息；
+
+b）在您未选择“匿名购买”或“匿名评价”功能时，绿页收集到的您在绿页进行交易的有关数据，包括但不限于出价、成交信息及评价详情；
+
+c）信用评价、违反法律规定或违反绿页约定规则行为及绿页已对您采取的措施。
+
+2. 信息使用
+
+a) 绿页不会向任何无关第三方提供、出售、出租、分享或交易您的个人信息，除非事先得到您的许可，或该第三方和绿页（含绿页关联公司）单独或共同为您提供服务，在该服务 结束后，其将被禁止访问包括其以前能够访问的所有这些资料。
+
+b) 绿页亦不允许任何第三方以任何手段收集、编辑、出售或者无偿传播您的个人信息。任何绿页平台用户如从事上述活动，一经发现，绿页有权立即终止与该用户的服务协议。
+
+c) 为服务用户的目的，绿页可能通过使用您的个人信息，向您回馈所需信息。 
+
+3. 信息披露
+
+   在如下情况下，绿页将依据您的个人意愿或法律的规定全部或部分的披露您的个人信息：
+
+a) 经您事先同意，向第三方披露；
+
+b) 非您意愿，将不向第三方任何非法律要求人透露；非主动以外情况除外（如发生社会暴乱、犯罪暴力袭击、黑客攻击、自然不可抗拒力等除外）
+
+c) 根据法律的有关规定，或者行政或司法机构的要求，向第三方或者行政、司法机构披露；
+
+d) 如您出现违反中国有关法律、法规或者绿页服务协议或相关规则的情况，需要向第三方披露；
+
+e) 为提供您所要求的产品和服务，而必须和第三方分享您的必要信息；
+
+f) 在绿页平台上创建的某一交易中，如交易任何一方履行或部分履行了交易义务后未得到其相应的约定内容之后，并提出信息披露请求的，绿页有权决定向该用户提供其交易对方 的联络方式等必要信息，以促成交易的完成或纠纷的解决。
+
+g) 其它绿页根据法律、法规或者网站政策认为相对于绿页商务业务合作人的合适的披露。
+
+h) 绿页认识到所有规章制度、服务协议或相关规则不应与国家、部门法律、法规抵触，商户应该遵守绿页对于合作产品、服务的必要要求和约定，之后作为合作人绿页有义务提示以上信息。
+
+4. 信息存储和交换    
+
+ 绿页收集的有关您的信息和资料将保存在绿页及（或）其关联公司的服务器上，这些信息和资料将定时清理或定时段提示您清理，用于产业商务分析的数据将不涉及具体行为人的信息。
+
+5. 涉及其他服务商的业务服务条款请参照相关此业务的成文条款。
+
+6. 信息安全
+
+a) 绿页商务有信息安全保护功能，请妥善保管您的账户及密码信息。麦野采取安全措施确保您的信息不丢失，不被滥用和编造。尽管有前述安全措施，但同时也请您注意在信息网 络上不存在“完善的安全措施”。
+
+b) 在使用绿页平台服务进行网上交易时，您不可避免的要向交易对方或潜在的交易对方披露自己的个人信息，如联络方式或者邮政地址。请您妥善保护自己的个人信息，仅在必要的情形下向他人提供。如您发现自己的个人信息泄密，尤其是支付账户及密码发生泄露，请您立即联络相关服务商客服，以便相应方采取相应措施。
+
+7. 未成年人的特别注意事项
+
+请自觉遵守基本商业规则，未成年人应在家长监护下使用相关信息，上网时间建议不超过30分钟，商务买卖行为须监护人在场。
+
+六、法律适用
+
+   本服务条款均适用中华人民共和国法律，您和麦野一致同意服从中国法院的管辖。如果麦野某部分服务条款与中华人民共和国法律、法规相抵触，则这些条款将完全按法律、规定重新解释，而其他条款则依旧保持对您产生法律效力和影响。     
+
+   麦野保留对本服务条款的最终解释权利。
+</h3>
+    </div>
+</div>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function hiddenAgreement(){
+    document.getElementById("Agreement").style.display="none";
+}
+function showAgreement(){
+    document.getElementById("Agreement").style.display="block";
+}
+//-->
+</SCRIPT> 
+<!--
+EOT;
+?>
+-->
+</body>
+</html>

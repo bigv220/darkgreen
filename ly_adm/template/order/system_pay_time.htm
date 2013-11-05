@@ -1,0 +1,58 @@
+<!--
+<?php
+print <<<EOT
+-->
+<script language="javascript" src="$webdb[www_url]/images/default/default.js"></script>
+<table width="100%" cellspacing="1" cellpadding="3" class="tablewidth">
+    <tbody><tr class="head">
+        <td colspan="6">
+            <div align="center"><font color="#FFFFFF">系统付款日</font></div>
+        </td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+        <td width="16%" align="left">采购单编号</td>
+        <td width="16%" align="left">标题</td>
+        <td width="16%" align="left">系统付款日期</td>
+        <td width="16%" align="left">买家信息</td>
+        <td width="16%" align="left">管理操作</td>
+        <td align="left">简要备注</td>
+    </tr>
+<!--
+EOT;
+foreach($listdb as $key=>$value) {print <<<EOT
+-->
+    <tr bgcolor="#FFFFFF">
+        <td width="16%" align="left">{$value[id]}</td>
+        <td width="16%" align="left">{$value[title]}</td>
+        <td width="16%" align="left">{$value[system_pay_date]} <span style="color:green;">{$value[complete]}</span></td>
+        <td width="16%" align="left"><a href="../member/userinfo.php?uid={$value[uid]}" target="_blank">浏览</a></td>
+        <td width="16%" align="left">
+<!--
+EOT;
+if($value[admin_confirm] == 1) {print <<<EOT
+-->
+            已确认
+<!--
+EOT;
+} else {print <<<EOT
+-->
+            <div id="btnDdiv{$value[id]}">
+                <input type="button" id="confirmBtn" onclick="admin_confirm({$value[id]},'{$ajaxUlr}','admin_confirm')" value="确认" />
+            </div>
+<!--
+EOT;
+}print <<<EOT
+-->
+        </td>
+        <td align="left">{$value[end_comment]}</td>
+    </tr>
+    <!--
+EOT;
+}print <<<EOT
+-->
+    </tbody>
+</table>
+<!--
+EOT;
+?>
+-->

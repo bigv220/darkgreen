@@ -1,0 +1,69 @@
+<!--
+<?php
+print <<<EOT
+-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btn_use_gutai').click(function() {
+
+        })
+    });
+</script>
+<div class="w1000 mg_at clearfix">
+    <div class="orderList fl">
+        <ul>
+            <li><a href="$webdb[www_url]/shop/gutai_config.php" class="oList">基本设置</a></li>
+
+            <li><a href="$webdb[www_url]/shop/gutai_pay.php?job=list" class="oList">终止和付款</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_money.php" class="oList">现有余额</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_trade.php" class="oList">交易采购单</a></li>
+            <li  class="on"><a href="$webdb[www_url]/shop/gutai_paper.php" class="oList">采购协议文本</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_faq.php" class="oList">服务说明</a></li>
+            <li><a href="http://www.darkgreen.cn/chatwithgogo.php" class="oList">客服GOGO</a></li>
+
+        </ul>
+    </div>
+<div class="rtWrap fr mt">
+    <h2>&nbsp;</h2>
+    <div class="oBox4">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-right: 1px solid #ccc;">
+            <tbody>
+            <tr>
+                <td width="100" style="text-align: center;">订单ID</td>
+                <td>卖家文本</td>
+                <td>买家文本</td>
+            </tr>
+<!--
+EOT;
+foreach($orders as $key=>$value) {
+print <<<EOT
+-->
+            <tr>
+                <td width="100" style="text-align: center;">{$key}</td>
+                <td>{$value[sellertext]}</td>
+                <td>{$value[buyertext]}</td>
+            </tr>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+            </tbody></table>
+
+    </div>
+
+
+
+</div>
+</div>
+</div>
+<script language="javascript" src="$webdb[www_url]/images/default/default.js"></script>
+<style type="text/css">
+    .rtWrap .oBox4 td {
+        border-right: 1px dashed #C1C1C1;
+    }
+</style>
+<!--
+EOT;
+?>
+-->

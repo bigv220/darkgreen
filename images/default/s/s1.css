@@ -1,0 +1,79 @@
+.Container .Mcont .sideL {
+	WIDTH: 160px; FLOAT: left; HEIGHT: 400px; BORDER-RIGHT: #ccc 1px solid;padding-left:168px;
+}
+.Container .Mcont .sideR {
+	WIDTH: 160px; FLOAT: right; HEIGHT: 400px
+}
+.Container .Mcont .MainC {
+	PADDING-LEFT: 20px; WIDTH: 620px; FLOAT: left
+}
+.showsort DT {
+	LINE-HEIGHT: 25px; PADDING-LEFT: 25px; PADDING-RIGHT: 15px; BACKGROUND: url(icon1.gif) no-repeat 15px 9px; HEIGHT: 25px; OVERFLOW: hidden; FONT-WEIGHT: bold
+}
+.showsort DD {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 25px; PADDING-RIGHT: 20px; PADDING-TOP: 0px
+}
+.showsort DD DIV {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; OVERFLOW: hidden
+}
+.showsort DD DIV A:link {
+	COLOR: #00c; TEXT-DECORATION: underline
+}
+.showsort DD DIV A:visited {
+	COLOR: #00c; TEXT-DECORATION: underline
+}
+.showsort DD DIV A:hover {
+	COLOR: #00c; TEXT-DECORATION: underline
+}
+.hotsearch DT {
+	BORDER-BOTTOM: #ccc 1px solid; LINE-HEIGHT: 25px; MARGIN-BOTTOM: 5px; HEIGHT: 25px; FONT-WEIGHT: bold
+}
+.hotsearch DD DIV {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; OVERFLOW: hidden
+}
+.hotsearch DD DIV A:link {
+	COLOR: #00c; TEXT-DECORATION: underline
+}
+.hotsearch DD DIV A:visited {
+	COLOR: #00c; TEXT-DECORATION: underline
+}
+.hotsearch DD DIV A:hover {
+	COLOR: #00c; TEXT-DECORATION: underline
+}
+.cophome_l_pro {
+    width:860px;
+    float:left;
+    padding-left:190px;
+}
+.cophome_l_pro li {
+    float: left;
+    height: 178px;
+    list-style: none outside none;
+    padding-top: 10px;
+    text-align: center;
+    width: 192px;
+    border:1px solid #CCCCCC;
+    margin:4px;
+}
+.cophome_l_pro .title {
+    padding:15px 0 0;
+    font-weight:bold;
+    border-top:1px dotted #CCCCCC;
+}
+.page {
+    font-family: microsoft yahei;
+    height: 24px;
+    line-height: 23px;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    text-align: center;
+    clear:both;
+}
+.page a {
+    background-color: #FFFFFF;
+    border: 1px solid #DBDBDB;
+    display: inline-block;
+    height: 23px;
+    margin: 0 3px;
+    padding:3px;
+}

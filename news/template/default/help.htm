@@ -1,0 +1,95 @@
+<!--
+<?php
+if($fidDB[config][ListShowType]!=1&&$fidDB[config][ListShowType]!=3){
+$listdb_pic=Get_Info($type='pic',$webdb[InfolistPicRows]?$webdb[InfolistPicRows]:4,$leng=30,$fid,$mid=0);
+}
+$listdb_pic || $hide_listpic='none';	//不存在图片主题的话.要把图片主题的边框隐藏
+print <<<EOT
+--> 
+<div id="ly_about" class="heightboxx">
+  <div class="ly_about_l">
+  <!--
+EOT;
+$styleid=$_GET[id];
+$querypro = $db->query("SELECT * FROM home_alonepage order by id asc");
+while($key = $db->fetch_array($querypro)){
+if($styleid==$key[id]){$listy='class=ly_about_l_on';}
+print <<<EOT
+-->
+    <li $listy><a href="/do/about.php?id=$key[id]" style="display:block">$key[name]</a></li>
+  <!--
+EOT;
+if($styleid>=$key[id]){$listy='';}
+}print <<<EOT
+-->   <li><a href="/guestbook/" style="display:block">意见反馈</a></li>
+<li class=ly_about_l_on><a href="/news/help-htm-fid-44.html" style="display:block">帮助中心</a></li>
+      <li><a href="/news/article-htm-fid-46.html" style="display:block">网站公告</a></li>
+      <li><a href="/do/friendlink.php" style="display:block">友情链接</a></li> 
+      
+  </div>
+  
+  <div class="ly_about_r"><!--****************************子栏目文章列表开始****************************-->
+            
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="listarticle">
+              <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+$target=$rs[target]?'_blank':'_self';
+print <<<EOT
+-->
+              <tr> 
+                <td><span class="title"><a href="helpread-htm-fid-$rs[fid]-id-$rs[id].html" target="$target" title='$rs[full_title]' style="color:$rs[titlecolor]">$rs[title]</a></span> 
+                  <!--
+EOT;
+if($webdb[ListShowIcon]&&$rs[picurl]){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/img_ico.gif"></span> 
+                  <!--
+EOT;
+}
+if($webdb[ListShowIcon]&&$rs[levels]){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/good_ico.gif"></span> 
+                  <!--
+EOT;
+}
+if($webdb[ListShowIcon]&&$rs['list']>$timestamp){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/top_icon.gif"></span> 
+                  <!--
+EOT;
+}
+if($webdb[ListShowIcon]&&$webdb[hotArticleNum]&&$rs['hits']>$webdb[hotArticleNum]){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/hot_icon.gif"></span> 
+                  <!--
+EOT;
+}
+if($webdb[ListShowIcon]&&$webdb[newArticleTime]&&($timestamp-$rs['full_posttime'])<$webdb[newArticleTime]*3600){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/new_ico.gif"></span> 
+                  <!--
+EOT;
+}print <<<EOT
+-->
+                  <span class="time">({$rs[posttime]})</span> </td>
+              </tr>
+              <!--
+EOT;
+}print <<<EOT
+-->
+            </table>
+            
+            <div class="page">$showpage</div>
+            <!--****************************子栏目文章列表结束****************************--></div>
+  
+</div>
+<!--
+EOT;
+?>
+-->

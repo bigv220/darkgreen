@@ -1,0 +1,57 @@
+<!--
+<?php
+print <<<EOT
+-->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function selectsearch(theA,word){
+	obj=document.getElementById("selectsearch").getElementsByTagName("a");
+	for(var i=0;i< obj.length;i++ ){
+		obj[i].className='';
+	}
+	theA.className='choose';
+	document.getElementById("searchtype").value=word;
+}
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+clickEdit.init();
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--//目的是为了做风格方便
+document.write('</div>');
+//-->
+</SCRIPT>
+</div>
+<div id="ly_main_footer">
+  <div class="ly_main_footer_menu"><a href="/do/about.php?id=2">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/do/about.php?id=4">会员服务</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/do/about.php?id=3">广告服务</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/do/about.php?id=5">渠道招商</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/do/about.php?id=6">服务条款</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/do/about.php?id=7">法律声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/do/friendlink.php">友情链接</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/guestbook/">意见反馈</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/do/about.php?id=9">诚聘英才</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/do/about.php?id=8">联系我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/news/help-htm-fid-44.html">帮助中心</a></div>
+  <div class="ly_main_footer_copy">$webdb[copyright]</div>
+  <div class="ly_main_footer_copypic">
+  <a href="http://net.china.com.cn/" target="_blank"><img src="$webdb[www_url]/images/default/lysw_178.jpg" border="0" ></a><a href="http://www.315.gov.cn/" target="_blank"><img src="$webdb[www_url]/images/default/lysw_180.jpg" border="0" ></a><a href="https://www.alipay.com/" target="_blank"><img src="$webdb[www_url]/images/default/lysw_182.jpg" border="0" ></a>
+  
+  </div>
+</div>
+<div id="gotopbtn"><IMG src="$webdb[www_url]/images/default/lysw_top.jpg" border=0></div>
+<script type="text/javascript">
+ idTest=document.getElementById('gotopbtn');
+ idTest.onclick=function (){
+  document.documentElement.scrollTop=0;
+  sb();
+  }
+ window.onscroll=sb;
+ function sb(){
+  if(document.documentElement.scrollTop==0){
+   idTest.style.display="none";
+   }else{
+    idTest.style.display="block";
+    }
+  }
+</script>
+</body>
+</html>
+<!--
+EOT;
+?>
+-->

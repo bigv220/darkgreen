@@ -1,0 +1,179 @@
+<!--
+<?php
+print <<<EOT
+--> 
+<link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/yellow/company_list.css">
+<div id="lysw_main" class="heightbox">
+<div class="lysw_hr_main_c_tit heightbox">
+ 
+</div>
+  <div class="lysw_main_l">
+  
+    <div id="ddsidemenubar" class="markermenu">
+<ul>
+<!--
+EOT;
+$i=0;
+$array=$Fid_db[0];
+foreach($array AS $fkey=>$fvalue){
+$listid=$fidDB[fup];
+if($listid==0){$listid=$fidDB[fid];}
+if($listid == $fkey){
+$dividnmae='class=ovdown';
+}
+$i++;
+print <<<EOT
+-->
+<li rel="ddsubmenuside{$i}" $dividnmae><a href="list.php?fid=$fkey">$fvalue</a></li>
+ <!--
+EOT;
+if($fkey>=$listid){$dividnmae='';}
+}print <<<EOT
+-->
+ 
+ 
+</ul>
+</div>
+	<script type="text/javascript"> 
+		$(document).ready(function() {
+			$('#ddsidemenubar').allenMenu();
+			$("#nav_10001").addClass("ovdown");
+		});
+</script> 
+<script type="text/javascript"> 
+ddlevelsmenu.setup("ddsidemenubar", "sidebar")
+</script>
+<!--
+EOT;
+$i=0;
+$array=$Fid_db[0];
+foreach($array AS $fkey=>$fvalue){
+$i++;
+$array2=$Fid_db[$fkey];
+if($array2){
+print <<<EOT
+--> 
+<ul id="ddsubmenuside{$i}" class="ddsubmenustyle blackwhite">
+<!--
+EOT;
+$array2=$Fid_db[$fkey];
+foreach($array2 AS $fkey2=>$fvalue2){
+print <<<EOT
+-->
+<li><a href="list.php?fid=$fkey2">$fvalue2</a>
+<!--
+EOT;
+$array3=$Fid_db[$fkey2];
+if($array3){
+print <<<EOT
+-->
+<ul>
+<!--
+EOT;
+$array3=$Fid_db[$fkey2];
+foreach($array3 as $skey3=>$fvalue3){
+print <<<EOT
+-->
+<li><a href="list.php?fid=$skey3">$fvalue3</a></li>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+</ul>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+</li>
+<!--
+EOT;
+}print <<<EOT
+-->
+</ul>
+ <!--
+EOT;
+}}print <<<EOT
+-->
+   
+</div>
+
+  <div class="lysw_main_r">
+  <div class="lysw_main_r_tit" id="lysw_main_r_tit">
+    <li><a href="listall.php?fid=$fidDB[fid]&ordertype=" style="display:block">最新企业</a></li>
+    <li><a href="listall.php?fid=$fidDB[fid]&ordertype=hits" style="display:block">热门企业</a></li>
+    <li><a href="listall.php?fid=$fidDB[fid]&ordertype=levelstime" style="display:block">推荐企业</a></li>
+  </div>
+  <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+if ($rs[is_tuiguang]==1) {
+$v_text="绿页推广";
+} else {
+$v_text="商务推介";
+}
+$renzhengdb=array(
+	0=>'<font color="#cccccc">未认证</font>',
+	1=>'<font color="#000000">普通会员</font>',
+	2=>'<font color="#9a0000">商务通会员</font>',
+	3=>'<font color="#FF0000">VIP会员</font>',
+);
+$renzhengdbname=$renzhengdb[$rs[renzheng]];
+$renzhengdbsm=array(
+	0=>'综合选择',
+	1=>'平台综合录入',
+	2=>'平台综合录入',
+	3=>'平台综合录入',
+);
+$renzhengdbnamesm=$renzhengdbsm[$rs[renzheng]];
+$coabout=mb_substr($rs[content],0,100,'UTF-8');
+print <<<EOT
+-->
+  <div class="lysw_main_r_list">
+    <div class="lysw_main_r_list_l"></div>
+    <div class="lysw_main_r_list_c">
+      <div class="lysw_main_r_list_c_l">
+        <span style="font-size:13px; font-weight:bold; line-height:30px;color: #5ea1a7;">{$v_text}</span><br />
+        经营模式:<font style=" color:#006600">{$rs[qy_saletype]}</font><br />
+        注册资金:<font style=" color:#006600">{$rs[qy_regmoney]}万 人民币</font><br />
+        身份信息:<font style=" color:#006600">$renzhengdbnamesm</font><br />
+        登记时间:<font style=" color:#006600">$rs[posttime]</font><br />
+        点击次数:<font style=" color:#006600">{$rs[hits]}次</font><br />
+      </div>
+      <div class="lysw_main_r_list_c_r">
+        <div class="lysw_main_r_list_c_r_l">
+            <a href="$webdb[www_url]/company.$rs[uid]" target="_blank"><font style="font-size:14px; font-weight:bold; line-height:30px;">$rs[title]</font></a><br />{$coabout}...</div>
+        <div class="lysw_main_r_list_c_r_r">
+        
+          <div class="lysw_main_r_list_c_r_r_l">
+            <li>商务平台:$webdb[www_url]/company.$rs[uid]</li>
+            <li>店铺:$webdb[www_url]/lyshop.$rs[uid]</li>
+          </div>
+          <div class="lysw_main_r_list_c_r_r_r">
+            <li><a href="$webdb[www_url]/company.$rs[uid]" target="_blank"><img src="images/ly_home_cop_14.jpg" border="0" /></a></li>
+            <li><a href="$webdb[www_url]/lyshop.$rs[uid]" target="_blank"><img src="images/ly_home_cop_14.jpg" border="0" /></a></li>
+          </div>
+        </div>
+        <div class="lysw_main_r_list_c_r_c">
+         <div class="lysw_main_r_list_c_r_c_1">所在地区:$rs[qy_address]&nbsp;&nbsp;联系方式:$rs[qy_contact_tel]&nbsp;&nbsp;联系人:$rs[qy_contact]</div>
+         <div class="lysw_main_r_list_c_r_c_2"><a href="/member/?main=pm.php?job=send&username=$rs[username]"><img src="images/ly_home_cop_18.jpg" border="0" /></a></div>
+         <div class="lysw_main_r_list_c_r_c_3"><a href="javascript:window.external.AddFavorite('$webdb[www_url]/home/?uid=$rs[uid]','$rs[title]')"><img src="images/ly_home_cop_20.jpg" border="0" /></a></div>
+        </div>
+      </div>
+    </div>
+    <div class="lysw_main_r_list_r"></div>
+  </div>
+ <!--
+EOT;
+}print <<<EOT
+--> 
+  
+  
+  <div class="lysw_main_r_page"><div class="page">$showpage</div></div>
+  
+  </div>
+<!--
+EOT;
+?>
+-->

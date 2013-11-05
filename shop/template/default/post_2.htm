@@ -1,0 +1,408 @@
+<!--
+<?php
+print <<<EOT
+-->
+  <script type="text/javascript" src="$webdb[www_url]/ewebeditor/ckeditor/ckeditor.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function() {
+          deliver_type($conf[default_sendtype], null);
+<!--
+EOT;
+if ($infodb[is_ask] == '1') {
+print <<<EOT
+-->
+change_paytype(5);
+$(".head .TAG").html('询价洽谈列表');
+<!--
+EOT;
+}
+print <<<EOT
+-->
+});
+  </script>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+  <tr> 
+    <td height="100" valign="top" class="Main"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable" >
+        <tr> 
+          <td class="head">
+            <h3 class="L"></h3>
+            <span class="TAG">商品采购列表</span>
+            <h3 class="R"></h3>
+          </td>
+        </tr>
+        <tr> 
+          <td class="middle"> 
+            <table width="100%" cellspacing="5" cellpadding="5">
+              <tr> 
+                <td align="left"> 
+                  
+                <form name="form_order" method="post" action="?action=$atc" enctype="multipart/form-data" onsubmit="if( Validator.Validate(this,3) ) return isReadText(); else return false;">
+                    <table width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;"   class="table_bg">
+                      <tr align="center" > 
+                        <td colspan="6" class="td_title"><div class="number">1</div><b style="color:white;">采购清单</b></td>
+                      </tr>
+                      <tr align="center">
+                        <td width="21%"><b><font color="#FF0000">商品名称</font></b></td>
+                        <td width="16%"><b><font color="#FF0000">商品型号</font></b></td>
+                          <td width="17%"><b><font color="#FF0000">类别</font></b></td>
+                        <td width="18%"><b><font color="#FF0000">数 量</font></b> 
+                        </td>
+                        <td width="14%" align="right" style="padding-right:2px;"><b><font color="#FF0000">单 价 </font></b></td>
+                        <td width="14%" align="right" style="padding-right:2px;"><b><font color="#FF0000">总 价 </font></b></td>
+                      </tr>
+                      <tr > 
+                        <td width="21%"  class="content"><a href="bencandy.php?city_id=$infodb[city_id]&fid=$fid&id=$cid" target="_blank">$infodb[title]</a></td>
+                        <td align="center" width="16%" >$infodb[shoptype]</td>
+                        <td align="center" width="17%" >$infodb[fname]</td>
+                        <td width="18%" align="center" >
+                          <input type="text" name="shopnum" value="$hownum" size="5"  id="shopnum">
+                            <input type="button" value="更新"  onclick="change_price();"/>
+                        </td>
+                        <td width="14%"  align="right" style="padding-right:2px;"><span style="color:#FF0000" id="single_price">{$infodb[price]}</span>元</td>
+                        <td width="14%"  align="right" style="padding-right:2px;"><span style="color:#FF0000" id="total_product_price">{$infodb[price]}</span>元</td>
+                      </tr>
+                    </table>
+                    <br/>
+                    <table width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;"  class="table_bg">
+                        <tr align="center" >
+                            <td colspan="4" class="td_title"><div class="number">2</div><b style="color:white;">物流、配送设置</b></td>
+                        </tr>
+                        <tr>
+                            <td width="16%" class="content">配送方式:<br></td>
+                            <td  colspan="3" width="74%">
+                                <input type='radio' onclick="deliver_type(1, this)" style='border:0;' name='postdb[order_sendtype]' value='1' {$rsdb[order_sendtype]['1']}>上门取货
+                                <input type='radio' onclick="deliver_type(2, this)" style='border:0;' name='postdb[order_sendtype]' value='2' {$rsdb[order_sendtype]['2']}>平邮
+                                <input type='radio' onclick="deliver_type(3, this)" style='border:0;' name='postdb[order_sendtype]' value='3' {$rsdb[order_sendtype]['3']}>普通快递
+                                <input type='radio' onclick="deliver_type(4, this)" style='border:0;' name='postdb[order_sendtype]' value='4' {$rsdb[order_sendtype]['4']}>EMS快递
+<!--
+EOT;
+foreach($deliver_array AS $key=>$value){
+print <<<EOT
+-->
+                                    <input type='radio' onclick="deliver_type({$key},this)" style='border:0;' name='postdb[order_sendtype]' value='$key' {$rsdb[order_sendtype]['$key']}>$value[deliver_type]
+<!--
+EOT;
+}print <<<EOT
+-->
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td width="16%" class="content">货运说明:<br></td>
+                            <td  colspan="3" width="74%"> <input type="text" id="deliver_desc" name="postdb[deliver_desc]" style="width:600px" ></td>
+                        </tr>
+                        <tr >
+                            <td width="16%" class="content">价格内容:<br></td>
+                            <td  colspan="3" width="74%"> <input type="text" id="price_content" name="price_content" style="width:600px">
+                            &nbsp;&nbsp;<div align="right">货运总价: <span id="deliver_total">0</span> 元</div></td>
+                        </tr>
+                        <tr><td colspan="4"><hr/>
+                            <div style="color:#808080;padding:0px 0px 10px 50px;">说明：送货方式选择邮寄的话,普通快递加收<b><font color="#FF0000">{$conf[norm_send]}</font></b>元,EMS快递加收<b><font color="#FF0000">{$conf[ems_send]}</font></b>元,平邮加收<b><font color="#FF0000">{$conf[slow_send]}</font></b>元</div>
+                        </td></tr>
+                    </table>
+                    <br/>
+                    <input type="hidden" id="send_type" name="postdb[send_type]" value="" />
+                    <input type="hidden" id="slow_send" value="{$conf[slow_send]}"/>
+                    <input type="hidden" id="norm_send" value="{$conf[norm_send]}"/>
+                    <input type="hidden" id="ems_send" value="{$conf[ems_send]}"/>
+<!--
+EOT;
+foreach($deliver_array AS $key=>$value){
+print <<<EOT
+-->
+                    <input type="hidden" id="transfer_fee{$value[id]}" value="{$value[transfer_fee]}"/>
+<!--
+EOT;
+}print <<<EOT
+-->
+                    <input type="hidden" id="transfer_comment" value="$conf[transfer_comment]" />
+<!--
+EOT;
+foreach($deliver_array AS $key=>$value){
+print <<<EOT
+-->
+                    <input type="hidden" id="transfer_comment{$value[id]}" value="{$value[transfer_comment]}" />
+<!--
+EOT;
+}print <<<EOT
+-->
+                    <table width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;"   class="table_bg">
+                        <tr align="center" >
+                            <td colspan="4" class="td_title"><div class="number">3</div><b style="color:white;">实际支付总额</b> </td>
+                        </tr>
+                        <tr>
+                            <td width="16%" class="content">组成:<br></td>
+                            <td  colspan="3" width="74%">  商品价格  +  货运总价<div style="float:right;">实际支付总额为:   <span id="total_money">{$infodb[price]}</span> 元</div> </td>
+                        </tr>
+
+                        <tr><td colspan="4"><hr/>
+                            </td></tr>
+                    </table>
+                    <br/>
+                    <table width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;" class="table_bg">
+                        <tr align="center" >
+                            <td colspan="4" class="td_title"><div class="number">4</div><b style="color:white;">支付方式</b></td>
+                        </tr>
+                        <tr>
+                            <td width="1%" class="content"></td>
+                            <td  colspan="3" width="94%"> <input type='radio' style='border:0;' name='postdb[order_paytype]'  onclick = "change_paytype(4);"  value='4' {$rsdb[order_paytype]['4']}>网上即时支付        &nbsp;&nbsp;&nbsp;
+                                <input type='radio' style='border:0;' name='postdb[order_paytype]' onclick = "change_paytype(1);"  value='1' {$rsdb[order_paytype]['1']}>货到付款        &nbsp;&nbsp;&nbsp;
+                                <input type='radio' style='border:0;' name='postdb[order_paytype]'  onclick = "change_paytype(2);"  value='2' {$rsdb[order_paytype]['2']}>银行电汇或ATM转帐          &nbsp;&nbsp;&nbsp;
+                                <input id="ask_option" type='radio' style='border:0;' name='postdb[order_paytype]'  onclick = "change_paytype(5);"  value='5' {$rsdb[order_paytype]['5']}>不选择支付, 只是咨询
+                          </td>
+                        </tr>
+                        <tr><td colspan="4"><hr/> <div style="color:#808080;padding:0px 0px 10px 50px;">说明：商家使用平台古太行--贸易辅助功能 （ 或商家使用支付宝、银联在线支付功能）</div></td></tr>
+                    </table>
+                    <br/>
+                    <table width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;position:relative;"  class="table_bg">
+                        <tr align="center" >
+                            <td colspan="5" class="td_title"><div class="number">5  </div><div style="position:absolute;left:60px;color:white;">可选择项</div><b style="color:white;">协议文本</b></td>
+                        </tr>
+                        <tr>
+                            <td width="1%" class="content"></td>
+                            <td  colspan="3" width="94%">
+                                <div style="float:left">阅读
+                                    <a href="javascript:void(0)" id="seller_text">卖方文本</a>
+                                </div>
+                                <div style="float:right;padding-right:80px;">阅读买方文本</div>
+                             </td>
+                        </tr>
+                        <tr><td colspan="4"><hr/><div style="color:#808080;padding:0px 0px 10px 50px;">说明：双方的协议文本将保存于各自客户中心---订单管理，可下载、打印、上传，完成的协议文本是相同的，存在于甲乙双方和平台系统。<br/>
+                            卖方可预先加载包括图文内容的产品商务协议，作为营销的内容项。</div></td></tr>
+                    </table>
+                    <input type="hidden" id="sellertext" name="postdb[sellertext]" value="{$seller_text}" />
+                    <input type="hidden" id="buyertext" name="postdb[buyertext]" value="" />
+                    <input type="hidden" id="isagreement" name="postdb[isagreement]" value="0" />
+                    <input type="hidden" id="ismodify" name="postdb[ismodify]" value="0" />
+
+                    <br/>
+                    <table width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;"  class="table_bg">
+                        <tr align="center" >
+                            <td colspan="5" class="td_title"><div class="number">6  </div><b style="color:white;">客户收货地址、联系信息</b></td>
+                        </tr>
+                        <tr>
+                            <td  colspan="4" width="94%">
+                                <div class="c_title"><div class="c_header">客户姓名:</div>    <input   type='text' datatype="Require" msg="请填写姓名"  name='postdb[order_username]' id='atc_order_username' style='width:200px;' value='$contact_db[order_username]'> </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">联系手机:</div>     <input   type='text'  name='postdb[order_mobphone]' id='atc_order_mobphone' style='width:200px;' value='$contact_db[order_mobphone]'>
+                                <input type="button" value="发送" id="send_validate_code"  onclick="send_order_sms('$webdb[www_url]', 2);"/> 查询收到的验证码               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    输入点击确定<input type="text" name="yznum"  id="yznum" class="inputbg"/><input type="button" value="确定" id="confirm_phone" onclick="confirm_sms_code('$webdb[www_url]');"/>
+                                <span class="ok_marker"><img src="$webdb[www_url]/images/default/ok.png"> 完成验证</span>
+                                <input type="hidden" id="validate_code_already" value="" datatype='LimitB' min="9" max="9" msg='请验证手机号码'/>
+                                <div class="fail_marker">验证码错误，无法通过验证</div>
+                                </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">联系电话:</div>     <input   type='text' name='postdb[order_phone]' id='atc_order_phone' style='width:200px;' value='$contact_db[order_phone]'>   </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">邮箱:</div>     <input   type='text' datatype="Email" msg="请输入正确邮箱格式" name='postdb[order_email]' id='atc_order_email' style='width:200px;' value='$contact_db[order_email]'>   </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">QQ: </div>    <input   type='text' name='postdb[order_qq]' id='atc_order_qq' style='width:200px;' value='$contact_db[order_qq]'>   </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">邮政编码: </div>    <input   type='text'  datatype="Require" msg="请输入邮编"  name='postdb[order_postcode]' id='atc_order_postcode' style='width:200px;' value='$contact_db[order_postcode]'>   </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">详细地址: </div>     <input   type='text'  datatype="Require" msg="请输入详细地址"  name='postdb[order_address]' id='atc_order_address' style='width:200px;' value='$contact_db[order_address]'>   </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">附注留言: </div>     <textarea  name='postdb[content]' id='atc_content' style='width:400px;height:50px;'>$contact_db[content]</textarea>   </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">采购单位: </div> 非单位采购可不填      </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">名称: </div>    <input   type='text' name='postdb[order_company]' id='atc_order_company' style='width:200px;' value='$contact_db[order_company]'>    </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">地址: </div>    <input   type='text' name='postdb[order_company_address]' id='atc_order_company_address' style='width:200px;' value='$contact_db[order_company_address]'>    </div>
+                                <hr/>
+                                <div class="c_title"><div class="c_header">采购人职能: </div>    <input   type='text' name='postdb[order_company_function]' id='atc_order_company_function' style='width:200px;' value='$contact_db[order_company_function]'>    </div>
+                            </td>
+                        </tr>
+                        <tr><td colspan="4"><hr/><div style="color:#808080;padding:0px 0px 10px 50px;">注：以上客户收货、联系地址信息，首次填写将自动存取；修改后将按最近内容提取。</div></td></tr>
+                    </table>
+                    <br/>
+                    <table id="ask_before_pay" width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;position:relative;display:none;"  class="table_bg">
+                        <tr align="center" >
+                            <td colspan="5" class="td_title"><div class="number">7  </div><b style="color:white;">确认订单</b></td>
+                        </tr>
+                        <tr>
+                            <td width="1%" class="content"></td>
+                            <td  colspan="3" width="94%"> <div align="center" style="padding-top:10px;">商洽后 确定   <input type="submit" value="采购咨询单"/></div>
+                            </td>
+                        </tr>
+                        <tr><td colspan="4"><hr/><div style="color:#808080;padding:0px 0px 10px 50px;">说明：付款功能实现，即自动创建---古太行消费用户版面，如进行其他操作另设置系统的支付密码。</div></td></tr>
+                    </table>
+                    <table id="online_pay" width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;position:relative;"  class="table_bg">
+                        <tr align="center" >
+                            <td colspan="5" class="td_title"><div class="number">7  </div><b style="color:white;">确认订单</b></td>
+                        </tr>
+                        <tr>
+                            <td width="1%" class="content"></td>
+                            <td  colspan="3" width="94%"> <div align="center" style="padding-top:10px;">确定以上内容     <input type="submit" name="Submit" value="创建订单"  ></div>
+                            </td>
+                        </tr>
+                        <tr><td colspan="4"><hr/><div style="color:#808080;padding:0px 0px 10px 50px;">说明：创建并保存于您和商家的客户中心---订单管理，是正式的咨询，商洽文书。</div></td></tr>
+                    </table>
+                    <input type="hidden" name="fid" value="$fid">
+                    <input type="hidden" name="id" value="$id">
+                    <input type="hidden" name="cid" value="$cid">
+                    <input type="hidden" name="postdb[title]" id="atc_title" size="50" value="$infodb[title]">
+                  </form>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="foot">
+            <h3 class="L"></h3>
+            <h3 class="R"></h3>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<div id="faqbg"></div>
+<div id="faqdiv" style="display:none">
+    <h2>卖家文本<a href="#" class="close">关闭</a></h2>
+    <div class="form" style="height: 75%; overflow-y:auto;">
+        {$seller_text}
+     </div>
+    <p>&nbsp;</p>
+    <p align="center">
+        <input value="同意卖家文本" class="but" type="button" onclick="agreeSellerText()" />
+<!--
+EOT;
+if($if_changeable == 1){
+print <<<EOT
+-->
+        <input type="button" value="编辑" onclick="editText()" />
+<!--
+EOT;
+}print <<<EOT
+-->
+    </p>
+</div>
+<div id="fckeditor_div" style="width: 800px;display:none;">
+    <h2>编辑卖家文本<a href="#" class="close">关闭</a></h2>
+    <div class="form">
+        <textarea style='display:none;' id='content1' name='postdb[content]'>{$seller_text}</textarea>
+
+        <script type="text/javascript">
+            var editor = CKEDITOR.replace( 'content1',
+                    {
+                        width:'100%',
+                        height:'500px',
+                        filebrowserBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html',
+                        filebrowserImageBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Images',
+                        filebrowserFlashBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Flash',
+                        filebrowserUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                        filebrowserImageUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                        filebrowserFlashUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+                    });
+            editor.setData($('#content1').html());
+        </script>
+        <p>&nbsp;</p>
+        <p align="center">
+            <input type="button" value="保存" onclick="saveText()" />
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $("#seller_text").click(function(){
+            //var str = "这里是信息内容，这里是信息内容！";
+           //$(".form").html(str);
+            $("#faqbg").css({display:"block",height:$(document).height()});
+            var yscroll =document.documentElement.scrollTop;
+            $("#faqdiv").css("top","60px");
+            $("#faqdiv").css("display","block");
+            document.documentElement.scrollTop=0;
+        });
+        $(".close").click(function(){
+            $("#faqbg").css("display","none");
+            $("#faqdiv").css("display","none");
+            $("#fckeditor_div").css("display","none");
+        });
+    });
+
+    function isReadText() {
+        return true;
+        var isModify = $('#ismodify').val();
+        var isAgree = $('#isagreement').val();
+        if(isModify == 0 && isAgree == 0) {
+            alert('您还没有阅读买方文本，请先阅读！');
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function agreeSellerText() {
+        $('#buyertext').val($('#sellertext').val());
+        $('#isagreement').val(1);
+
+        // hidden the popup window
+        $("#faqbg").css("display","none");
+        $("#faqdiv").css("display","none");
+        CKEDITOR.instances.content1.setData($('#content1').html());
+        alert('您已同意卖家文本！');
+    }
+
+    function editText() {
+        var yscroll = document.documentElement.scrollTop;
+        $("#fckeditor_div").css("top","60px");
+        $("#fckeditor_div").css("display","block");
+        document.documentElement.scrollTop=0;
+    }
+
+    function html_decode(str)
+    {
+        var s = "";
+        if (str.length == 0) return "";
+        s = str.replace(/&gt;/g, "&");
+        s = s.replace(/&lt;/g, "<");
+        s = s.replace(/&gt;/g, ">");
+        s = s.replace(/&nbsp;/g, " ");
+        s = s.replace(/&#39;/g, "\'");
+        s = s.replace(/&quot;/g, "\"");
+        return s;
+    }
+
+    function saveText() {
+        var ini_content = $('#content1').html();
+        ini_content = ini_content.replace(/\s/g, '');
+
+        var content = CKEDITOR.instances.content1.getData();
+        content = html_decode(content);
+        content = content.replace(/\s/g, '');
+
+        $('#buyertext').val(content);
+        if(ini_content == content) {
+            $('#isagreement').val(1);
+        } else {
+            $('#ismodify').val(1);
+        }
+
+        // hidden the popup window
+        $("#faqbg").css("display","none");
+        $("#faqdiv").css("display","none");
+        $("#fckeditor_div").css("display","none");
+        alert('您已修改卖家文本！');
+    }
+</script>
+<style type="text/css">
+    #faqbg{background-color:#666666; position:absolute; z-index:99; left:0; top:0; display:none; width:100%; height:1000px;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
+    #faqdiv {position:absolute;width:700px; left:40%; top:30%; margin-left:-200px; height:600px; z-index:100;background-color:#fff; border:1px #8FA4F5 solid; padding:1px;}
+    #faqdiv h2{ margin-top: 0px; height:25px; font-size:14px; background-color:#8FA4F5; position:relative; padding-left:10px; line-height:25px;}
+    #faqdiv h2 a{position:absolute; right:5px; font-size:12px; color:#FF0000}
+    #faqdiv .form{padding:10px;}
+
+    #fckeditor_div {position:absolute;width:400px; left:35%; top:50%; margin-left:-200px; height:auto; z-index:100;background-color:#fff; border:1px #8FA4F5 solid; padding:1px;}
+    #fckeditor_div h2{ margin-top: 0px; height:25px; font-size:14px; background-color:#8FA4F5; position:relative; padding-left:10px; line-height:25px;}
+    #fckeditor_div h2 a{position:absolute; right:5px; font-size:12px; color:#FF0000}
+    #fckeditor_div .form{padding:10px;}
+</style>
+<!--
+EOT;
+?>
+-->

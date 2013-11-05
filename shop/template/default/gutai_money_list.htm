@@ -1,0 +1,68 @@
+<!--
+<?php
+print <<<EOT
+-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btn_use_gutai').click(function() {
+
+        })
+    });
+</script>
+<div class="w1000 mg_at clearfix">
+    <div class="orderList fl">
+        <ul>
+            <li><a href="$webdb[www_url]/shop/gutai_config.php" class="oList">基本设置</a></li>
+
+            <li><a href="$webdb[www_url]/shop/gutai_pay.php?job=list" class="oList">终止和付款</a></li>
+            <li class="on"><a href="$webdb[www_url]/shop/gutai_money.php" class="oList">现有余额</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_trade.php" class="oList">交易采购单</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_paper.php" class="oList">采购协议文本</a></li>
+            <li><a href="$webdb[www_url]/shop/gutai_faq.php" class="oList">服务说明</a></li>
+            <li><a href="http://www.darkgreen.cn/chatwithgogo.php" class="oList">客服GOGO</a></li>
+
+        </ul>
+    </div>
+<div class="rtWrap fr mt">
+    <h2>&nbsp;</h2>
+    <div class="mt20">
+        <span class="sp1"><a href="$webdb[www_url]/shop/gutai_money.php">返回现有余额</a></span>
+    </div>
+
+    <div class="oBox3">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody><tr>
+                <th width="140" scope="col">序号</th>
+                <th width="120" scope="col">操作</th>
+                <th width="80" scope="col">金额</th>
+                <th width="60" scope="col">状态</th>
+                <th width="80" scope="col">时间</th>
+            </tr>
+<!--
+EOT;
+foreach($listdb AS $key=>$rs){
+if(true) {
+print <<<EOT
+-->
+<tr>
+    <td><span >{$rs[id]}</span></td>
+    <td>$rs[gutai_type]</td>
+    <td><span>{$rs[amount]}</span>元</td>
+    <td><span  id="status{$rs[id]}">$rs[status]</span></td>
+    <td><span class="sBlue">$rs[posttime]</span></td>
+</tr>
+<!--
+EOT;
+} }print <<<EOT
+-->
+            </tbody></table>
+    </div>
+</div>
+</div>
+</div>
+<script language="javascript" src="$webdb[www_url]/images/default/default.js"></script>
+<!--
+EOT;
+?>
+-->

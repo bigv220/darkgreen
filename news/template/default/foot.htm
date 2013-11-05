@@ -1,0 +1,55 @@
+<!--
+<?php
+print <<<EOT
+-->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function selectsearch(theA,word){
+	obj=document.getElementById("selectsearch").getElementsByTagName("a");
+	for(var i=0;i< obj.length;i++ ){
+		obj[i].className='';
+	}
+	theA.className='choose';
+	document.getElementById("searchtype").value=word;
+}
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+clickEdit.init();
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--//目的是为了做风格方便
+document.write('</div>');
+//-->
+</SCRIPT>
+ 
+<div id="lysw_bottom">
+  <div class="lysw_bottom_c"><strong>绿页商务平台服务热线:400 0532 796 &nbsp;&nbsp;&nbsp;绿页商务—麦野商务信息办公版</strong>
+  <div class="lysw_bottom_link"><a href="http://www.darkgreen.cn/do/about.php?id=8"><img src="images/logo.jpg" onmousemove="src='images/logo2.jpg'" onmouseout="src='images/logo.jpg'" width="66" height="59" border="0" /></a></div>
+  </div>
+</div>
+ 
+<div id="gotopbtn"><IMG src="images/lysw_172.jpg" border=0></div>
+<script type="text/javascript"> 
+ idTest=document.getElementById('gotopbtn');
+ idTest.onclick=function (){
+  document.documentElement.scrollTop=0;
+  sb();
+  }
+ window.onscroll=sb;
+ function sb(){
+  if(document.documentElement.scrollTop==0){
+   idTest.style.display="none";
+   }else{
+    idTest.style.display="block";
+    }
+  }
+</script>
+</body>
+</html>
+<!--
+EOT;
+?>
+-->

@@ -1,0 +1,149 @@
+<script language="javascript" type="text/javascript" src="/common/Date/WdatePicker.js"></script>
+<link href="/common/Date/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<!--
+<?php
+print <<<EOT
+-->
+ <div style="display:none;"> <iframe width=1 height=1 src='' id="iframe_zone" name="iframe_zone"></iframe> 
+  <iframe width=1 height=1 src='' id="iframe_street" name="iframe_street"></iframe> 
+  <form name="form1" method="post" action="" target="iframe_zone" id="form_zone">
+  </form>
+</div>
+<script src="$webdb[www_url]/images/default/setday.js"></script>
+        <form action="?" method="post" enctype="multipart/form-data" name="form4Com" id="form4Com" >
+          
+  <table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#CCCCCC"  class="posttable">
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9" style="width: 100px;"><font color=red>*</font><strong>店铺全称</strong>:</td>
+      <td bgcolor="#FFFFFF" >
+        <input type='text' name='title' id='atc_title' size='30' value='$intro[title]' />
+      </td>
+    </tr>
+    <tr> 
+      <td align="right" valign="top" bgcolor="#f9f9f9" class="tdT">
+        <strong>商家LOGO</strong>:<br />
+      </td>
+      <td align="left" valign="top" bgcolor="#FFFFFF">
+        <input name="postfile" type="file" size="30" />
+        <br />
+        <img src="$companydb[logo]"  border="0" onload="if(this.width>150)this.width=150;"  class="logo" onerror="this.src='$Murl/images/default/icobg.gif'"/> 
+        <input name="oldfile" type="hidden"  value="$intro[picurl]" />
+        <br />
+        <span class="tdT">(公司的LOGO尺寸长或宽如果大于300px,系统将自动截剪)</span></td>
+    </tr>
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9"><font color=red>*</font><strong>主营分类</strong>:</td>
+      <td bgcolor="#FFFFFF" id="categoryTd"> 
+        <!--include
+EOT;
+$post_company=1;
+require(dirname(__FILE__)."/../morechosefid.htm");
+print<<<EOT
+include-->
+      </td>
+    </tr>
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9"><font color=red>*</font><strong>所在地区</strong>:</td>
+      <td bgcolor="#FFFFFF" > 
+       $city_fid<span id="showzone"></span><span id="showstreet"></span> 
+                    <SCRIPT LANGUAGE="JavaScript">
+<!--
+function choose_where(t,fup,fid,delstreet,typeid){
+	if(t=='getzone'){
+		url="http://www.darkgreen.cn/hy/job.php?job=getzone&typeid="+typeid+"&fup="+fup+"&fid="+fid+"&delstreet="+delstreet;
+		target='iframe_zone';
+	}else{
+		url="http://www.darkgreen.cn/hy/job.php?job=getstreet&typeid="+typeid+"&fup="+fup+"&fid="+fid;
+		target='iframe_street';
+	}
+	document.getElementById("form_zone").action=url;
+	document.getElementById("form_zone").target=target;
+	document.getElementById("form_zone").submit();
+}
+choose_where("getzone","$city_id","$zone_id",'','');
+choose_where("getstreet","$zone_id","$street_id",'','');
+//-->
+</SCRIPT>
+      </td>
+    </tr>
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9"><font color=red>*</font><strong>所属行业</strong>:</td>
+      <td bgcolor="#FFFFFF" >
+        <select name='my_trade' id='atc_my_trade'>
+          <!--
+EOT;
+$detail=explode("\r\n",$webdb[companyTrade]);
+foreach($detail AS $key=>$value){
+$ckk=$intro[my_trade]==$value?' selected ':' ';
+print <<<EOT
+-->
+          <option value="$value" $ckk>$value</option>
+          <!--
+EOT;
+}print <<<EOT
+-->
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9"><strong>成立时间</strong>:</td>
+      <td bgcolor="#FFFFFF" >
+        <input class="Wdate" readonly="readonly" type="text" onClick="WdatePicker()" name='qy_createtime' id='atc_qy_createtime' size='20' value='$intro[qy_createtime]' />
+      </td>
+    </tr>
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9"><strong>主营产品或服务</strong>:<br />
+      </td>
+      <td bgcolor="#FFFFFF" >
+        <input type='text' name='qy_pro_ser' id='atc_qy_pro_ser' size='50' value='$intro[qy_pro_ser]' />
+      </td>
+    </tr>
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9"><strong>主要采购产品</strong>:<br />
+      </td>
+      <td bgcolor="#FFFFFF" >
+        <input type='text' name='my_buy' id='atc_my_buy' size='50' value='$intro[my_buy]' />
+      </td>
+    </tr>
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9"><strong>注册地址</strong>:<br />
+      </td>
+      <td bgcolor="#FFFFFF" >
+        <input type='text' name='qy_regplace' id='atc_qy_regplace' size='50' value='$intro[qy_regplace]' />
+      </td>
+    </tr>
+    <tr> 
+      <td align='right' bgcolor="#f9f9f9">&nbsp;</td>
+      <td bgcolor="#FFFFFF" >
+        <input type="button" name="button8" id="button12" value="提 交"  onclick="posts()" style="cursor: pointer;"/>
+        <input name="atn" type="hidden" id="atn" value="$atn" />
+        <input name="step" type="hidden" id="step" value="1" />
+        <input name="uid" type="hidden" id="uid" value="$uid" />
+      </td>
+    </tr>
+  </table>
+        </form>
+        <SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function posts(){
+    if ("" == $("#atc_title").val()) {
+        alert("店铺全称不可以为空！");
+        return;
+    }
+    if ($("#atc_title").val().length < 5 || $("#atc_title").val().length > 30) {
+        alert("店铺全称必须在5-30字符之间，请重新输入！");
+        return;
+    }
+    if ($("#categoryTd").find("input[name^=fids]").length == 0) {
+        alert("主营分类不可以为空！");
+        return;
+    }
+    document.getElementById("form4Com").submit();
+}
+//-->
+</SCRIPT>
+<!--
+EOT;
+?>
+-->

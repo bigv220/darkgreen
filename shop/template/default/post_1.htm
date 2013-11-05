@@ -1,0 +1,347 @@
+<!--
+<?php
+
+$huiyuan_check = $rsdb[huiyuan_price] > 0 ? 'checked="checked"' :'';
+$huiyuan_check2 = $rsdb[huiyuan_price] <= 0 ? 'checked="checked"' :'';
+$show_huiyuan_price = $rsdb[huiyuan_price] <= 0 ? 'disabled="disabled"': '';
+print <<<EOT
+--> 
+<script type="text/javascript" src="$webdb[www_url]/ewebeditor/ckeditor/ckeditor.js"></script>
+<script src="$webdb[www_url]/images/default/setday.js"></script>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+  <tr> 
+    <td width="100%" height="393" valign="top" class="Main"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable" id="postshop">
+        <tr> 
+          <td class="head"> 
+            <h3 class="L"></h3>
+            <span class="TAG">$fidDB[name]</span> 
+            <h3 class="R"></h3>
+          </td>
+        </tr>
+        <tr> 
+          <td class="middle" style="padding: 5px;"> 
+            <form name="form4Edit" id="form4Edit" method="post" action="post.php?action=$atc"  enctype="multipart/form-data">
+              
+              <table width="99%" cellpadding="0" cellspacing="0" style="height: 200px;">
+                <tr> 
+                  <td width="70px" rowspan="6" valign="top"> 
+                    <div class="ct">基本资料</div>
+                  </td>
+                  <td width="100px" align="right"><font color="red">*</font>商品名称：</td>
+                  <td> 
+                    <input type="text" name="postdb[title]" id="atc_title" size="40" value="$rsdb[title]">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right">商品价格：</td>
+                  <td> 
+                    <input type="text" name="postdb[price]" id="atc_price" size="10" value="$rsdb[price]"> 元
+                  </td>
+                </tr>
+                <!--
+EOT;
+if($job!="edit"&&!$web_admin){
+print <<<EOT
+-->
+                <tr> 
+                  <td align="right"><font color=red>*</font> 验证码：</td>
+                  <td> 
+                    <input id="yzImgNum" type="text" name="yzimg" size="8">
+                    <script language="JavaScript">
+                    <!--
+                    document.write('<img border="0" name="imageField" onclick="this.src=this.src+Math.random();" src="$webdb[www_url]/do/yzimg.php?'+Math.random()+'">');
+                    //-->
+                    </script>
+                  </td>
+                </tr>
+                <!--
+EOT;
+}
+print <<<EOT
+--><!--
+EOT;
+if(count($city_DB[name])>1){
+print <<<EOT
+-->
+                <tr> 
+                  <td align="right">所在城市：</td>
+                  <td> 
+                    <select name="city_id">
+<!--
+EOT;
+foreach($city_DB[name] AS $key=>$value){
+if($job=='edit'){
+    $city_id=$rsdb[city_id];
+}
+$ckk=$city_id==$key?'selected':'';
+print <<<EOT
+-->
+                      <option value="$key" $ckk>$value</option>
+ <!--
+EOT;
+}
+print <<<EOT
+-->
+                    </select>
+                  </td>
+                </tr>
+                <!--
+EOT;
+}
+print <<<EOT
+-->
+                <tr> 
+                  <td align="right">介绍图片
+                    <img border='0'  onClick="showinput()" title="点击增加1项" src='$webdb[www_url]/images/default/menu_add.gif' style="cursor: pointer;">：
+                  </td>
+                  <td> 
+                    <script language="JavaScript">
+                    <!--
+                    function choosef(i,t){
+                        if(t=='out'){
+                            document.getElementById("out_url"+i).style.display='';
+                            document.getElementById("in_url"+i).style.display='none';
+                        }else{
+                            document.getElementById("out_url"+i).style.display='none';
+                            document.getElementById("in_url"+i).style.display='';
+                        }
+                    }
+                    //-->
+                    </script>
+                    <!--
+EOT;
+if($groupdb['gid']==2){
+    $picnum=$webdb[Info_GuestPostPicNum]!=''?intval($webdb[Info_GuestPostPicNum]):3;
+}elseif($groupdb['gid']==8){
+    $picnum=$webdb[Info_MemberPostPicNum]!=''?intval($webdb[Info_MemberPostPicNum]):10;
+}else{
+    $picnum=80;
+}
+if($picnum<1)unset($listdb);
+$detail=explode(",",$webdb[group_UpPhoto].',3,4');
+if($webdb[group_UpPhoto]&&!in_array($groupdb['gid'],$detail))$none='none;';
+$i=0;
+foreach($listdb AS $key=>$rs){
+$i++;
+print <<<EOT
+-->
+                    标题： 
+                    <input type="text" name="titledb[$i]" size="10" value="$rs[name]">
+                    地址： 
+                    <input type="text" name="photodb[$i]" size="30" id="out_url$i" value="$rs[imgurl]" style="width: 240px; height: 24px;">
+                    <input type="file" name="local_file$i" id="in_url$i" style="display:none;">
+                    <input type="radio" name="ftype[$i]" value="out" checked onclick="choosef($i,'out')">&nbsp;网络文件 <a style="display:$none;"> 
+                    <input type="radio" name="ftype[$i]" value="in" onclick="choosef($i,'in')">&nbsp;本地文件 </a> 
+                    <input type="hidden" name="piddb[$i]" value="$key">
+                    <br>
+                    <!--
+EOT;
+}print <<<EOT
+-->
+                  <div id='input$i'></div>
+                    <script>
+totalnum=$i;
+limitnum=$picnum;
+function showinput(){
+    if(totalnum > (limitnum-1)){
+        alert("你最多只能上"+limitnum+"传张图片!");
+        return ;
+    }
+    var str='';
+    var divid='input'+totalnum;
+    var num=2;
+    num=document.form4Edit.nums.value;
+    for(var i=1;i<=num;i++){
+        totalnum=totalnum+i;
+        str+='标题：&nbsp;<input type="text" name="titledb['+totalnum+']" size="10"> 地址： <input type="text" style="width: 240px; height: 24px; margin: 3px 0px;" name=photodb['+totalnum+'] size="30" id="out_url'+totalnum+'"> <input type="file" name="local_file'+totalnum+'" id="in_url'+totalnum+'" style="display:none; margin: 3px 0px;"> <input type="radio" name="ftype['+totalnum+']" value="out" checked onclick="choosef('+totalnum+',\'out\')">&nbsp;网络文件 <a style="display:$none;"><input type="radio" name="ftype['+totalnum+']" value="in" onclick="choosef('+totalnum+',\'in\')">&nbsp;本地文件</a><br>';
+    }
+    document.getElementById(divid).innerHTML=str+"<div id='input"+totalnum+"'></div>";
+    if(parent.document.getElementById('member_mainiframe')!=null){
+        parent.document.getElementById('member_mainiframe').height=parseInt(parent.document.getElementById('member_mainiframe').height)+18;
+    }
+} 
+function doNoPrice() {
+    $("#priceTr").css("color", "gray");
+    $("#atc_market_price").attr("disabled", "disabled");
+}
+function doPrice() {
+    $("#priceTr").css("color", "#000");
+    $("#atc_market_price").removeAttr("disabled");
+}
+</script>
+                    <input type="hidden" size="3" name="nums" value="1">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right">标　　签：</td>
+                  <td> 
+                    <input type="text" name="postdb[keywords]" size="50" value="$rsdb[keywords]">
+                    (多个用空格隔开)</td>
+                </tr>
+              </table>
+              <hr/>
+              
+              <table width="99%" cellpadding="0" cellspacing="0" style="height: 90px;">
+                <tr> 
+                  <td width="70px" rowspan="3" style="vertical-align: top;"> 
+                    <div class="ct">付费功能</div>
+                  </td>
+                  <td width="100px" align="right">是否置顶：</td>
+                  <td> 
+                    <input type="radio" name="iftop" value="0" $ifTop[0]> 不置顶 
+                    <input type="radio" name="iftop" value="1" $ifTop[1]> 置顶
+                    &nbsp;&nbsp;(注：栏目里置顶需要消费{$webdb[MoneyName]}
+                    <b><font color="#FF0000">{$webdb[Info_TopMoney]}</font></b>{$webdb[MoneyDW]}，<a href="$webdb[www_url]/do/jf.php" target="_blank"><font color="#004600">点击查上看如何获取{$webdb[MoneyName]}?</font></a>) 
+                  </td>
+                </tr>
+                <tr>
+                    <td align="right">会员价：</td>
+                    <td>
+                        <input type='radio' onclick="doNoPrice()" style='border:0;' name='postdb[is_huiyuan]' value='0' {$huiyuan_check2}  > 无
+                        <input type='radio' onclick="doPrice()" style='border:0;' name='postdb[is_huiyuan]' value='1' {$huiyuan_check} > 有
+                    </td>
+                </tr>
+                <tr id="priceTr">
+                    <td align="right">价格：</td>
+                    <td>
+                        <input type='text' name='postdb[huiyuan_price]' id='atc_market_price' {$show_huiyuan_price} style='width:100px;' value='$rsdb[huiyuan_price]'> 元
+                    </td>
+                </tr>
+              </table>
+              
+              <hr />
+              
+              <table width="99%" border="0" cellspacing="0" cellpadding="0" >
+                <tr> 
+                  <td width="70px" rowspan="4" style="vertical-align: top;">
+                    <div class="ct">具体资料</div>
+                  </td>
+                  <td width="100px" align='right' style="height: 35px;">属性专业说明: <br></td>
+                  <td class="product_details">
+                    <!--<input type='text' name='postdb[shoptype]' id='atc_shoptype' style='width:100px;' value='$rsdb[shoptype]'>-->
+                    <div id="product_details_div">
+                        <!-- shoptype 旧的"类型"字段-->
+                      <span class="details_span">品牌:</span> <input type='text' name='postdb[pinpai]' id='atc_pinpai' style='width:100px;' value='$rsdb[pinpai]'>
+                      <span class="details_span">型号: </span><input type='text' name='postdb[xinghao]' id='atc_xinghao' style='width:100px;' value='$rsdb[xinghao]'>
+                      <span class="details_span">尺寸: </span><input type='text' name='postdb[chicun]' id='atc_chicun' style='width:100px;' value='$rsdb[chicun]'>
+                      <span class="details_span">颜色: </span><input type='text' name='postdb[yanse]' id='atc_yanse' style='width:100px;' value='$rsdb[yanse]'>
+                      <span class="details_span">构成: </span><input type='text' name='postdb[goucheng]' id='atc_goucheng' style='width:100px;' value='$rsdb[goucheng]'>
+                        <br>
+                      <span class="details_span">材质: </span><input type='text' name='postdb[caizhi]' id='atc_caizhi' style='width:100px;' value='$rsdb[caizhi]'>
+                      <span class="details_span">重量: </span><input type='text' name='postdb[zhongliang]' id='atc_zhongliang' style='width:100px;' value='$rsdb[zhongliang]'>
+                      <span class="details_span">安全: </span><input type='text' name='postdb[anquan]' id='atc_anquan' style='width:100px;' value='$rsdb[anquan]'>
+                      <span class="details_span">质量: </span><input type='text' name='postdb[zhiliang]' id='atc_zhiliang' style='width:100px;' value='$rsdb[zhiliang]'>
+                        <span class="details_span">标准: </span><input type='text' name='postdb[biaozhun]' id='atc_biaozhun' style='width:100px;' value='$rsdb[biaozhun]'>
+                        <br>
+                        <span class="details_span">工艺: </span><input type='text' name='postdb[gongyi]' id='atc_gongyi' style='width:100px;' value='$rsdb[gongyi]'>
+                        <span class="details_span">配件: </span><input type='text' name='postdb[peijian]' id='atc_peijian' style='width:100px;' value='$rsdb[peijian]'>
+                        <br>
+                        <span class="details_span">重要技术参数: </span><input type='text' name='postdb[jishucaishu]' id='atc_jishucaishu' style='width:300px;' value='$rsdb[jishucaishu]'>
+                        <br>
+                        <span class="details_span" style="margin-right: 48px;">其他: </span><input type='text' name='postdb[qita]' id='atc_qita' style='width:300px;' value='$rsdb[qita]'>
+
+                    </div>
+                    以上信息: 有内容项前端显示, 无内容项前端不显示<br><br>
+
+                  </td>
+                </tr>
+
+                  <tr>
+                      <td align='right'>卖家文本</td>
+                      <td style="height: 35px;">
+                          <textarea name='postdb[sellertext]' id='seller_text' >$rsdb[sellertext]</textarea>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align='right'>是否可编辑</td>
+                      <td style="height: 35px;">
+                          <input type="checkbox" name="postdb[if_changeable]" checked="checked" />
+                      </td>
+                  </tr>
+                <tr> 
+                  <td align='right'>商品介绍：</td>
+                  <td >
+                    <div style="width: 700px;">
+                    <textarea name='postdb[content]' id='atc_content' >$rsdb[content]</textarea> 
+<script type='text/javascript'>
+function doSubmit() {
+    if ("" == $("#atc_title").val()) {
+        alert("商品名称不可以为空！");
+        return;
+    }
+    if ("" == $("#yzImgNum").val()) {
+        alert("验证码不可以为空！");
+        return;
+    }
+    var reg = /^\d+(\.\d{1})?$/g;
+    if ("" != $("#atc_price").val() && !reg.test($("#atc_price").val())) {
+        alert("商品价格输入格式不正确，请重新输入！");
+        return;
+    }
+    if (!$("#atc_market_price").attr("disabled") && 
+            "" == $("#atc_market_price").val()) {
+        alert("会员价格不可以为空！");
+        return;
+    }
+    if (!$("#atc_market_price").attr("disabled") && 
+            !/^\d+(\.\d{1})?$/g.test($("#atc_market_price").val())) {
+        alert("会员价格输入格式不正确，请重新输入！");
+        return;
+    }
+    document.form4Edit.submit();
+}
+CKEDITOR.replace( 'atc_content',
+{
+width:'100%',
+height:'230px',
+filebrowserBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html',
+filebrowserImageBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Images',
+filebrowserFlashBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Flash',
+filebrowserUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+filebrowserImageUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+filebrowserFlashUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+});
+CKEDITOR.replace( 'seller_text',
+        {
+            width:'75%',
+            height:'230px',
+            filebrowserBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Images',
+            filebrowserFlashBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Flash',
+            filebrowserUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+        });
+</script></div></td>
+                </tr>
+                <!---->
+
+                <tr> 
+                  <td align='right'>&nbsp;</td>
+                  <td style="height: 35px;"> 
+                    <input type="button" name="Submit" value="提 交" style="cursor: pointer;" onclick="doSubmit()" />
+                    <input type="hidden" name="fid" value="$fid">
+                    <input type="hidden" name="id" value="$id">
+                  </td>
+                </tr>
+              </table>
+            </form>
+            
+          </td>
+        </tr>
+        <tr> 
+          <td class="foot"> 
+            <h3 class="L"></h3>
+            <h3 class="R"></h3>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!--
+EOT;
+?>
+-->

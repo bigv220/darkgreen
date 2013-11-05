@@ -1,0 +1,84 @@
+<!--
+<?php
+print <<<EOT
+--><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<div id="ly_about" class="heightboxx">
+  <div class="ly_about_l">
+  <!--
+EOT;
+$styleid=$_GET[id];
+$querypro = $db->query("SELECT * FROM home_alonepage order by id asc");
+while($key = $db->fetch_array($querypro)){
+if($styleid==$key[id]){$listy='class=ly_about_l_on';}
+print <<<EOT
+-->
+    <li $listy><a href="/do/about.php?id=$key[id]" style="display:block">$key[name]</a></li>
+  <!--
+EOT;
+if($styleid>=$key[id]){$listy='';}
+}print <<<EOT
+--><li><a href="/guestbook/" style="display:block">意见反馈</a></li> 
+<li><a href="/news/help-htm-fid-44.html" style="display:block">帮助中心</a></li>
+ <li><a href="/news/article-htm-fid-46.html" style="display:block">网站公告</a></li>
+  <li><a href="/do/friendlink.php" style="display:block">友情链接</a></li> 
+  </div>
+  
+  <div class="ly_about_r"><div class="cvlist webbox">
+            <script language='javascript'>function Checkcv(){ 
+			if (document.myform.postdbpara11.value.length == 0) {
+alert('应聘职位 不能为空');
+document.myform.postdbpara11.focus();
+return false;}
+if (document.myform.postdbpara12.value.length == 0) {
+alert('姓名 不能为空');
+document.myform.postdbpara12.focus();
+return false;}
+if (document.myform.postdbpara16.value.length == 0) {
+alert('E–mail 不能为空');
+document.myform.postdbpara16.focus();
+return false;}
+if (document.myform.yzimg.value.length == 0) {
+alert('验证码不能为空');
+document.myform.yzimg.focus();
+return false;}
+}</script><form  enctype='multipart/form-data' method='POST' onSubmit='return Checkcv();' name='myform' action='save.php?action=add' target='_self'>
+<table class='cv_table'>
+<tr><td class='text'>应聘职位</td>
+<td class='input'><input name='postdbpara11' type='text' class='input-text' size='40'><span class='info'>*</span></td></tr>
+<tr><td class='text'>姓名</td>
+<td class='input'><input name='postdbpara12' type='text' class='input-text' size='10'><span class='info'>*</span></td></tr>
+<tr><td class='text'>性别</td>
+<td class='input'><input name='postdbpara13' type='radio' id='para13_1' value='男' checked='checked' /><label for='para13_1'>男</label>  <input name='postdbpara13' type='radio' id='para13_2' value='女'  /><label for='para13_2'>女</label>  <span class='info'></span></td></tr>
+<tr><td class='text'>出生年月</td>
+<td class='input'><input name='postdbpara14' type='text' class='input-text' size='40'><span class='info'></span></td></tr>
+<tr><td class='text'>联系电话</td>
+<td class='input'><input name='postdbpara15' type='text' class='input-text' size='40'><span class='info'></span></td></tr>
+<tr><td class='text'>E–mail</td>
+<td class='input'><input name='postdbpara16' type='text' class='input-text' size='40'><span class='info'>*</span></td></tr>
+<tr><td class='text'>学历</td>
+<td class='input'><input name='postdbpara17' type='text' class='input-text' size='40'><span class='info'></span></td></tr>
+<tr><td class='text'>专业</td>
+<td class='input'><input name='postdbpara18' type='text' class='input-text' size='40'><span class='info'></span></td></tr>
+<tr><td class='text'>学校</td>
+<td class='input'><input name='postdbpara19' type='text' class='input-text' size='40'><span class='info'></span></td></tr>
+<tr><td class='text'>通讯地址</td>
+<td class='input'><input name='postdbpara20' type='text' class='input-text' size='40'><span class='info'></span></td></tr>
+<tr><td class='text'>工作经历</td>
+<td class='input'><textarea name='postdbpara21' class='textarea-text' cols='60' rows='5'></textarea><span class='info'></span></td></tr>
+<tr><td class='text'>验证码</td>
+<td class='input'> <input type="text" name="yzimg" size="8">&nbsp;<SCRIPT LANGUAGE="JavaScript">
+<!--
+document.write('<img border="0" id="yz_Img" name="imageField" onclick="this.src=this.src+Math.random();" src="$webdb[www_url]/do/yzimg.php?'+Math.random()+'">');
+//-->
+</SCRIPT></td></tr>
+<tr><td class='text'></td>
+<td class='submint'><input type='submit' name='Submit' value='提交信息' class='submit' />&nbsp;&nbsp;<input type='reset' name='Submit' value='重新填写' class='reset' /></td>
+</tr></table></form>
+        </div>
+</div>
+  
+</div>
+<!--
+EOT;
+?>
+-->

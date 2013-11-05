@@ -1,0 +1,96 @@
+<!--
+<?php
+print <<<EOT
+-->
+<form method="post" id="closeForm" action="setClose.php">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+    <tr>
+        <td height="100" valign="top" class="Main">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable">
+            <tr>
+                <td class="head">设置</td>
+            </tr>
+            <tr>
+                <td class="middle" style="padding: 5px;">
+                    <table border="0" cellpadding="0" cellspacing="0" style="height: 520px;">
+                        <tr>
+                            <td style="width: 30px; text-align: center;">
+                                &nbsp;
+                            </td>
+                            <td>
+                                <div style="padding:30px 30px 30px 0;font-size:13px;"><span>$lfjid</span>的客户中心是启用状态</div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 30px; text-align: center; vertical-align: top; padding-top: 5px;">
+                                <input type="radio" name="close" id="close" value="all">
+                            </td>
+                            <td>
+                                <div>完全注销，<span>$lfjid</span>名下的客户中心和已有的注册信息。不再启用此版面。</div>
+                                <div>我已对相关重要信息、数据进行了整理（包括删除、备份）。</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30px; text-align: center; vertical-align: top; padding-top: 13px;">
+                                <input type="radio" name="all_close" id="all_close" value="all">
+                            </td>
+                            <td>
+                                <div>留言板</div>
+                                <div style="margin-top: 5px;">
+                                    <textarea rows="10" cols="80" name="suggest"></textarea>
+                                </div>
+                                <div style="margin-top: 5px;">
+                                    <input type="button" style="cursor: pointer; border: solid 1px #c3c3c3;" value="  确 定  " onclick="doSubmit();">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30px; text-align: center; vertical-align: top; padding-top: 2px;">
+                                &nbsp;
+                            </td>
+                            <td style="height:100px;">
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="width: 80px;">
+                                            <img src="/images/default/greenLogo.jpg" style="width:70px;"/>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <span style="color: #055D35; font-weight: bold;">麦野商务信息有限公司</span>&nbsp;
+                                                <span style="color: #055D35;">是绿页商务平台的运营公司</span>
+                                            </div>
+                                            <div>
+                                                <span style="color: #055D35;">MYSW</span>
+                                                <img src="/images/default/GOGO.jpg" style="vertical-align:middle;">
+                                                <span>服务电话：123456789</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="foot">&nbsp;</td>
+            </tr>
+        </table>
+        </td>
+    </tr>
+</table>
+</form>
+<script type="text/javascript">
+function doSubmit() {
+    if ($('#close').attr("checked") == false || $('#all_close').attr("checked") == false) {
+        alert('请选中关闭选项');
+        return;
+    }
+    $('#closeForm').submit();
+}
+</script>
+<!--
+EOT;
+?>
+-->

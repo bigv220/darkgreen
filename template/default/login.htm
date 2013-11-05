@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9" />
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta name="keywords" content="$titleDB[keywords]" />
+    <meta name="description" content="$titleDB[description]" />
+    
+    <title>会员登录 绿页商务</title>
+    
+    <link rel="stylesheet" type="text/css" href="/images/default/common.css" />
+    
+    <script type="text/javascript" src="/common/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/images/default/index.js"></script>
+    <script language="javascript" src="/images/default/inc.js"></script>
+    <script language="javascript" src="/images/default/default.js"></script>
+    <script language="javascript" src="/images/default/swfobject.js"></script>
+    <script language="javascript" src="/images/default/transport.js"></script>
+    <script language="javascript" src="/images/default/listtable.js"></script>
+    <script language="javascript" src="/images/default/jquery-1.2.6.min.js"></script>
+    <script language="javascript">
+    function killErr() {
+        return true;
+    }
+    window.onerror = killErr;
+    $(function() {
+        $("#submitImg").click(function() {
+            if ("" == $("#username").val()) {
+                alert("请输入用户名称！");
+            } else if ("" == $("#password").val()) {
+                alert("请输入密码！");
+            } else {
+                document.form4Login.submit();
+            }
+        });
+    })
+    </script>
+</head>
+<body ondblclick="$bodyondblclick">
+<!--
+<?php
+print <<<EOT
+-->
+<div id="ly_login_top">
+  <div class="ly_login_top_c">
+    <span style="font-size:12px; position: relative; top: 43px;">
+        <a href="/" class="logintop">返回平台</a>&nbsp;|&nbsp;
+        <a href="/news/help-htm-fid-44.html" class="logintop">帮助中心</a>
+    </span>
+  </div>
+</div>
+<div id="ly_login" class="heightbox">
+  <div class="ly_login">
+    <div class="ly_login_l"><img src="$webdb[www_url]/images/default/ly_login_06.jpg" /></div>
+    <div class="ly_login_r">
+        <div class="ly_login_r_tit_form">
+            <form name="form4Login" method="post" action="?f">
+                <table width="340" border="0" cellspacing="0" cellpadding="5" align="center" style="font-size:14px;">
+                  <tr>
+                    <td colspan="2" align="left" valign="middle" height="30"></td>
+                  </tr>
+                  <tr>
+                    <td width="64" height="30" align="right" valign="middle">用户名:</td>
+                    <td width="256">
+                        <input type="text" name="username" id="username" class="inputbg" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" valign="middle" height="30">密码:</td>
+                    <td>
+                        <input type="password" name="password" id="password" class="inputbg"/>
+                        &nbsp;<a href="/do/sendpwd.php" class="searchkey"><font style="font-size:12px;">忘记密码?</font></a></td>
+                  </tr>
+                  <tr>
+                    <td height="50">&nbsp;</td>
+                    <td>
+                        <img id="submitImg" src="$webdb[www_url]/images/default/login_but_1.jpg" style="cursor: pointer;" />
+                        &nbsp;&nbsp;
+                        <a href="/do/reg.php"><img src="$webdb[www_url]/images/default/login_but_2.jpg" border="0" /></a><br /><br />
+                        <!--
+                        EOT;
+                        if($webdb[QQ_login]){print <<<EOT
+                        -->
+                        <a href="$webdb[www_url]/do/qq_login.php" target="_blank"><img id="qqlogin"  src="$webdb[www_url]/images/default/qq_login.png" border="0"></a>
+                        <!--
+                        EOT;
+                        }print <<<EOT
+                        -->
+                    </td>
+                  </tr>
+                </table>
+                <input type="hidden" name="step" value="2" />
+                <input type="hidden" name="fromurl" value="$FROMURL" />
+                <input type="hidden" name="cookietime" value="86400" />
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+<!--
+EOT;
+?>
+-->

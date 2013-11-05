@@ -1,0 +1,60 @@
+<!--
+<?php
+print <<<EOT
+-->
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+  <tr> 
+    <td height="100" valign="top" class="Main"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable" >
+        <tr> 
+          <td class="head">绿页商务信箱管理 </td>
+        </tr>
+        <tr> 
+          <td class="middle"> 
+            <table width="100%" border="0" cellspacing="1" cellpadding="3" style='TABLE-LAYOUT: fixed;WORD-WRAP: break-word'>
+              <tr align="center" class="head_in"> <td width="29%">邮箱域名</td>
+                <td width="19%">每用户大小</td>
+                <td width="19%">用户数</td>
+                <td width="13%">到期时间</td>
+                
+                <td width="10%">管理</td>
+                <td width="10%">删除</td>
+              </tr>
+              <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+$isopen='';
+if($rs[isopen]==0)$isopen='等待开通...';
+print <<<EOT
+-->
+              <tr class='trA' onMouseOver="this.className='trB'" onMouseOut="this.className='trA'">  
+              <td align="left" width="29%">&nbsp;&nbsp;$rs[domain]&nbsp;<font style="color:#F00">$isopen</font></td>
+                <td  align="center" width="19%">$rs[mailsize] </td>
+                <td  align="center" width="19%">$rs[mailnum] </td>
+                <td align="center" width="13%">$rs[mailtime]&nbsp;&nbsp;</td>
+               
+                <td align="center" width="10%"> <a href="emialinfo.php?job=list&id=$rs[id]">管理</a></td>
+                <td align="center" width="10%"><a href="?act=del&id=$rs[id]">删除</a></td>
+              </tr>
+              <!--
+EOT;
+}print <<<EOT
+-->
+              <tr align="center"> 
+                <td colspan="7">$showpage</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="foot"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!--
+EOT;
+?>
+-->

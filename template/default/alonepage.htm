@@ -1,0 +1,43 @@
+<!--
+<?php
+print <<<EOT
+--><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<div id="ly_about" class="heightboxx">
+  <div class="ly_about_l">
+  <!--
+EOT;
+$styleid=$_GET[id];
+$querypro = $db->query("SELECT * FROM home_alonepage order by id asc");
+while($key = $db->fetch_array($querypro)){
+if($styleid==$key[id]){$listy='class=ly_about_l_on';}
+print <<<EOT
+-->
+    <li $listy><a href="/do/about.php?id=$key[id]" style="display:block">$key[name]</a></li>
+  <!--
+EOT;
+if($styleid>=$key[id]){$listy='';}
+}print <<<EOT
+--><li><a href="/guestbook/" style="display:block">意见反馈</a></li> 
+<li><a href="/news/help-htm-fid-44.html" style="display:block">帮助中心</a></li>
+ <li><a href="/news/article-htm-fid-46.html" style="display:block">网站公告</a></li>
+ <li><a href="/do/friendlink.php" style="display:block">友情链接</a></li> 
+  </div>
+  
+  <div class="ly_about_r">$rsdb[content]
+   <!--
+EOT;
+if($styleid==9){
+print <<<EOT
+-->
+ <div style="TEXT-ALIGN: right; WIDTH: 100%; HEIGHT: 33px; PADDING-TOP: 10px"><a href="/do/cv.php?id=9"><img border=0 src="/images/default/hr_appli_home.gif" width=130 height=30 /></a></div> 
+   <!--
+EOT;
+}print <<<EOT
+-->
+  </div>
+  
+</div>
+<!--
+EOT;
+?>
+-->

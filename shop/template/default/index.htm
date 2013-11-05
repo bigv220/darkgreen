@@ -1,0 +1,201 @@
+<!--
+<?php
+if($_GET[style]==1){
+$divstyle='style=display:block';
+$divstyle1='style=display:none';
+}else{
+$divstyle='style=display:none';
+$divstyle1='style=display:block';
+}
+print <<<EOT
+--> 
+<link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/yellow/shop_index.css">
+<div id="lysw_main" class="heightbox">
+<div class="lysw_hr_main_c_tit heightbox">
+  
+</div>
+  <div class="lysw_main_l">
+  
+    <div id="ddsidemenubar" class="markermenu">
+<ul>
+<!--
+EOT;
+$j=0;
+foreach($Fid_db[0] AS $key=>$name){
+$j++;
+$name=get_word($name,20);
+print <<<EOT
+-->
+<li rel="ddsubmenuside{$j}"><a href="list.php?fid=$key">$name</a></li>
+<!--
+EOT;
+}print <<<EOT
+-->
+</ul>
+</div>
+	<script type="text/javascript"> 
+		$(document).ready(function() {
+			$('#ddsidemenubar').allenMenu();
+			$("#nav_10001").addClass("ovdown");
+		});
+</script> 
+<script type="text/javascript"> 
+ddlevelsmenu.setup("ddsidemenubar", "sidebar")
+</script>
+ 
+<!--
+EOT;
+$j=0;
+foreach($Fid_db[0] AS $key=>$name){
+$j++;
+$name=get_word($name,20);
+print <<<EOT
+-->
+<ul id="ddsubmenuside{$j}" class="ddsubmenustyle blackwhite">
+ <!--
+EOT;
+foreach($Fid_db[$key] AS $fid=>$name ){
+$name=get_word($name,24);
+print <<<EOT
+-->
+<li><a href="list.php?fid=$fid">$name</a></li>
+  <!--
+EOT;
+}print <<<EOT
+-->
+</ul>
+ <!--
+EOT;
+}print <<<EOT
+-->
+ 
+    <div class="lysw_main_l_t2">热销产品
+    <div class="lysw_main_l_t2_btn" id="stateBut1" onClick="use('stateBut1','class1contentt1','455','<img src=images/ly_home_cop_28.jpg  alt=点击关闭 title=点击关闭 style=cursor:pointer>','<img src=images/ly_home_cop_28_1.jpg alt=点击展开 title=点击展开 style=cursor:pointer>')"><a href="#"><img src="images/ly_home_cop_28.jpg" border="0" /></a></div>
+    </div>
+    <div id="class1contentt1" class="lysw_main_l_c222" style="display:block">
+    <div class="lysw_main_l_c2" >
+      
+      <!--
+EOT;
+$array=list_title('hot',8);
+foreach($array AS $rs){
+$name=get_word($rs[title],10);
+$url=get_info_url('',$rs[fid],$rs[city_id]);
+print <<<EOT
+-->
+      <div class="lysw_main_l_c2_c">
+        <div class="lysw_main_l_c2_l"><a href="/shop/bencandy.php?fid=$rs[fid]&id=$rs[id]"><img src="$rs[picurl]" width="60" height="50" border="0" /></a></div>
+        <div class="lysw_main_l_c2_r">$name<br />产品价格:$rs[price]</div>
+      </div>
+      <!--
+EOT;
+}print <<<EOT
+-->
+    </div>
+    </div>
+    
+    <div class="lysw_main_l_t2">推荐精品
+    <div class="lysw_main_l_t2_btn" id="stateBut2" onClick="use('stateBut2','new222','455','<img src=images/ly_home_cop_28.jpg  alt=点击关闭 title=点击关闭 style=cursor:pointer>','<img src=images/ly_home_cop_28_1.jpg alt=点击展开 title=点击展开 style=cursor:pointer>')"><a href="#"><img src="images/ly_home_cop_28_1.jpg" border="0" /></a></div>
+    </div>
+    <div id="new222" class="lysw_main_l_c222" style="display:none">
+    <div class="lysw_main_l_c2" >
+      <!--
+EOT;
+$array=list_title('com',8);
+foreach($array AS $rs){
+$name=get_word($rs[title],10);
+$url=get_info_url('',$rs[fid],$rs[city_id]);
+print <<<EOT
+-->
+      <div class="lysw_main_l_c2_c">
+        <div class="lysw_main_l_c2_l"><a href="/shop/bencandy.php?fid=$rs[fid]&id=$rs[id]"><img src="$rs[picurl]" width="60" height="50" border="0" /></a></div>
+        <div class="lysw_main_l_c2_r">$name<br />产品价格:$rs[price]</div>
+      </div>
+      <!--
+EOT;
+}print <<<EOT
+-->
+    </div>
+    </div>
+    
+
+    
+</div>
+  
+  <div class="lysw_main_r">
+    
+  <div class="lysw_main_r_tit" id="lysw_main_r_tit" style="padding-left:9px;">
+    <li><a href="listall.php?ordertype=" style="display:block">最新产品</a></li>
+    <li><a href="listall.php?ordertype=hits" style="display:block">热门产品</a></li>
+    <li><a href="listall.php?ordertype=levelstime" style="display:block">推荐产品</a></li>
+  
+  <div class="lysw_main_r_type">共有100个产品于类别*中&nbsp;&nbsp;显示方式:&nbsp;<img src="images/productview_type1.jpg" onclick="Submit_onclick_cophome_l_pro1()" style="cursor:pointer"/>&nbsp;<img src="images/productview_type2.jpg" onclick="Submit_onclick_cophome_l_pro2()" style="cursor:pointer"/></div>
+  
+  </div>
+  <div class="cophome_l_pro_cen">
+  <div class="cophome_l_pro" id="cophome_l_pro1" $divstyle1>
+      <div class="cophome_l_pro">
+      <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+$target=$rs[target]?'_blank':'_self';
+$url=get_info_url('',$rs[fid],$rs[city_id]);
+print <<<EOT
+-->
+      <li><a href="$rs[url]"><img src="$rs[picurl]" onerror="this.src='$webdb[www_url]/images/default/nopic.jpg'" width="298" height="194" border="0" /></a></li>
+      <!--
+EOT;
+}print <<<EOT
+-->
+</div>
+<!--
+EOT;
+if($showpage){print <<<EOT
+-->
+			 <div class="lysw_main_r_page"><div class="page">$showpage</div></div>
+<!--
+EOT;
+}print <<<EOT
+-->
+
+</div>
+  <div class="cophome_l_pro" id="cophome_l_pro2" $divstyle>
+  <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+$target=$rs[target]?'_blank':'_self';
+$url=get_info_url('',$rs[fid],$rs[city_id]);
+print <<<EOT
+--><br />
+<table width="1000" border="0" cellspacing="0" cellpadding="0" class="listshop" align="center">
+              <tr> 
+                <td class="img" height="100" width="130"><a href="$rs[url]" target="_blank"><img src="$rs[picurl]" onerror="this.src='$webdb[www_url]/images/default/nopic.jpg'" width="120" height="90"/></a></td>
+                <td class="info" width="600"> 
+                  <div class="title"><a href="$rs[url]" target="_blank" title='$rs[full_title]' style="color:$rs[titlecolor];">$rs[title]</a></div>
+                  <div class="sort">所属分类：<a href="$url" target="_blank">{$rs[fname]}</a></div>
+                  <div class="more"> 发布日期：{$rs[posttime]} </div>
+                  <div class="more"> 关注度：{$rs[hits]}人次   发布者:{$rs[username]}</div>
+                </td>
+                <td class="price" width="100">￥{$rs[price]} 元</td>
+                <td class="renzheng" width="100"><img alt="{$renzhengDB[$rs[renzheng]]}" src="$webdb[www_url]/images/yellow/company_renzheng{$rs[renzheng]}.gif"></td>
+              </tr>
+            </table>
+<!--
+EOT;
+}if($showpage2){print <<<EOT
+-->
+			  <div class="lysw_main_r_page"><div class="page">$showpage2</div></div>
+<!--
+EOT;
+}print <<<EOT
+-->
+  
+  </div>
+  </div>
+  
+  </div>
+</div>
+<!--
+EOT;
+?>
+-->

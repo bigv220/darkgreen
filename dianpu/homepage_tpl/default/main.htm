@@ -1,0 +1,39 @@
+<!--
+<?php
+print <<<EOT
+-->
+<div id="cophome">
+<div class="cophome_l">
+<!--include
+EOT;
+$mod_in='right';
+if(!$m){
+    foreach($conf[index_right] as $file){
+        get_homepage_module($file);
+    }
+}else{
+	get_homepage_module($m);
+}
+print <<<EOT
+include-->
+
+  </div>
+  <div class="cophome_r">
+   <!--主体-左边部分-->
+<!--include
+EOT;
+$mod_in='left';
+foreach($conf[index_left] as $file){
+	get_homepage_module($file);
+}
+print <<<EOT
+include-->
+
+    <div class="cophome_l_cen"><br /><br />您可以自助创建这样的模板页 欢迎您注册使用!<br/><br/><a href="/do/reg.php"><img src="images/huangye_15.jpg" height="43" width="103" border="0" /></a></div>
+  </div>
+</div>
+</div>
+<!--
+EOT;
+?>
+-->

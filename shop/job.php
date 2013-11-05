@@ -1,0 +1,18 @@
+<?php
+require(dirname(__FILE__)."/global.php");
+$head_tpl=html('head');
+$foot_tpl=html('foot');
+if($webdb[IF_Private_tpl]==2||$webdb[IF_Private_tpl]==3){
+	if(is_file(Mpath.$webdb[Private_tpl_head])){
+		$head_tpl=Mpath.$webdb[Private_tpl_head];
+	}
+	if(is_file(Mpath.$webdb[Private_tpl_foot])){
+		$foot_tpl=Mpath.$webdb[Private_tpl_foot];
+	}
+}
+if(eregi("^([_0-9a-z]+)$",$job)){
+	require_once(Mpath."inc/job/$job.php");
+}elseif(eregi("^([_0-9a-z]+)$",$action)){
+	require_once(Mpath."inc/job/$action.php");
+}
+?>

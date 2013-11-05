@@ -1,0 +1,166 @@
+<!--
+<?php
+print <<<EOT
+--> 
+<link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/yellow/news/common.css">
+<div id="lysw_main" class="heightbox">
+<div class="lysw_hr_main_c_tit heightbox"></div>
+  <div class="lysw_main_l">
+  
+    <div id="ddsidemenubar" class="markermenu">
+<ul>
+<!--
+EOT;
+$i=0;
+$array=$Fid_db[0];
+foreach($array AS $fkey=>$fvalue){
+$listid=$fidDB[fup];
+if($listid==0){$listid=$fidDB[fid];}
+if($listid == $fkey){
+$dividnmae='class=ovdown';
+}
+$i++;
+print <<<EOT
+-->
+<li rel="ddsubmenuside{$i}" $dividnmae><a href="list.php?fid=$fkey">$fvalue</a></li>
+ <!--
+EOT;
+if($fkey>=$listid){$dividnmae='';}
+}print <<<EOT
+-->
+</ul>
+</div>
+	<script type="text/javascript"> 
+		$(document).ready(function() {
+			$('#ddsidemenubar').allenMenu();
+			$("#nav_10001").addClass("ovdown");
+		});
+</script> 
+<script type="text/javascript"> 
+ddlevelsmenu.setup("ddsidemenubar", "sidebar")
+</script>
+ 
+<!--
+EOT;
+$i=0;
+$array=$Fid_db[0];
+foreach($array AS $fkey=>$fvalue){
+$i++;
+$array2=$Fid_db[$fkey];
+if($array2){
+print <<<EOT
+--> 
+<ul id="ddsubmenuside{$i}" class="ddsubmenustyle blackwhite">
+<!--
+EOT;
+$array2=$Fid_db[$fkey];
+foreach($array2 AS $fkey2=>$fvalue2){
+print <<<EOT
+-->
+<li><a href="list.php?fid=$fkey2">$fvalue2</a></li>
+<!--
+EOT;
+}print <<<EOT
+-->
+</ul>
+ <!--
+EOT;
+}}print <<<EOT
+-->
+ 
+    
+</div>
+  
+  <div class="lysw_main_r">
+    <div class="lysw_main_r_tit_ar">
+     <li><a href="sell.php?fid=$fidDB[fid]&lmid=6" style="display:block">供应信息</a></li>
+<li><a href="buy.php?fid=$fidDB[fid]&lmid=7" style="display:block">求购信息</a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=1" style="display:block">热点资讯</a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=2" style="display:block">行情趋势</a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=3" style="display:block">合作招商</a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=4" style="display:block">专题分析</a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=5" style="display:block">展会信息</a></li>
+    </div>
+  <div id="newslist">
+  
+       <table width="100%" border="0" cellspacing="0" cellpadding="0" id="AutoRows">
+        <!--
+EOT;
+$moreline=$webdb[InfoListSonline]>0?$webdb[InfoListSonline]:2;
+$array=array_chunk($listdb_moresort,$moreline);
+$moretdwidth=floor(100/$moreline)."%";
+$moreline>1&&$moretimedisplay='none';
+foreach($array AS $key2=>$array2){
+print <<<EOT
+-->
+        <tr> 
+          <!--
+EOT;
+$iii=0;
+foreach($array2 AS $key=>$rss){
+$iii++;
+if($moreline>1&&$iii%$moreline==1){
+$tbstyle=" style='padding-right:5px;padding-top:10px;' ";
+}elseif($moreline>1&&$iii%$moreline==0){
+$tbstyle=" style='padding-left:5px;padding-top:10px;' ";
+}else{
+$tbstyle=" ";
+}
+print <<<EOT
+-->
+          <td width="$moretdwidth" $tbstyle> 
+            <table border="0" cellspacing="0" cellpadding="0" class="dragTable" width="100%" bgcolor="#FFFFFF" style="border:1px solid #CCC">
+              <tr> 
+                <td style="background:url(../images/yellow/menubg.gif);padding-top:10px;" height="24" > 
+                  <span class="TAG"><a href="list.php?fid=$rss[fid]">&nbsp;&nbsp;<b>$rss[name]</b></A></span> 
+                  
+                </td>
+                <td style="background:url(../images/yellow/menubg.gif);padding-top:10px;"><span class="more" style="float:right;"><a href="list.php?fid=$rss[fid]">更多...</A></span>  </td>
+              </tr>
+              <tr> 
+                <td class="middle" style="padding-top:15px;"> 
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <!--
+EOT;
+foreach($rss[article] AS $key1=>$rs){
+print <<<EOT
+-->
+                    <tr class="list_tr"> 
+                      <td class="list_title" height="22">&nbsp;&nbsp;<img src="../images/yellow/fenlie_icon.gif" /> <a href="bencandy.php?fid=$rs[fid]&id=$rs[id]">$rs[title]</a></td>
+                      <td align="right" class="list_time">[{$rs[posttime]}]&nbsp;&nbsp;</td>
+                    </tr>
+                    <!--
+EOT;
+}print <<<EOT
+-->
+                  </table>
+                </td>
+              </tr>
+              <tr> 
+                <td class="foot"> 
+                  <h3 class="L"></h3>
+                  <h3 class="R"></h3>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <!--
+EOT;
+}print <<<EOT
+-->
+        </tr>
+        <!--
+EOT;
+}print <<<EOT
+-->
+      </table>
+  
+  </div>
+  
+  
+  </div>
+</div>
+<!--
+EOT;
+?>
+-->

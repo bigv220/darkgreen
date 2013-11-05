@@ -1,0 +1,193 @@
+<!--
+<?php
+if($fidDB[config][ListShowType]!=1&&$fidDB[config][ListShowType]!=3){
+$listdb_pic=Get_Info($type='pic',$webdb[InfolistPicRows]?$webdb[InfolistPicRows]:4,$leng=30,$fid,$mid=0);
+}
+$listdb_pic || $hide_listpic='none';	//不存在图片主题的话.要把图片主题的边框隐藏
+print <<<EOT
+--> 
+<link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/yellow/news/common.css">
+<div id="lysw_main" class="heightbox">
+<div class="lysw_hr_main_c_tit heightbox"></div>
+  <div class="lysw_main_l">
+  
+    <div id="ddsidemenubar" class="markermenu">
+<ul>
+<!--
+EOT;
+$i=0;
+$array=$Fid_db[0];
+foreach($array AS $fkey=>$fvalue){
+$listid=$fidDB[fup];
+if($listid==0){$listid=$fidDB[fid];}
+if($listid == $fkey){
+$dividnmae='class=ovdown';
+}
+$i++;
+print <<<EOT
+-->
+<li rel="ddsubmenuside{$i}" $dividnmae><a href="list.php?fid=$fkey">$fvalue</a></li>
+ <!--
+EOT;
+if($fkey==$listid){$dividnmae='';}
+}print <<<EOT
+-->
+</ul>
+</div>
+	<script type="text/javascript"> 
+		$(document).ready(function() {
+			$('#ddsidemenubar').allenMenu();
+			$("#nav_10001").addClass("ovdown");
+		});
+</script> 
+<script type="text/javascript"> 
+ddlevelsmenu.setup("ddsidemenubar", "sidebar")
+</script>
+ 
+<!--
+EOT;
+$i=0;
+$array=$Fid_db[0];
+foreach($array AS $fkey=>$fvalue){
+$i++;
+$array2=$Fid_db[$fkey];
+if($array2){
+print <<<EOT
+--> 
+<ul id="ddsubmenuside{$i}" class="ddsubmenustyle blackwhite">
+<!--
+EOT;
+$array2=$Fid_db[$fkey];
+foreach($array2 AS $fkey2=>$fvalue2){
+print <<<EOT
+-->
+<li><a href="list.php?fid=$fkey2">$fvalue2</a></li>
+<!--
+EOT;
+}print <<<EOT
+-->
+</ul>
+ <!--
+EOT;
+}}print <<<EOT
+-->
+ 
+    
+</div>
+  <!--
+EOT;
+$lmid=$_GET['lmid'];
+if($lmid==1){
+$sylelist=' class=lysw_main_r_tit_arop';
+$sylelist3='color:#FFF';
+}
+if($lmid==2){
+$sylelist2=' class=lysw_main_r_tit_arop';
+$sylelist32='color:#FFF';
+}
+if($lmid==3){
+$sylelist3=' class=lysw_main_r_tit_arop';
+$sylelist33='color:#FFF';
+}
+if($lmid==4){
+$sylelist4=' class=lysw_main_r_tit_arop';
+$sylelist34='color:#FFF';
+}
+if($lmid==5){
+$sylelist5=' class=lysw_main_r_tit_arop';
+$sylelist35='color:#FFF';
+}
+if($lmid==6){
+$sylelist6=' class=lysw_main_r_tit_arop';
+$sylelist36='color:#FFF';
+}
+if($lmid==7){
+$sylelist7=' class=lysw_main_r_tit_arop';
+$sylelist37='color:#FFF';
+}
+print <<<EOT
+-->  
+  <div class="lysw_main_r">
+    <div class="lysw_main_r_tit_ar">
+     
+<li><a href="sell-htm-fid-$fidDB[fid]-lmid-6.html" style="display:block" $sylelist6><font style="font-size:12px;$sylelist36">供应信息</font></a></li>
+<li><a href="buy-htm-fid-$fidDB[fid]-lmid-7.html" style="display:block" $sylelist7><font style=" font-size:12px;$sylelist37">求购信息</font></a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=1" style="display:block" $sylelist><font style="font-size:12px;$sylelist3">热点资讯</font></a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=2" style="display:block" $sylelist2><font style="font-size:12px;$sylelist32">行情趋势</font></a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=3" style="display:block" $sylelist3><font style="font-size:12px;$sylelist33">合作招商</font></a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=4" style="display:block" $sylelist4><font style="font-size:12px;$sylelist34">专题分析</font></a></li>
+<li><a href="list.php?fid=$fidDB[fid]&lmid=5" style="display:block" $sylelist5><font style="font-size:12px;$sylelist35">展会信息</font></a></li>
+ 
+     
+    </div>
+  <div id="newslist">
+  
+      <!--****************************子栏目文章列表开始****************************-->
+            
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="listarticle">
+              <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+$target=$rs[target]?'_blank':'_self';
+print <<<EOT
+-->
+              <tr> 
+                <td><span class="title"><a href="bencandy.php?fid=$rs[fid]&id=$rs[id]" target="$target" title='$rs[full_title]' style="color:$rs[titlecolor]">$rs[title]</a></span> 
+                  <!--
+EOT;
+if($webdb[ListShowIcon]&&$rs[picurl]){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/img_ico.gif"></span> 
+                  <!--
+EOT;
+}
+if($webdb[ListShowIcon]&&$rs[levels]){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/good_ico.gif"></span> 
+                  <!--
+EOT;
+}
+if($webdb[ListShowIcon]&&$rs['list']>$timestamp){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/top_icon.gif"></span> 
+                  <!--
+EOT;
+}
+if($webdb[ListShowIcon]&&$webdb[hotArticleNum]&&$rs['hits']>$webdb[hotArticleNum]){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/hot_icon.gif"></span> 
+                  <!--
+EOT;
+}
+if($webdb[ListShowIcon]&&$webdb[newArticleTime]&&($timestamp-$rs['full_posttime'])<$webdb[newArticleTime]*3600){
+print <<<EOT
+-->
+                  <span class="icon">&nbsp;<img src="$webdb[www_url]/images/default/new_ico.gif"></span> 
+                  <!--
+EOT;
+}print <<<EOT
+-->
+                  <span class="time">[{$rs[posttime]}]</span> </td>
+              </tr>
+              <!--
+EOT;
+}print <<<EOT
+-->
+            </table>
+            
+            <div class="page">$showpage</div>
+            <!--****************************子栏目文章列表结束****************************-->
+  
+  </div>
+  
+  
+  </div>
+</div>
+<!--
+EOT;
+?>
+-->

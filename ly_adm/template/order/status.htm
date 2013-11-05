@@ -1,0 +1,59 @@
+<!--
+<?php
+print <<<EOT
+-->
+<table width="100%" cellspacing="1" cellpadding="3" class="tablewidth">
+    <tbody><tr class="head">
+        <td colspan="10">
+            <div align="center"><font color="#FFFFFF">状态内容</font></div>
+        </td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+        <td width="10%" align="left">行业</td>
+        <td width="10%" align="left">编号</td>
+        <td width="10%" align="left">标题</td>
+        <td width="10%" align="left">系统付款日期</td>
+        <td width="10%" align="left">商品/产品/服务</td>
+        <td width="10%" align="left">采购款</td>
+        <td width="10%" align="left">买家信息</td>
+        <td width="10%" align="left">卖家信息</td>
+        <td width="10%" align="left">管理员操作</td>
+        <td width="10%" align="left">简要备注</td>
+    </tr>
+<!--
+EOT;
+foreach($listdb AS $key=>$value){
+print <<<EOT
+-->
+    <tr bgcolor="#FFFFFF">
+        <td width="10%" align="left">{$value[fname]}</td>
+        <td width="10%" align="left">{$value[ID]}</td>
+        <td width="10%" align="left">{$value[title]}</td>
+        <td width="10%" align="left">{$value[posttime]}</td>
+        <td width="10%" align="left">{$value[send]} <span style="color:green;">({$value[complete]})</span></td>
+        <td width="10%" align="left">{$value[pay]}</td>
+        <td width="10%" align="left"><a href="../member/userinfo.php?uid={$value[uid]}" target="_blank">浏览</a></td>
+        <td width="10%" align="left"><a href="../member/userinfo.php?uid={$value[cuid]} target="_blank"">浏览</a></td>
+        <td width="10%" align="left">{$value[admin_oper]}</td>
+        <td width="10%" align="left">{$value[end_comment]}</td>
+    </tr>
+<!--
+EOT;
+}print <<<EOT
+-->
+    </tbody>
+</table>
+<!--
+EOT;
+if($showpage){print <<<EOT
+-->
+<div class="lysw_main_r_page"><div class="page">$showpage</div></div>
+<!--
+EOT;
+}print <<<EOT
+-->
+
+<!--
+EOT;
+?>
+-->

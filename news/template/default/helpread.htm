@@ -1,0 +1,124 @@
+<!--
+<?php
+$rsdb[iframeurl]?$isiframe[1]=" checked ":$isiframe[0]=" checked ";
+if(!$nextdb[id]){$nextdb[links]=" onclick='return false;' ";$nextdb[subject]="没有了";}
+if(!$backdb[id]){$backdb[links]=" onclick='return false;' ";$backdb[subject]="没有了";}
+print <<<EOT
+-->
+<link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/yellow/news/common.css">
+<div id="ly_about" class="heightboxx">
+  <div class="ly_about_l">
+  <!--
+EOT;
+$styleid=$_GET[id];
+$querypro = $db->query("SELECT * FROM home_alonepage order by id asc");
+while($key = $db->fetch_array($querypro)){
+if($styleid==$key[id]){$listy='class=ly_about_l_on';}
+print <<<EOT
+-->
+    <li $listy><a href="/do/about.php?id=$key[id]" style="display:block">$key[name]</a></li>
+  <!--
+EOT;
+if($styleid>=$key[id]){$listy='';}
+}print <<<EOT
+-->  
+<li><a href="/guestbook/" style="display:block">意见反馈</a></li>
+ <li class=ly_about_l_on><a href="/news/help-htm-fid-44.html" style="display:block">帮助中心</a></li>
+      <li><a href="/news/article-htm-fid-46.html" style="display:block">网站公告</a></li>
+      <li><a href="/do/friendlink.php" style="display:block">友情链接</a></li> 
+  </div>
+  
+  <div class="ly_about_r" style="padding-top:0px;"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MdinTable">
+  <tr> 
+    <td width="98%" height="393" valign="top" class="Main"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable" id="viewarticle">
+        <tr> 
+          <td class="head"> 
+            
+          </td>
+        </tr>
+        <tr> 
+          <td class="middle"> 
+            <table width="99%" border="0" cellspacing="0" cellpadding="0">
+              <tr> 
+                <td align="right" height="16"> 
+                  
+                </td>
+              </tr>
+            </table>
+            <table width="99%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:8px;" >
+              <tr> 
+                <td style="color:#990000;font-weight:bold;font-size:14px;" align="center">$rsdb[title]</td>
+              </tr>
+            </table><table width="99%" border="0" cellspacing="0" cellpadding="0" >
+              <tr> 
+                <td  align="center" style="color:#990000; ">$rsdb[subhead]</td>
+              </tr>
+            </table>
+            <table width="99%" border="0" cellspacing="0" cellpadding="0" >
+              <tr> 
+                <td  align="left" style="color:red; ">$MSG</td>
+              </tr>
+            </table>
+            
+            
+            <table width="99%" border="0" cellspacing="0" cellpadding="0"  style="margin-bottom:8px;border-bottom:1px solid #ccc;">
+              <tr> 
+                <td align="center"> [ 编辑:{$rsdb[username]} |&nbsp;时间:{$rsdb[posttime]} 
+                  | 浏览:<font id="hits">{$rsdb[hits]}</font>次]
+                </td>
+              </tr>
+            </table>
+            <table class="content" width="99%" cellspacing="0" cellpadding="0" style='TABLE-LAYOUT: fixed;WORD-WRAP: break-word'>
+              <tr> 
+                <td align="left" class="content_word"><font id="zoom" face="宋体"><span id="post1">$rsdb[content]</span></font></td>
+              </tr>
+            </table>      <!--
+EOT;
+if($webdb[ShowMoreInfo] ){
+print <<<EOT
+-->
+ <table width="99%" border="0" cellspacing="1" cellpadding="3" id="about">
+<!--               
+   <tr>
+    <td width="20%">所属专题:</td>
+    <td width="80%"><a href="list.php?spid=$rsdb[spid]&fid=$fid" target="_blank">{$Spid_db[name][$rsdb[spid]]}</a></td>
+  </tr>
+  <tr>
+    <td width="20%">所属地区:</td>
+    <td width="80%">$rsdb[province] $rsdb[city]</td>
+  </tr>
+--><tr>
+    <td width="20%"></td>
+    <td width="80%"></td>
+  </tr>
+   $TempLate 
+</table>
+      <!--
+EOT;
+}
+print <<<EOT
+-->
+            <table width="99%" border="0" cellspacing="0" cellpadding="0" style='TABLE-LAYOUT: fixed;WORD-WRAP: break-word;'>
+              <tr> 
+                <td colspan="2" align="center" class="page">$showpage</td>
+              </tr><tr> 
+                <td colspan="2" align="right" ></td>
+              </tr>
+              
+            </table>
+          </td>
+        </tr>
+        
+      </table>
+      
+
+    </td>
+  </tr>
+</table></div>
+  
+</div>
+<!--
+EOT;
+?>
+-->

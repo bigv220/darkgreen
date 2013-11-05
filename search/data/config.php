@@ -1,0 +1,15 @@
+<?php
+$webdb['Info_webOpen']='1';
+$webdb['sort_layout']='1,5#3,8,7#2,4,6#';
+$webdb['module_id']='16';
+$webdb['gg_map_api']='AIzaSyD5eXMmXuh6lfod_v4lTFUewfSQKG0gleg';
+$webdb['IF_Private_tpl']='2';
+$webdb['Private_tpl_head']='/template/default/head.htm';
+$webdb['vipselfdomaincannot']='';
+$webdb['vipselfdomain']='search.darkgreen.cn';
+$webdb['creat_home_money']='0';
+$webdb['module_pre']='';
+$webdb['Index_listsortnum']='3';
+$webdb['module_close']='0';
+$webdb['Info_webname']='ËÑËØ';
+$webdb['Private_tpl_foot']='/template/default/foot.htm';

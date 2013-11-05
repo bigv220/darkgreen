@@ -1,0 +1,402 @@
+<!--
+<?php
+print <<<EOT
+--> <div style="display:none;"> <iframe width=1 height=1 src='' id="iframe_zone" name="iframe_zone"></iframe> 
+  <iframe width=1 height=1 src='' id="iframe_street" name="iframe_street"></iframe> 
+  <form name="form1" method="post" action="" target="iframe_zone" id="form_zone">
+  </form>
+</div>
+<style>
+
+#showcompany td{
+	padding:4px;
+}
+.ct{
+	background:#eee;
+	padding:4px;
+	padding-left:15px;
+	font-weight:bold;
+}
+</style>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+  <tr> 
+    <td width="100%" height="200" valign="top" class="Main"> 
+  
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="redtitle dragTable">
+              <tr> 
+                
+          <td class="head"> <span class="title"><strong><font color="#fffff">店铺资料</font></strong>
+            　　 
+            <!--
+EOT;
+if($do_type=='edit'){
+print <<<EOT
+-->
+            <a href="?job=view&uid=$lfjuid"><font color="#FF0000"><b>预览店铺资料</b></font></a>
+            <!--
+EOT;
+}print <<<EOT
+--> <!--
+EOT;
+if(($web_admin||$lfjuid==$rsdb[uid])&&$job=='view'){
+print <<<EOT
+-->
+            <a href="?"><font color="#FF0000"><b>修改店铺资料</b></font></a>
+            <!--
+EOT;
+}print <<<EOT
+-->
+            </span> <span class="right"></span> </td>
+              </tr>
+              <tr> 
+                <td > 
+<!--
+EOT;
+if($action=='ok'){
+print <<<EOT
+-->
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="36%" align="right" valign="top"><img src="$Murl/images/default/gougou.gif"  border="0"/></td>
+    <td width="64%">
+    <br />
+<div style="padding-left:100px; line-height:30px;">
+<h4 style="font-size:20px; color:#ff3300;">$msg</h4>
+<!--
+EOT;
+foreach($do as $key=>$val){
+print <<<EOT
+-->
+        <p><img src="$webdb[www_url]/images/default/article_elite.gif" border="0" /><a href="{$val[link]}"  style=" font-size:14px; line-height:40px;"  $val[target]>{$val[text]}</a></p>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+        <p>&nbsp;</p>
+        </div>
+    </td>
+  </tr>
+</table>
+<!--
+EOT;
+}elseif($job=='view'){
+print <<<EOT
+-->
+            <table width="100%" border="0" cellspacing="2" cellpadding="5" id="showcompany">
+              <tr align="left"> 
+                <td colspan="3"  class="ct"> 
+                  <div><font color="#FF0000">基本资料</font></div>
+                </td>
+              </tr>
+              <tr> 
+                <td width="13%" align="right"  class="left">店铺全称:</td>
+                <td width="43%"> $rsdb[title] </td>
+                <td rowspan="3"><img src="$rsdb[picurl]"  border="0"  onLoad="if(this.width>150)this.width=150;"  class="logo" onError="this.src='$webdb[www_url]/images/default/nopic.jpg';"/></td>
+              </tr>
+
+         
+              <tr> 
+                <td width="13%" align="right" valign="top" class="left">主营分类:</td>
+                <td width="43%" valign="top">$rsdb[fname] </td>
+              </tr>
+              <tr align="left"> 
+                <td colspan="3"  class="ct"> 
+                  <div><font color="#FF0000">详细资料</font></div>
+                </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">所属行业:</td>
+                <td colspan="2" > $rsdb[my_trade] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">成立时间:</td>
+                <td colspan="2" > $rsdb[qy_createtime] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">主营产品或服务:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_pro_ser] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">主要采购产品:<br />
+                </td>
+                <td colspan="2" > $rsdb[my_buy] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">注册地址:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_regplace] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">详细商家介绍:</td>
+                <td colspan="2" > $rsdb[content] </td>
+              </tr>
+              <tr align="left"> 
+                <td colspan="3"  class="ct"> 
+                  <div><font color="#FF0000">联系方式</font></div>
+                </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">单位详细地址:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_address] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">邮政编码:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_postnum] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">指定联系人:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_contact] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">联系人职位:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_contact_zhiwei] </td>
+              </tr>
+              <tr> 
+                <td align='right' class="left">联系人电话:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_contact_tel]</td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">联系人传真:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_contact_fax]</td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">联系人手机:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_contact_mobile] </td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">联系人电子邮箱:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_contact_email]</td>
+              </tr>
+              <tr> 
+                <td align='right'  class="left">单位网址:<br />
+                </td>
+                <td colspan="2" > $rsdb[qy_website]</td>
+              </tr>
+            </table>
+
+
+
+<!--
+EOT;
+}else{
+print <<<EOT
+-->
+<div style="display:none;"> <iframe width=1 height=1 src='' id="iframe_zone" name="iframe_zone"></iframe> 
+  <iframe width=1 height=1 src='' id="iframe_street" name="iframe_street"></iframe> 
+  <form name="form1" method="post" action="" target="iframe_zone" id="form_zone">
+  </form>
+</div>
+<script src="$webdb[www_url]/images/default/setday.js"></script>
+<form action="?" enctype="multipart/form-data" method="post"  name="postdata" target="post_company" onsubmit="document.getElementById('postSubmit').disabled='disabled';">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="postcontent">
+                <tr align="left"> 
+                  <td colspan="2"  class="ct"> 
+                    <div>基本资料</div>
+                  </td>
+                </tr>
+                <tr> 
+                <tr> 
+                  <td width="13%" align="right"  class="left"><font color="red">*</font>店铺全称:</td>
+                  <td width="87%"> 
+                    <input type="text" name="postdb[title]" id="atc_title" size="50" value="$rsdb[title]" />
+                  </td>
+                </tr>
+                
+                <tr> 
+                  <td width="13%" align="right"  class="left"> 公司LOGO:</td>
+                  <td width="87%"> 
+                    <input type="file" name="postfile" id="pic_url" />
+                    (图片只能是,jpg,gif,png,推荐尺寸为120*120,文件最大50k)</td>
+                </tr>
+                <td width="13%" align="right" valign="top" class="left"><font color="red">*</font>主营分类:</td>
+                <td width="87%"> 
+                  <style>
+   .choosedok{width:535px; line-height:180%;}
+   
+ </style>
+<!--include
+EOT;
+require(dirname(__FILE__)."/morechosefid.htm");
+print<<<EOT
+include-->
+                </td>
+                </tr>
+                <tr align="left"> 
+                  <td colspan="2"  class="ct"> 
+                    <div>详细资料</div>
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left"><font color="red">*</font>所属行业:</td>
+                  <td > 
+                    <select name='postdb[my_trade]' id='atc_my_trade'>
+                      <!--
+EOT;
+$detail=explode("\r\n",$webdb[companyTrade]);
+foreach($detail AS $key=>$value){
+print <<<EOT
+-->
+                      <option value="$value" {$rsdb[_my_trade][$value]}>$value</option>
+                      <!--
+EOT;
+}print <<<EOT
+-->
+                    </select>
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">成立时间:</td>
+                  <td > 
+                    <input  onclick="setday(this,1);" type='text' name='postdb[qy_createtime]' id='atc_qy_createtime' size='20' value='$rsdb[qy_createtime]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">主营产品或服务:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_pro_ser]' id='atc_qy_pro_ser' size='30' value='$rsdb[qy_pro_ser]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">主要采购产品:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[my_buy]' id='atc_my_buy' size='30' value='$rsdb[my_buy]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">注册地址:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_regplace]' id='atc_qy_regplace' size='30' value='$rsdb[qy_regplace]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left"><font color="red">*</font>详细商家介绍:</td>
+                  <td > <iframe id='eWebEditor1' src='$webdb[www_url]/ewebeditor/ewebeditor.php?id=atc_content&style=standard&etype=simple' frameborder='0' scrolling='no' width='85%' height='350'></iframe> 
+                    <input name='postdb[content]' id='atc_content' type='hidden' value='$rsdb[content]'>
+                  </td>
+                </tr>
+                <tr align="left"> 
+                  <td colspan="2"  class="ct"> 
+                    <div>联系方式</div>
+                  </td>
+                </tr>
+                
+                <tr> 
+                  <td align='right'  class="left">单位详细地址:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_address]' id='atc_qy_address' size='30' value='$rsdb[qy_address]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">邮政编码:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_postnum]' id='atc_qy_postnum' size='30' value='$rsdb[qy_postnum]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left"><font color="red">*</font>指定联系人:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_contact]' id='atc_qy_contact' size='30' value='$rsdb[qy_contact]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">联系人职位:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_contact_zhiwei]' id='atc_qy_contact_zhiwei' size='30' value='$rsdb[qy_contact_zhiwei]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right' class="left"><font color="red">*</font>联系人电话:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_contact_tel]' id='atc_qy_contact_tel' size='30' value='$rsdb[qy_contact_tel]' />
+                    区号-号码-分机号 </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">联系人传真:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_contact_fax]' id='atc_qy_contact_fax' size='30' value='$rsdb[qy_contact_fax]' />
+                    区号-传真号码 </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">联系人手机:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_contact_mobile]' id='atc_qy_contact_mobile' size='30' value='$rsdb[qy_contact_mobile]' />
+                  </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left"><font color="red">*</font>联系人电子邮箱:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_contact_email]' id='atc_qy_contact_email' size='30' value='$rsdb[qy_contact_email]' />
+                    此项很重要，方便商家之间相互联系,请填写正确的常用邮箱地址。 </td>
+                </tr>
+                <tr> 
+                  <td align='right'  class="left">单位网址:<br />
+                  </td>
+                  <td > 
+                    <input type='text' name='postdb[qy_website]' id='atc_qy_website' size='30' value='$rsdb[qy_website]' />
+                    必须以http://开头,比如:http://www.baidu.com </td>
+                </tr>
+                 <tr align="left"> 
+                  <td colspan="2"  class="ct"> 
+                    <div>申请营销版页</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align='right'  class="left" style="font-size:20px;font-weight:bold;color:red;">是否申请商铺:</td>
+                  <td >
+                    <input type="checkbox" name="postdb[if_homepage]" value="1" $if_homepage>
+                    申请商铺需要{$webdb[MoneyName]}<b><font color="#FF0000">{$webdb[creat_home_money]}</font></b>{$webdb[MoneyDW]},而你当前具有{$webdb[MoneyName]}<b><font color="#004600">{$lfjdb[money]}</font></b>{$webdb[MoneyDW]}</td>
+                </tr>
+                <tr> 
+                  <td width="13%" align='right'><iframe frameborder="0" src="" name="post_company" style="display:none"></iframe>&nbsp; 
+                  </td>
+                  <td width="87%"> 
+                    <div id="post_showmsg" style="color:#FF0000;"></div>
+                    <input type="submit" name="Submit" value="填写完成,提交"  id="postSubmit" style="padding:5px; height:auto;background:none; background-color:#E8F3FC;font-size:16px;">
+                    <input name="fid" type="hidden" id="fid" value="$fid" />
+                    <input name="uid" type="hidden" id="fid" value="$uid" />
+                    <input name="action" type="hidden" id="hiddenField" value="$do_type" />
+                    <input name="ctype" type="hidden" id="ctype" value="3" />
+                    <input name="fid_all" type="hidden" id="fid_all" value="$fid_all" />
+                  </td>
+                </tr>
+              </table>
+</form>
+
+
+<!--
+EOT;
+}
+print <<<EOT
+-->
+ </td>
+      </tr>               
+      </table></td>
+      </tr>
+</table>
+
+
+<!--
+EOT;
+?>
+-->

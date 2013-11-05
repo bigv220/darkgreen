@@ -1,0 +1,56 @@
+<!--
+<?php
+print <<<EOT
+-->
+<script language="javascript" src="$webdb[www_url]/images/default/default.js"></script>
+<table width="100%" cellspacing="1" cellpadding="3" class="tablewidth">
+    <tbody><tr class="head">
+        <td colspan="5">
+            <div align="center"><font color="#FFFFFF">状态内容</font></div>
+        </td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+        <td width="20%" align="left">采购单编号</td>
+        <td width="20%" align="left">买家指令付款</td>
+        <td width="20%" align="left">买家确认</td>
+        <td width="20%" align="left">管理操作</td>
+        <td width="20%" align="left">简要备注</td>
+    </tr>
+    <!--
+EOT;
+foreach($listdb as $key=>$value) {print <<<EOT
+-->
+    <tr bgcolor="#FFFFFF">
+        <td width="20%" align="left">{$value[id]}</td>
+        <td width="20%" align="left">{$value[buyer_pay_date]} 指令付款</td>
+        <td width="20%" align="left"><img src="images/right.jpg" alt=""></td>
+        <td width="20%" align="left">
+<!--
+EOT;
+if($value[admin_confirm] == 1) {print <<<EOT
+-->
+            已确认
+<!--
+EOT;
+} else {print <<<EOT
+-->
+            <div id="btnDdiv{$value[id]}">
+                <input type="button" id="confirmBtn" onclick="admin_confirm({$value[id]},'{$ajaxUlr}','admin_confirm')" value="确认" />
+            </div>
+<!--
+EOT;
+}print <<<EOT
+-->
+        </td>
+        <td width="20%" align="left">{$value[end_comment]}</td>
+    </tr>
+    <!--
+EOT;
+}print <<<EOT
+-->
+    </tbody>
+</table>
+<!--
+EOT;
+?>
+-->

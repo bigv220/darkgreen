@@ -1,0 +1,137 @@
+<!--
+<?php
+print <<<EOT
+-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
+  <tr> 
+    <td height="100" valign="top" class="Main"> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable">
+        <tr> 
+          <td class="head">启用免费邮箱</td>
+        </tr>
+        <tr> 
+          <td class="middle"> 
+
+            <!--
+EOT;
+if($job=='reg'){
+print <<<EOT
+-->
+            <table width="100%" border="0" cellspacing="5" cellpadding="5">
+              <form name="form1" method="post" action="?job=reg&" enctype="multipart/form-data" onsubmit="return ckregdatapost();">
+                <tr> 
+                  <td height="25"> 
+                    <table width="100%" border="0" cellspacing="1" cellpadding="6">
+                      <tr> 
+                        <td colspan="2" style="border-bottom:1px solid #ccc;background:#eee;line-height:21px;">以下为重要信息</td>
+                      </tr>
+                      <tr> 
+                        <td width="28%" height="40" align="right" class="table_label">帐号:</td>
+                        <td width="72%"> $lfjid </td>
+                      </tr>
+                      <tr> 
+                        <td width="28%" height="40" align="right" class="table_label">选择邮箱:</td>
+                        <td width="72%" class="">
+                        <select name="email" id="email">
+                          <option value="green-cc.com">$lfjid@green-cc.com</option>
+                          <option value="blove-cc.com">$lfjid@blove-cc.com</option>
+                          <option value="red-cc.com">$lfjid@red-cc.com</option>
+                        </select>
+&nbsp;&nbsp;&nbsp;<font style="color:#8f5154">red-cc.com</font>&nbsp;&nbsp;<font style="color:#74bab8">blove-cc.com</font>&nbsp;&nbsp;<font style="color:#558668">green-cc.com</font>&nbsp;&nbsp;<font style="color:#949494">这三种不同的邮箱域名，可供选择</font></td>
+                      </tr>
+                      <tr> 
+                        <td width="28%" height="40" align="right" class="table_label">大小:</td>
+                        <td width="72%" class="">
+                        <select name="emailsize" id="emailsize">
+                          <option value="100">100M</option>
+                          <option value="200">200M</option>
+                          <option value="300">300M</option>
+                          <option value="400">400M</option>
+                          <option value="500">500M</option>
+                        </select>
+                         </td>
+                      </tr>
+                      <tr> 
+                        <td width="28%" height="40" align="right" class="table_label">密码设置:</td>
+                        <td width="72%" class="">
+                          <input type="password" name="password" style="width:130px;">
+&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:#949494">邮箱内有重新设置密码的功能</font> </td>
+                      </tr>
+                      <tr>
+                        <td height="40" align="right" class="table_label">&nbsp;</td>
+                        <td class=""><a href="http://www.darkgreen.cn/do/reg1.html" target="_blank">已阅读并同意用户协议</a>&nbsp;<input name="" type="checkbox" value="" checked="checked" onclick="sdisabled()" />&nbsp;&nbsp;<input type="submit" id="Submit3" name="Submit3" value="提 交">
+                          <input type="hidden" name="step" value="2">
+                          <input type="hidden" name="emailname" value="$lfjid">&nbsp;&nbsp;<font style="color:#949494">点击提交后，你的绿页邮箱,在一个工作日后就可以使用了</font></td>
+                      </tr>
+                      <tr> 
+                        <td colspan="2">
+						<script src="$webdb[www_url]/images/default/setday.js"></script>
+						<SCRIPT LANGUAGE="JavaScript">
+<!--
+var filed_id='';
+var filed_name='';
+function ckregdata(a,b){
+	filed_id=a;
+	filed_name=b;
+}
+function ckregdatapost(){
+	id_array=filed_id.split(',');
+	name_array=filed_name.split(',');
+	for(var i=0;i<id_array.length;i++){
+		if(id_array[i]!=''&&document.getElementById(id_array[i]).value==''){
+			alert("“"+name_array[i]+'”不能为空');
+			document.getElementById(id_array[i]).focus();
+			return false;
+		}
+	}
+}
+var zhi ='1';
+function sdisabled(){
+	if(zhi =="1"){
+		document.form1.Submit3.disabled = true;
+	zhi = "2";
+		 }else{
+			document.form1.Submit3.disabled = false; 
+			 zhi = "1"; 
+		 }
+	
+}
+/*如要为页面布局考虑的话，你可以把template\default\regfield.htm里边的内容复制过来，然后把以下两行删除即可*/
+document.write('<div id="showRegDiv"></div>');
+AJAX.get("showRegDiv","$webdb[www_url]/do/regfield.php?job=reg");
+//-->
+</SCRIPT></td>
+                      </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr> 
+                        <td align="center"> 
+                          
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </form>
+            </table>
+ 
+            <!--
+EOT;
+}print <<<EOT
+-->
+          </td>
+        </tr>
+        <tr>
+          <td class="foot">
+            <h3 class="L"></h3>
+            <h3 class="R"></h3>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!--
+EOT;
+?>
+-->

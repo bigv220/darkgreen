@@ -1,0 +1,142 @@
+<!--
+<?php
+print <<<EOT
+-->
+<!-- IE6 "fix" for the close png image -->
+<!--[if lt IE 7]>
+<link rel="stylesheet" href="$webdb[www_url]/images/default/gutai/css/basic_ie.css" type="text/css" />
+<![endif]-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btn_use_gutai').click(function() {
+
+        })
+    });
+</script>
+<div class="w1000 mg_at clearfix">
+    <div class="orderList fl">
+        <ul>
+
+            <li><a href="http://www.darkgreen.cn/chatwithgogo.php" class="oList">客服GOGO</a></li>
+
+        </ul>
+    </div>
+    <div class="rtWrap fr mt">
+        <h2>实际支付总额</h2>
+        <div class="oBox1">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="300" align="center">&nbsp;</td>
+                    <td width="300" align="center">商品价格+运输价格=支付价格</td>
+                    <td align="center">实际支付总额为： <span class="sRed">{$infodb[totalmoney]}</span> 元</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <ul class="oBox2">
+            <li>确认以下重要信息：</li>
+            <li >
+
+            </li>
+            <li >
+                <div class="t2">
+                    本次支付的采购单---<span class="sp1">序号：00{$order_id}</span>&nbsp;&nbsp;&nbsp;<span class=" sGreen">古太行—麦野信息</span>  提供贸易信息系统辅助功能
+                </div>
+            </li>
+            <li>
+                <div class="t2">
+                    商家在系统中，设置支付宝，银联在线未支付工具，请遵守相关服务商的服务协议。
+                </div>
+            </li>
+            <li>
+
+                <div class="t2">
+                    这是平台贸易的辅助功能，不对交易是否成功负责。 “采购协议文本”可记录更多内容。
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="mt20">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="300" align="center"><img src="images/img/zfb.jpg" width="138" height="30" /><input type="radio" name="paytype" value="ali" style="border:0px;" id="pay_ali" checked></td>
+                    <td width="300" align="center"><img src="images/img/yl.jpg" width="138" height="30" /> <input type="radio" name="paytype" value="chinapay" checked style="border:0px;" id="pay_yee" checked></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><br/><a href="javascript:pay();"><img id="next_btn_step2" src="images/default/next.gif" border="0"></a>
+                        <div class="waiting" align="center" style="margin:30px auto;display:none">
+                            <img style="vertical-align:top" src="$webdb[www_url]/images/default/spinner.gif" alt=""/>&nbsp;请等待</div></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+</div>
+<div id="basic-modal-content">
+    <h3>付款提示</h3>
+    <p>您选择了通过银联在线支付，请到支付页面完成付款。.</p>
+    <br/>
+    <p>如果您付款完成，可以点击查询订单查看订单状态。</p>
+    <br/>
+    <p>如果您已通过网银在线支付成功，但由于网络或操作原因订单数据接受系统可能会有2-3分钟的延迟，请耐心等待，如果付款遇到问题， 请拨打客服电话400 0532 796。</p>
+    <br/>
+    <br/><br/>
+    <table cellpadding="5" align="center"><tr>
+        <td><div class="border_btn left" onclick="checkOrder();" style="margin-right:100px;">付款完成</div></td>
+        <td><div class="border_btn left" onclick="checkOrder();">查询订单</div></td>
+    </tr></table>
+</div>
+<!-- preload the images -->
+<div style='display:none'>
+    <img src='$webdb[www_url]/images/default/gutai/css/x.png' alt='关闭' title="关闭"/>
+</div>
+<script type="text/javascript" src="$webdb[www_url]/images/default/js/jquery.simplemodal.js"></script>
+<script language="JavaScript">
+    <!--
+
+    function checkOrder() {
+        window.location.href="http://www.darkgreen.cn/shop/gutai_pay.php?job=list";
+    }
+
+    function paytype(){
+        var url='';
+        if(document.getElementById("pay_ten")!=null&&document.getElementById("pay_ten").checked==true){
+            url='tenpay';
+        }
+        else if(document.getElementById("pay_ali")!=null&&document.getElementById("pay_ali").checked==true){
+            url='alipay';
+        }
+        else if(document.getElementById("pay_99bi")!=null&&document.getElementById("pay_99bi").checked==true){
+            url='99pay';
+        }
+        else if(document.getElementById("pay_yee")!=null&&document.getElementById("pay_yee").checked==true){
+            url='chinapay';
+            window.open("gutai.php?pay_code=$pay_code&banktype="+url, "_blank");
+            return;
+        }
+        window.location.href="gutai.php?pay_code=$pay_code&banktype="+url;
+    }
+
+    function pop_up() {
+        $('#basic-modal-content').modal();
+        return false;
+    }
+
+    function pay() {
+        pop_up();
+        $('#next_btn_step2').unbind('click');
+        $('#next_btn_step2').hide();
+        $('#next_btn_step2').val('请等待...');
+        $('.waiting').show();
+        paytype();
+    }
+
+    //-->
+</script>
+<!--
+EOT;
+?>
+-->

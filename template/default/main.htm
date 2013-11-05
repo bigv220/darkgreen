@@ -1,0 +1,881 @@
+<!--
+<?php
+print <<<EOT
+--> 
+<link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/yellow/index.css">
+<style type="text/css">
+<!--
+.STYLE3 {font-size: 12px; font-family: "宋体"; }
+-->
+</style>
+<div id="ly_main_home" class="heightboxx">
+<div id="ly_main_left" class="heightboxx" >
+    <div class="ly_main_left_c1">
+      <div class="ly_main_left_c1_l">$label[life_t4]</div>
+      <div id="ly_main_left_c1_r_cen">
+      <div class="ly_main_left_c1_r" id="show_work_area">
+        <ul class="w63">
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_work()"><img src="$webdb[www_url]/images/default/lysw_55.jpg" border="0" /></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_zy()"><img src="$webdb[www_url]/images/default/lysw_70.jpg" border="0" /></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_email()"><img src="$webdb[www_url]/images/default/lysw_86.jpg" border="0" /></a></li>
+        </ul>
+        <ul class="w528">
+          <li style="padding-top:14px;"><center>&nbsp;<span class="STYLE3">商务办公空间:&nbsp;<input name="" type="text" class="input1" onclick="Submit_onclick_work()"/>&nbsp;
+          </center>
+          </li>
+          <li ><center>&nbsp;<span class="STYLE3">职员办公空间:&nbsp;<input name="" type="text" class="input2" onclick="Submit_onclick_zy()"/>&nbsp;
+          </center>
+          </li>
+          <li><img src="$webdb[www_url]/images/default/selecthome.jpg" onclick="Submit_onclick_email()" width="461" height="25" style="cursor:pointer"/></li>
+        </ul>
+        <ul class="w40">
+          <li><center><img src="$webdb[www_url]/images/default/lysw_58.jpg" style="padding-top:17px;" /></center></li>
+          <li><center><img src="$webdb[www_url]/images/default/lysw_72.jpg" style="padding-top:17px;"/></center></li>
+          <li><center><img src="$webdb[www_url]/images/default/lysw_72.jpg" style="padding-top:17px;"/></center></li>
+        </ul>
+        <ul class="w70">
+          <li style="padding-top:16px; height:40px;"><center><a href="javascript:;" onclick="showAgreement()"><img src="$webdb[www_url]/images/default/lysw_60.jpg" border="0"/></a>
+          </center></li>
+          <li style="padding-top:16px; height:40px;"><center><a href="#" onclick="showAgreement1()"><img src="$webdb[www_url]/images/default/lysw_60.jpg" border="0"/></a>
+          </center></li>
+          <li style="padding-top:16px; height:40px;"><center><a href="javascript:;" onclick="showAgreement2()"><img src="$webdb[www_url]/images/default/lysw_87.jpg" border="0"/></a></center></li>
+        </ul>
+      </div>
+      
+      <div class="ly_main_left_c1_r" id="show_zy_area" style="display:none">
+        <ul class="w63">
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_work()"><img src="$webdb[www_url]/images/default/lysw_55_1.jpg" border="0" /></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_zy()"><img src="$webdb[www_url]/images/default/lysw_70_1.jpg" border="0" /></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_email()"><img src="$webdb[www_url]/images/default/lysw_86.jpg" border="0" /></a></li>
+        </ul>
+        <ul class="w528">
+          <li style="padding-top:14px;"><center>&nbsp;<span class="STYLE3">商务办公空间:&nbsp;<input name="" type="text" class="input2" onclick="Submit_onclick_work()"/>&nbsp;</li>
+          <li><center>&nbsp;<span class="STYLE3">职员办公空间:&nbsp;<input name="" type="text" class="input1" onclick="Submit_onclick_zy()"/>&nbsp;</li>
+          <li><img src="$webdb[www_url]/images/default/selecthome.jpg" onclick="Submit_onclick_email()" width="461" height="25" style="cursor:pointer"/></li>
+        </ul>
+        <ul class="w40">
+          <li><center><img src="$webdb[www_url]/images/default/lysw_72.jpg" style="padding-top:17px;" /></center></li>
+          <li><center><img src="$webdb[www_url]/images/default/lysw_58.jpg" style="padding-top:17px;"/></center></li>
+          <li><center><img src="$webdb[www_url]/images/default/lysw_72.jpg" style="padding-top:17px;"/></center></li>
+        </ul>
+        <ul class="w70">
+          <li style="padding-top:16px; height:40px;"><center><a href="javascript:;" onclick="showAgreement()"><img src="$webdb[www_url]/images/default/lysw_60.jpg" border="0"/></a></center></li>
+          <li style="padding-top:16px; height:40px;"><center><a href="javascript:;" onclick="showAgreement1()"><img src="$webdb[www_url]/images/default/lysw_60.jpg" border="0"/></a></center></li>
+          <li style="padding-top:16px; height:40px;"><center><a href="javascript:;" onclick="showAgreement2()"><img src="$webdb[www_url]/images/default/lysw_87.jpg" border="0"/></a></center></li>
+        </ul>
+      </div>
+      
+      <div class="ly_main_left_c1_r" id="show_emial_area" style="display:none">
+        <ul class="w63">
+          <li><a href="javascript:void(0)" onmousemove="Submit_onclick_work()"><img src="$webdb[www_url]/images/default/lysw_55_1.jpg" border="0" /></a></li>
+          <li><a href="javascript:void(0)" onmousemove="Submit_onclick_zy()"><img src="$webdb[www_url]/images/default/lysw_70.jpg" border="0" /></a></li>
+          <li><a href="javascript:void(0)" onmousemove="Submit_onclick_email()"><img src="$webdb[www_url]/images/default/lysw_86_1.jpg" border="0" /></a></li>
+        </ul>
+        <ul class="w528">
+          <li style="padding-top:14px;"><center>&nbsp;<span class="STYLE3">商务办公空间:&nbsp;<input name="" type="text" class="input2" onclick="Submit_onclick_work()" />&nbsp;</li>
+          <li><center>&nbsp;<span class="STYLE3">职员办公空间:&nbsp;<input name="" type="text" class="input2" onclick="Submit_onclick_zy()" />&nbsp;</li>
+          <li>
+        <script language="javascript" type="text/javascript">
+            function stopEnter() 
+            {
+                var pwd = document.getElementById('txtPassword').value;
+                
+                if (pwd.length == 0) {
+                    return !(window.event && window.event.keyCode == 13);
+                } else {
+                    return true;
+                }
+            }
+            
+            function ClearPwdChkbox()
+            {
+                var uname = document.getElementById('chkRememberUsername');
+                var pwd = document.getElementById('chkRememberPassword');
+                
+                if (!uname.checked)
+                {
+                    pwd.checked = false;
+                    pwd.disabled = true;
+                }
+                else
+                {
+                    pwd.disabled = false;
+                }
+            }
+            
+            function CheckUnameChkbox()
+            {
+                var uname = document.getElementById('chkRememberUsername');
+                var pwd = document.getElementById('chkRememberPassword');
+                
+                if ((pwd.checked) && (!uname.checked))
+                {
+                    uname.checked = true;
+                }
+            }
+            
+            function PopulatePassword(sValue) 
+            {
+                document.getElementById('txtPassword').value = sValue;
+            }
+            
+            function KeyDownHandler(btn)
+            {
+                // process only the Enter key
+                if (event.keyCode == 13)
+                {
+                    // cancel the default submit
+                    event.returnValue=false;
+                    event.cancel = true;
+                    // submit the form by programmatically clicking the specified button
+                    document.getElementById(btn).click();
+                }
+            }
+            
+            function CheckForParent()
+            {
+                if (window != window.top)
+                {
+                    window.top.location.href = "http://mail.darkgreen.cn/";
+                }
+            }
+            
+            function SetFocus()
+            {
+                if (document.login.txtUsername)
+                {
+                    document.login.txtUsername.focus();
+                }
+            }
+            
+            function ClearPassword()
+            {
+                document.login.txtPassword.value = '';
+                document.login.hdnPwdChanged.value = 'yes';
+            }
+
+
+        </script>
+          <form name="login" method="post" action="http://mail.darkgreen.cn/" id="login" target="_blank"
+                  onsubmit="return mailLoginSubmit();">
+
+              <input type="hidden" name="_task"  value="login" />
+              <input type="hidden" name="_action"  value="login" />
+              <input type="hidden" name="_url"  value="" />
+              <input type="hidden" name="_token"  value="" />
+              <input type="hidden" name="_timezone"  value="Asia/Shanghai" />
+              <input type="hidden" name="_task"  value="login" />
+              <input type="hidden" id="_user" name="_user" value=""/>
+
+
+
+<script type="text/javascript"> 
+<!--
+var theForm = document.forms['login'];
+if (!theForm) {
+    theForm = document.login;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+ 
+ 
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWEQLkrodjAqXVsrgJArWptJELAvn6+RsC5Iz21QgCiIbKrAcC1of2ww4C74fCtAECjo+S1wQCt42+9AUCu4Ce8AUC3IPmmA0C5IyCvQ0Coaye0AMCyaDy2gQCgtyHhgwCguPaiwGGw4GpBzy7kzeuIhwUmo0crH0YZQ==" />
+
+<input type="hidden" name="ddlLanguage" id="ddlLanguage" value="zh-CN" />
+<input type="hidden" name="txtUsername" type="text" maxlength="255" id="txtUsername" tabindex="3" class="inputTextMedToLarge" onkeypress="return stopEnter()" />
+                 
+
+          <div class="maillogin">
+          
+        <div class="ln" style="float:left; width:190px;">
+        <div style="float:left; width:91px; line-height:27px;">&nbsp;绿页商务信箱:&nbsp;</div>
+        <div style="float:left; width:99px;">
+        <input type="text" style="width:87px; height:20px; padding-left:5px; line-height:20px;" maxlength="128" name="userid2" id="userid2"  onkeyup="add_(); " autocomplete="on"/></div>
+       </div>
+       <div id="searchtypeuserid3" style="display:none">
+        <input type="text" style="width:112px; height:20px; line-height:20px; padding-left:5px;" maxlength="128" name="userid3" id="userid3"  onkeyup="txtUsername.value=userid2.value+userid3.value; " autocomplete="on" value="@"/></div>
+        <div id="MainSearch">
+        
+        <div id="searchtype">
+            <div id="SelectShow" onclick="ShowMore()"></div>
+            <div id="ListType" class="hidden">
+                <a href="javascript:;" onclick="Submit_onclick_emailinput()" class="ck">点击输入</a>
+                <a href="javascript:;" onclick="selectsearchaabc(this,'green-cc.com','@green-cc.com')">@green-cc.com</a>
+                <a href="javascript:;" onclick="selectsearchaabc(this,'blove-cc.com','@blove-cc.com')">@blove-cc.com</a> 
+                <a href="javascript:;" onclick="selectsearchaabc(this,'red-cc.com','@red-cc.com')">@red-cc.com</a>
+                <a href="javascript:;" onclick="window.open('http://mail.163.com','_blank');">跳转到163邮箱！</a> 
+                <a href="javascript:;" onclick="window.open('http://mail.qq.com','_blank'); ">跳转到qq邮箱！</a>
+            </div>
+        </div>
+       </div>
+        <SCRIPT LANGUAGE="JavaScript">
+<!--
+function addCookie(objName,objValue,objHours){//添加cookievar 
+          str = objName + "=" + escape(objValue);
+          if(objHours > 0){//为0时不设定过期时间，浏览器关闭时cookie自动消失
+          var date = new Date();
+          var ms = objHours*3600*1000;
+          date.setTime(date.getTime() + ms);
+          str += "; expires=" + date.toGMTString();
+          }
+          document.cookie = str;
+          }
+          function getCookie(objName){//获取指定名称的cookie的值
+          var arrStr = document.cookie.split("; ");
+          for(var i = 0;i < arrStr.length;i ++){
+              var temp = arrStr[i].split("=");
+              if(temp[0] == objName) return unescape(temp[1]);
+              }
+              }
+              function add_(){    
+              inputValue = document.login.userid2.value;    
+              addCookie('userid2',inputValue,10000);
+              }
+              function get_(){    
+              cookie_value = getCookie('userid2');    
+              cookie_SelectShow = getCookie('SelectShow');
+              if(cookie_SelectShow==''){
+                  cookie_SelectShow="输入或选择";
+              }
+              if(cookie_value==undefined){
+              document.login.userid2.value = '';
+              }else{
+                document.login.userid2.value = cookie_value;  
+              }
+              document.getElementById("SelectShow").innerHTML="输入或选择";
+              }
+              var zhi ='1';
+function ShowMore(){
+    if(zhi =="1"){
+        document.getElementById("SelectShow").className="click";
+        document.getElementById("ListType").className="show";
+        zhi = "2";
+         }else{
+            document.getElementById("SelectShow").className="";
+        document.getElementById("ListType").className="hidden";
+        zhi = "1"; 
+         }
+        //if(document.getElementById("SelectShow").className="click"){
+//              document.getElementById("ListType").className="hidden";
+//              document.getElementById("SelectShow").className="";
+//        }else{  
+//        document.getElementById("SelectShow").className="click";
+//        document.getElementById("ListType").className="show";
+//        }
+    }
+
+function mailLoginSubmit(){
+    document.getElementById("_user").value = document.getElementById("userid2").value + document.getElementById("SelectShow").innerHTML;
+    //alert(document.getElementById("_user").value);
+    //alert(document.getElementById("_pass").value);
+    //alert(document.getElementById("login").action);
+    return true;
+}
+function selectsearchaabc(theA,word,keyword){
+    document.getElementById("SelectShow").className="";
+    document.getElementById("ListType").className="hidden";
+    document.getElementById('SelectShow').innerHTML = keyword;
+    obj=document.getElementById("ListType").getElementsByTagName("a");
+    for(var i=0;i< obj.length;i++ ){
+        obj[i].className='';
+    }
+    theA.className='ck';
+    var jmz = {};
+jmz.GetLength = function(str) {
+    var realLength = 0, len = str.length, charCode = -1;
+    for (var i = 0; i < len; i++) {
+        charCode = str.charCodeAt(i);
+        if (charCode >= 0 && charCode <= 128) realLength += 1;
+        else realLength += 2;
+    }
+    return realLength;
+};
+                document.login.txtUsername.value=document.login.userid2.value+keyword;
+                addCookie('SelectShow',keyword,10000);
+    //document.getElementById("login").action="http://mail."+word+"/login.aspx";
+}
+function hiddensearchtype(){
+    document.getElementById("ListType").className="hidden";
+    document.getElementById("SelectShow").className="";
+}
+function changmenu(obj){
+    var alinks=document.getElementById('Mainmenu').getElementsByTagName('a');
+    up = obj-1;
+    for(var i=0;i<alinks.length;i++){
+        if(up==i){
+            alinks[i].className='up';
+        }else if(obj==i){
+            alinks[i].className='ck';
+        }else{
+            alinks[i].className='';
+        }
+    }    
+}
+//-->
+</SCRIPT> 
+        
+        
+        
+     <div style="float:left; width:170px; height:30px;"><table width="147" align="left" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50" height="30" style="line-height:27px;">&nbsp;密&nbsp;码:&nbsp;</td>
+    <td width="100"><input name="_pass" id="_pass" style=" float:left; width:95px; height:20px; padding-left:5px; line-height:20px;" type="password" class="input4f" value=""/></td>
+  </tr>
+</table>
+
+     
+     
+     </div>
+        
+    </div>
+          
+          </li>
+        </ul>
+        <ul class="w40">
+          <li><center><img src="$webdb[www_url]/images/default/lysw_72.jpg" style="padding-top:17px;" /></center></li>
+          <li><center><img src="$webdb[www_url]/images/default/lysw_72.jpg" style="padding-top:17px;"/></center></li>
+          <li style="padding-top:17px;"><center><input type="submit"  name="btnLogin" value=" " id="btnLogin" class="loginButton" style="cursor:pointer; border:0px; background:url(/images/default/lysw_58.jpg) no-repeat 0px 0px; width:40px; height:25px;"/></center></li>
+        </ul><input name="hdnPwdChanged" type="hidden" id="hdnPwdChanged" />
+        <script language=javascript>ClearPwdChkbox();</script></FORM>
+        <ul class="w70">
+          <li style="padding-top:16px; height:40px;"><center><a href="javascript:;" onclick="showAgreement()"><img src="$webdb[www_url]/images/default/lysw_60.jpg" border="0"/></a></center></li>
+          <li style="padding-top:16px;height:40px;"><center><a href="javascript:;" onclick="showAgreement1()"><img src="$webdb[www_url]/images/default/lysw_60.jpg" border="0"/></a></center></li>
+          <li style="padding-top:16px;height:40px;"><center><a href="javascript:;" onclick="showAgreement2()"><img src="$webdb[www_url]/images/default/lysw_87.jpg" border="0"/></a></center></li>
+        </ul>
+      </div>
+    </div>
+    </div>
+    <div class="ly_main_left_classlist" style="position:relative">
+    
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function hiddenAgreement(){
+    document.getElementById("Agreement").style.display="none";
+    document.getElementById("Agreement1").style.display="none";
+    document.getElementById("Agreement2").style.display="none";
+}
+function showAgreement(){
+    document.getElementById("Agreement").style.display="block";
+    document.getElementById("Agreement1").style.display="none";
+    document.getElementById("Agreement2").style.display="none";
+}
+function hiddenAgreement1(){
+    document.getElementById("Agreement1").style.display="none";
+    document.getElementById("Agreement").style.display="none";
+    document.getElementById("Agreement2").style.display="none";
+}
+function showAgreement1(){
+    document.getElementById("Agreement1").style.display="block";
+    document.getElementById("Agreement").style.display="none";
+    document.getElementById("Agreement2").style.display="none";
+}
+function hiddenAgreement2(){
+    document.getElementById("Agreement2").style.display="none";
+    document.getElementById("Agreement").style.display="none";
+    document.getElementById("Agreement1").style.display="none";
+}
+function showAgreement2(){
+    document.getElementById("Agreement2").style.display="block";
+    document.getElementById("Agreement").style.display="none";
+    document.getElementById("Agreement1").style.display="none";
+}
+//-->
+</SCRIPT> 
+      <ul class="classlist11" id="classlist1" style="text-align: left;">
+        <li>行业、企业</li>
+        <li><div id="stateBut" onClick="Submit_onclick_class1(),uselist('stateBut','class1content','125'),Submit_onclick_tab1()"><img src="$webdb[www_url]/images/default/lysw_104.jpg" alt="点击展开" title="点击展开" style="cursor:pointer"/></div></li>
+      </ul>
+      <ul class="classlist22" id="classlist2" style="text-align: left;">
+        <li>产品、物资</li>
+        <li><div id="stateBut1" onClick="Submit_onclick_class2(),uselist('stateBut1','class1content1','125'),Submit_onclick_tab2()"><img src="$webdb[www_url]/images/default/lysw_104.jpg"  alt="点击展开" title="点击展开" style="cursor:pointer"/></div></li>
+      </ul>
+      <ul class="classlist33" id="classlist3" style="text-align: left;">
+        <li>商贸资讯</li>
+        <li><div id="stateBut2" onClick="Submit_onclick_class3(),uselist('stateBut2','class1content2','125'),Submit_onclick_tab3()"><img src="$webdb[www_url]/images/default/lysw_104.jpg"  alt="点击展开" title="点击展开" style="cursor:pointer"/></div></li>
+      </ul>
+      <ul class="classlist44" id="classlist4" style="text-align: left;">
+        <li>商铺</li>
+        <li><div id="stateBut3" onClick="Submit_onclick_class4(),uselist('stateBut3','class1content3','125'),Submit_onclick_tab4()"><img src="$webdb[www_url]/images/default/lysw_104.jpg"  alt="点击展开" title="点击展开" style="cursor:pointer"/></div></li>
+      </ul>
+    </div>
+    <div class="ly_main_left_classcen">
+      <div class="ly_main_left_classc" id="class1content" style="display:none">
+        $label[life_t3]
+      </div>
+      <div class="ly_main_left_classc" id="class1content1" style="display:none">
+        $label[life_t5]
+      </div>
+      <div class="ly_main_left_classc" id="class1content2" style="display:none">
+        $label[life_t6]
+      </div>
+      <div class="ly_main_left_classc" id="class1content3" style="display:none">
+        $label[life_t7]
+      </div>
+    </div>
+  <div class="ly_main_ar_cen">
+      
+      <div class="ly_main_ar" id="ar_xxc">
+        <ul class="w67">
+          <li></li>
+          <li></li>
+          <li>师文言</li>
+          <li>商阁文</li>
+        </ul>
+        <ul class="w62">
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_xxc()"><img src="$webdb[www_url]/images/default/lysw_116.jpg" border="0"></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_ymw()"><img src="$webdb[www_url]/images/default/lysw_118.jpg" border="0"/></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_swy()"><img src="$webdb[www_url]/images/default/lysw_120.jpg" border="0"/></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_sgw()"><img src="$webdb[www_url]/images/default/lysw_122.jpg" border="0"/></a></li>
+        </ul>
+        <ul class="w830">
+          <li><div id="flashcontentmenu">
+  <script type="text/javascript"> 
+    var so = new SWFObject("images/default/c_menu.swf", "main", "830", "56", 9, "#fff");
+        so.addParam("quality", "high");
+        so.addParam("wmode", "transparent");
+        so.addParam("allowScriptAccess", "always");
+        so.addParam("allowFullScreen", "true");
+        so.addParam("align", "middle");
+           so.write("flashcontentmenu");
+</script>
+ 
+</div></li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+        </ul>
+      </div>
+      <div class="ly_main_ar" id="ar_ymw" style="display:none">
+        <ul class="w67">
+          <li></li>
+          <li></li>
+          <li>师文言</li>
+          <li>商阁文</li>
+        </ul>
+        <ul class="w62">
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_xxc()"><img src="$webdb[www_url]/images/default/lysw_116_1.jpg" border="0"></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_ymw()"><img src="$webdb[www_url]/images/default/lysw_118_1.jpg" border="0"/></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_swy()"><img src="$webdb[www_url]/images/default/lysw_120.jpg" border="0"/></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_sgw()"><img src="$webdb[www_url]/images/default/lysw_122.jpg" border="0"/></a></li>
+        </ul>
+        <ul class="w830">
+          <li><img src="$webdb[www_url]/images/default/lysw_117.jpg" /></li>
+          <li><div id="flashcontent">
+  <script type="text/javascript"> 
+    var so = new SWFObject("images/default/loading1.swf", "main", "830", "61", 9, "#fff");
+        so.addParam("quality", "high");
+        so.addParam("wmode", "transparent");
+        so.addParam("allowScriptAccess", "always");
+        so.addParam("allowFullScreen", "true");
+        so.addParam("align", "middle");
+           so.write("flashcontent");
+</script>
+ 
+</div>
+</li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+        </ul>
+      </div>
+      <div class="ly_main_ar" id="ar_swy" style="display:none">
+        <ul class="w67">
+          <li></li>
+          <li></li>
+          <li>师文言</li>
+          <li>商阁文</li>
+        </ul>
+        <ul class="w62">
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_xxc()"><img src="$webdb[www_url]/images/default/lysw_116_1.jpg" border="0"></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_ymw()"><img src="$webdb[www_url]/images/default/lysw_118.jpg" border="0"/></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_swy()"><img src="$webdb[www_url]/images/default/lysw_120_1.jpg" border="0"/></a></li>
+          <li><a href="javascript:void(0)" onclick="Submit_onclick_sgw()"><img src="$webdb[www_url]/images/default/lysw_122.jpg" border="0"/></a></li>
+        </ul>
+        <ul class="w830">
+          <li><img src="$webdb[www_url]/images/default/lysw_117.jpg" /></li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+          <li><div id="flashcontent2">
+  <script type="text/javascript"> 
+    var so = new SWFObject("images/default/loading2.swf", "main", "830", "61", 9, "#fff");
+        so.addParam("quality", "high");
+        so.addParam("wmode", "transparent");
+        so.addParam("allowScriptAccess", "always");
+        so.addParam("allowFullScreen", "true");
+        so.addParam("align", "middle");
+           so.write("flashcontent2");
+</script>
+ 
+</div></li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+        </ul>
+      </div>
+      <div class="ly_main_ar" id="ar_sgw" style="display:none">
+        <ul class="w67">
+          <li></li>
+          <li></li>
+          <li>师文言</li>
+          <li>商阁文</li>
+        </ul>
+        <ul class="w62">
+          <li><a href="javascript:void(0)" onmousemove="Submit_onclick_xxc()"><img src="$webdb[www_url]/images/default/lysw_116_1.jpg" border="0"></a></li>
+          <li><a href="javascript:void(0)" onmousemove="Submit_onclick_ymw()"><img src="$webdb[www_url]/images/default/lysw_118.jpg" border="0"/></a></li>
+          <li><a href="javascript:void(0)" onmousemove="Submit_onclick_swy()"><img src="$webdb[www_url]/images/default/lysw_120.jpg" border="0"/></a></li>
+          <li><a href="javascript:void(0)" onmousemove="Submit_onclick_sgw()"><img src="$webdb[www_url]/images/default/lysw_122_1.jpg" border="0"/></a></li>
+        </ul>
+        <ul class="w830">
+          <li><img src="$webdb[www_url]/images/default/lysw_117.jpg" /></li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+          <li><img src="$webdb[www_url]/images/default/lysw_121.jpg" /></li>
+          <li><div id="flashcontent3">
+  <script type="text/javascript"> 
+    var so = new SWFObject("images/default/loading3.swf", "main", "830", "61", 9, "#fff");
+        so.addParam("quality", "high");
+        so.addParam("wmode", "transparent");
+        so.addParam("allowScriptAccess", "always");
+        so.addParam("allowFullScreen", "true");
+        so.addParam("align", "middle");
+           so.write("flashcontent3");
+</script>
+ 
+</div></li>
+</ul>
+</div></div>
+  <div class="ly_mang_search_home">
+    <div class="ly_mang_search_home_l"><img src="$webdb[www_url]/images/default/lysw_126.jpg" /></div>
+    <form name="topsearchform" id="topsearchform" target="_blank" method="post" action='$webdb[www_url]/hy/shop_search.php?action=search' onsubmit="return checkpostdd();">
+    <div class="ly_mang_search_home_c">
+      绿页.城.市<br />
+<!--
+EOT;
+$querypro2 = $db->query("SELECT * FROM home_zone WHERE fup='$city_id' order by fid asc");
+while($key2 = $db->fetch_array($querypro2)){
+$value1 .= $key2[fid].','; 
+}
+$met_flash_img=substr($value1, 0, -1);
+$querypro2 = $db->query("SELECT * FROM home_street WHERE fup in($met_flash_img) order by fid asc");
+$key2 = $db->fetch_array($querypro2); 
+if($key2){
+print <<<EOT
+-->
+<select name="street_id" style="height:24px;">
+<!--
+EOT;
+$querypro = $db->query("SELECT * FROM home_street WHERE fup in($met_flash_img) order by fid asc");
+while($key = $db->fetch_array($querypro)){
+print <<<EOT
+-->
+        <option value="$key[fid]">$key[name]</option>
+<!--
+EOT;
+}print <<<EOT
+-->
+      </select>
+<!--
+EOT;
+}print <<<EOT
+--><input name="keyword" type="text" value="请输入您要查找的内容" onClick="if(this.value.indexOf('请输入您要查找的')!=-1)this.value=''" id="censearchkeyword" style="height:21px; line-height:21px;" size="52"/>&nbsp;&nbsp;
+    </div>
+    <div class="ly_mang_search_home_r"><input type="image" src="$webdb[www_url]/images/default/lysw_129.jpg" style="border:0px;" /></div>
+    </form>
+    <SCRIPT LANGUAGE="JavaScript">
+<!--
+function checkpostdd(){
+    if (document.getElementById("censearchkeyword").value=='' || document.getElementById("censearchkeyword").value=='请输入您要查找的内容')
+    {
+        alert('关键字不能为空!');
+        return false;
+    }
+}
+//-->
+</SCRIPT>  
+  </div>
+  
+  <div class="ly_mang_linkhome">
+  
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_141.jpg" width="61" height="52" alt=""></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t11]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_143.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t12]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_145.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t13]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_147.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t14]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_149.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t15]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_151.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t16]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_153.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+       $label[life_t17]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_155.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t18]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_157.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t19]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_163.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t20]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_165.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t21]
+        </div>
+      </div>
+    </div>
+    <div class="ly_mang_linkhome_c">
+      <div class="ly_mang_linkhome_c_l"><img src="$webdb[www_url]/images/default/lysw_167.jpg"></div>
+      <div class="ly_mang_linkhome_c_r">
+        <div class="ly_mang_linkhome_c_r_c">
+        $label[life_t22]
+       </div>
+      </div>
+    </div>
+</div></div>
+  <div id="ly_main_right" class="heightboxx">
+    <div class="ly_main_right_1">
+      <li class="w105">
+      <a href="http://picture.darkgreen.cn" target="_blank">
+          <img src="$webdb[www_url]/images/default/lysw_50.jpg" border="0" /></a>      </li>
+      <li class="w60">图片集</li>
+      <li class="w45"><img src="$webdb[www_url]/images/default/lysw_20.jpg" border="0" /></li>
+    </div>
+    <script type="text/javascript">
+    function openTupian() {
+        $('.w105 img').attr('src','images/default/lysw_50_over.jpg');
+        window.open('http://picture.darkgreen.cn','_blank');
+    }
+    $(document).ready(function() {
+        $('.w105').click(function() {
+           $('.w105').css('background','url("../images/default/lysw_69_over.jpg") no-repeat scroll center top transparent');
+        });
+    });
+    function changew105back() {
+        $('.w105').css('background','url("../images/default/lysw_69.jpg") no-repeat scroll center top transparent');
+    }
+    var prox;
+    var proy;
+    var proxc;
+    var proyc;
+    function show(id){/*--打开--*/
+        clearInterval(prox);
+        clearInterval(proy);
+        clearInterval(proxc);
+        clearInterval(proyc);
+        var o = document.getElementById(id);
+        o.style.display = "block";
+        o.style.width = "1px";
+        o.style.height = "1px"; 
+        prox = setInterval(function(){openx(o,960)},10);
+    }   
+    function openx(o,x){/*--打开x--*/
+        var cx = parseInt(o.style.width);
+        if(cx < x)
+        {
+            o.style.width = (cx + Math.ceil((x-cx)/5)) +"px";
+        }
+        else
+        {
+            clearInterval(prox);
+            proy = setInterval(function(){openy(o,124)},10);
+        }
+    }   
+    function openy(o,y){/*--打开y--*/ 
+        var cy = parseInt(o.style.height);
+        if(cy < y)
+        {
+            o.style.height = (cy + Math.ceil((y-cy)/5)) +"px";
+        }
+        else
+        {
+            clearInterval(proy);            
+        }
+    }   
+    function closeed(id){/*--关闭--*/
+        clearInterval(prox);
+        clearInterval(proy);
+        clearInterval(proxc);
+        clearInterval(proyc);       
+        var o = document.getElementById(id);
+        if(o.style.display == "block")
+        {
+            proyc = setInterval(function(){closey(o)},10);          
+        }       
+    }   
+    function closey(o){/*--打开y--*/  
+        var cy = parseInt(o.style.height);
+        if(cy > 0)
+        {
+            o.style.height = (cy - Math.ceil(cy/5)) +"px";
+        }
+        else
+        {
+            clearInterval(proyc);               
+            proxc = setInterval(function(){closex(o)},10);
+        }
+    }   
+    function closex(o){/*--打开x--*/
+        var cx = parseInt(o.style.width);
+        if(cx > 0)
+        {
+            o.style.width = (cx - Math.ceil(cx/5)) +"px";
+        }
+        else
+        {
+            clearInterval(proxc);
+            o.style.display = "none";
+        }
+    }   
+</script>
+    <div class="ly_main_right_1" style="text-align: left;" >
+    <div class="Agreement2" id="Agreement" style="display:none;">
+        <div class="h"><span></span><a href="javascript:;" onclick="hiddenAgreement()"><img src="$webdb[www_url]/images/default/hidden.jpg" style="padding-top:5px;" border="0"/></a></div>
+        <div class="c">
+            <h3>麦野职员  为您服务<br />详情请咨询 400 0532 796</h3> 
+            <div>商务平台开发建设中，敬请期待。。。</div>
+        </div>
+    </div>
+    <div class="Agreement1" id="Agreement1" style="display:none;" >
+        <div class="h"><span></span><a href="javascript:;" onclick="hiddenAgreement1()"><img src="$webdb[www_url]/images/default/hidden.jpg" style="padding-top:5px;" border="0"/></a></div>
+        <div class="c">
+            <h3>麦野职员  为您服务<br />详情请咨询 400 0532 796</h3> 
+            <div>商务平台开发建设中，敬请期待。。。</div>
+        </div>
+    </div>
+    <div class="Agreement2" id="Agreement2" style="display:none;">
+        <div class="h"><span></span><a href="javascript:;" onclick="hiddenAgreement2()"><img src="$webdb[www_url]/images/default/hidden.jpg" style="padding-top:5px;" border="0"/></a></div>
+        <div class="c">
+            <h3>麦野职员  为您服务<br />详情请咨询 400 0532 796</h3> 
+            <div>绿页商务信箱问您提供安全稳定的电子邮件服务。如需开通，请联系客服人员。</div>
+        </div>
+    </div>
+    <div class="w105" >
+        <a href="javascript:void(0)" onclick = "show('fd')" class="propicname" id="classnameright">农林牧渔</a>
+        <div id="fd" style="display:none;filter:alpha(opacity=100);opacity:1;"  onmouseleave="closeed('fd');changew105back();">
+             $label[life_t8]
+        </div>
+    </div>
+      <div class="w60pic">精工产品</div>
+      <div class="w45tj">服务推荐</div>
+      
+    </div>
+    <div id="imgright">
+    <script type="text/javascript">
+var xmlhttp = false;
+function creatXMLHttp(){
+    try 
+    {
+        xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+        try {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (E){
+            xmlhttp = false;
+        }
+    }
+    if (!xmlhttp && typeof XMLHttpRequest != 'undefined') 
+    {
+        xmlhttp = new XMLHttpRequest();
+    }
+}
+function replaceHtml(el, html) {
+var oldEl = typeof el === "string" ? document.getElementById(el) : el;
+/*@cc_on 
+oldEl.innerHTML = html;
+return oldEl;
+@*/
+var newEl = oldEl.cloneNode(false);
+newEl.innerHTML = html;
+oldEl.parentNode.replaceChild(newEl, oldEl);
+return newEl;
+};
+function makerequest(objID, classimgid) 
+{
+    creatXMLHttp();
+    var obj = document.getElementById(objID);
+    var url = "/do/ajax_output.php?id=" +classimgid+"&"+"t="+Math.random();  
+    xmlhttp.open("POST", url,true);
+    xmlhttp.onreadystatechange = function() 
+    {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+        {
+            
+            obj=replaceHtml(obj, xmlhttp.responseText);
+        }
+    }
+    xmlhttp.setRequestHeader("If-Modified-Since","0");    
+    xmlhttp.send(null);
+}
+//-->
+</script>
+    </div>
+  </div>
+</div>
+</div>
+<!--
+EOT;
+?>
+-->

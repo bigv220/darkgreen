@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+<?php
+
+
+//echo $lfjdb[grouptype]; //1是企业用户
+/*
+if($_GET["menutype"] == 9){
+	$lfjdb[menutype] = 9;
+}
+else{
+	$lfjdb[menutype] = $lfjdb[grouptype];
+}
+*/
+
+//echo $lfjdb[menutype]; //0 个人 1企业普通班 9 企业应用版
+print <<<EOT
+-->
+<head>
+<title>会员中心 </title>
+<link rel="stylesheet" type="text/css" href="images/orange/css.css">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script language="javascript" src="http://www.darkgreen.cn/images/default/jquery-1.2.6.min.js"></script>
+
+<script type="text/javascript"> 
+$(function () { 
+//绑定事件处理 
+$("#choice_list_district a").click(function (e) { 
+if ($("#divObj").css("display") == "none") { 
+e.stopPropagation(); 
+//设置弹出层位置 
+var offset = $(e.target).offset(); 
+//设置弹出层位置在点击的下面 
+$("#divObj").css({ top: offset.top + $(e.target).height() + "px", left: offset.left }); 
+$("#divObj").show(); 
+} 
+else { 
+$("#divObj").hide(); 
+} 
+}); 
+//单击空白区域隐藏弹出层 
+$("#divObj").mouseover(function (event) { $("#divObj").show(); }); 
+$("#divObj").mouseout(function (event) { $("#divObj").hide(); }); 
+//单击弹出层则自身隐藏 
+//$("#divObj").click(function (event) { $("#divObj").hide(speed) }); 
+//$("#tab tr td").click(function (event) { 
+//$("#aaa").val($(this).html()); 
+//}); 
+}); 
+</script> 
+</head>
+<script type="text/javascript">
+
+function reinitIframe(){
+
+var iframe = document.getElementById("member_mainiframe");
+
+try{
+
+var bHeight = iframe.contentWindow.document.body.scrollHeight;
+
+var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+
+var height = Math.max(bHeight, dHeight);
+
+iframe.height =  height;
+
+}catch (ex){}
+
+}
+
+window.setInterval("reinitIframe()", 200);
+
+</script>
+
+<body onload="gethome33_();">
+
+<div id="Iframe"> 
+<div id="HeadContainer">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="Logo"><a href="index.php?SystemId=$SystemId">
+        <img src="images/orange/logo.png" border="0" style="padding:20px 10px 0px 50px;"></a></td>
+    <td class="TopRight">
+    	<div class="webguide">
+            <span><a href="/" target="_blank">平台首页</a></span>
+            |    <span><a href="$webdb[www_url]/news/list-htm-fid-76.html" target="_blank"> 商贸资讯</a></span>
+            |   <span><a href="$webdb[www_url]/hy" target="_blank">行业.企业</a></span>
+            |    <span style=""><a href="$webdb[www_url]/dianpu" target="_blank">商铺</a></span>
+            |    <span><a href="$webdb[www_url]/shop" target="_blank">产品.物资</a></span>
+
+
+            <br/>
+            <!-- <span><a href="$webdb[www_url]/f" target="_blank">分类信息</a></span>-->
+            <!-- |  <span><a href="$webdb[www_url]/city" target="_blank">绿页城市</a></span> -->
+           <!-- |  <span><a href="$url" target="_blank">加盟促销</a></span>-->
+           <!-- |  <span style="padding-right:256px"><a href="$webdb[www_url]/hr" target="_blank">求职招聘</a></span> -->
+           <!-- |  <span><a href="$url" target="_blank">礼品</a></span>-->
+            <!--|  <span><a href="$webdb[www_url]/dianping" target="_blank">点评</a></span>-->
+		</div> 
+      
+    </td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="wellcome">
+    	<div style="padding:13px 20px 0 10px;display:inline;font-size:14px;">会员名称:<span>$lfjid</span></div>
+        <div style="padding:13px 20px 0 44px;display:inline;font-size:14px;"><A HREF="$webdb[www_url]/member/homepage.php?uid=$lfjuid" target=_blank>注册信息</A></div>
+        <a href="../do/login.php?action=quit" style="font-size:14px;"><span>安全退出</span></a>
+    </td>
+    <td class="select">
+    	<div id="time">
+        <span style="padding-right:30px;font-family:arial;font-size:14px;"><a href="http://gogo.darkgreen.cn/" target="_blank"><font style="color:#FFF">GOGO</font></a></span>
+        <span id="choice_list_district" style="padding-right:30px;font-family:arial;font-size:14px;"><a href="http://mail.darkgreen.cn" style="text-decoration:none"><font style="color:#FFF">绿页邮箱登录</font></a></span><div id="divObj" style="position: absolute; margin-top:6px; display:inline; width:200px; height:238px; color:#333; text-align:left; background:#fff; border:1px solid #CCC; border-top:none; display:none; z-index:9999; overflow:hidden"> 
+<table width="95%" border="0" cellspacing="0" cellpadding="0" style="margin:10px;">
+               <script language="javascript" type="text/javascript">
+			function stopEnter() 
+			{
+				var pwd = document.getElementById('txtPassword').value;
+				
+				if (pwd.length == 0) {
+					return !(window.event && window.event.keyCode == 13);
+				} else {
+					return true;
+				}
+			}
+			
+			function ClearPwdChkbox()
+			{
+				var uname = document.getElementById('chkRememberUsername');
+				var pwd = document.getElementById('chkRememberPassword');
+				
+				if (!uname.checked)
+				{
+					pwd.checked = false;
+					pwd.disabled = true;
+				}
+				else
+				{
+					pwd.disabled = false;
+				}
+			}
+			
+			function CheckUnameChkbox()
+			{
+				var uname = document.getElementById('chkRememberUsername');
+				var pwd = document.getElementById('chkRememberPassword');
+				
+				if ((pwd.checked) && (!uname.checked))
+				{
+					uname.checked = true;
+				}
+			}
+			
+			function PopulatePassword(sValue) 
+			{
+				document.getElementById('txtPassword').value = sValue;
+			}
+			
+			function KeyDownHandler(btn)
+			{
+				// process only the Enter key
+				if (event.keyCode == 13)
+				{
+					// cancel the default submit
+					event.returnValue=false;
+					event.cancel = true;
+					// submit the form by programmatically clicking the specified button
+					document.getElementById(btn).click();
+				}
+			}
+			
+			function CheckForParent()
+			{
+				if (window != window.top)
+				{
+					window.top.location.href = "http://mail.darkgreen.cn/";
+				}
+			}
+			
+			function SetFocus()
+			{
+				if (document.logon2home.txtUsername)
+				{
+					document.logon2home.txtUsername.focus();
+				}
+			}
+			
+			function ClearPassword()
+			{
+				document.logon2home.txtPassword.value = '';
+				document.logon2home.hdnPwdChanged.value = 'yes';
+			}
+		</script>
+                          
+               <FORM name="logon2home" id="logon2home" METHOD="POST" action="http://mail.darkgreen.cn/" target="_blank">
+                 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTUxNDcxODM1Mw9kFgICAQ9kFgQCAQ9kFggCCw8QZBAVCQdFbmdsaXNoFFBvcnR1Z3XDqnMgZG8gQnJhc2lsDOeugOS9k+S4reaWhwznuYHpq5TkuK3mlocJRnJhbsOnYWlzB0RldXRzY2gISXRhbGlhbm8J5pel5pys6KqeCEVzcGHDsW9sFQkFZW4tVVMFcHQtQlIFemgtQ04FemgtVFcFZnItRlIFZGUtREUFaXQtSVQFamEtSlAFZXMtRVMUKwMJZ2dnZ2dnZ2dnFgECAmQCDQ8QDxYCHgRUZXh0BRXorrDkvY/miJHnmoTnlKjmiLflkI0WAh4Hb25jbGljawUQQ2xlYXJQd2RDaGtib3goKWRkZAIPDxAPFgIfAAUS6K6w5L2P5oiR55qE5a+G56CBFgIfAQUSQ2hlY2tVbmFtZUNoa2JveCgpZGRkAhMPDxYGHwAFBueZu+W9lR4FV2lkdGgbAAAAAAAAVEABAAAAHgRfIVNCAoACZGQCAw8PFgQfAAVaWW91IGhhdmUgZXhjZWVkZWQgdGhlIG1heGltdW0gbnVtYmVyIG9mIGxvZ2luIGF0dGVtcHRzLiAgWW91J3JlIGFjY291bnQgaXMgbm93IGxvY2tlZCBvdXQuHgdWaXNpYmxlaGRkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYCBRNjaGtSZW1lbWJlclVzZXJuYW1lBRNjaGtSZW1lbWJlclBhc3N3b3Jk4Vx1zdo3XttlLVdtQRAxQzHlWwk=" />
+ 
+<script type="text/javascript"> 
+<!--
+var theForm = document.forms['logon2home'];
+if (!theForm) {
+    theForm = document.logon2home;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+ 
+ 
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWEQLkrodjAqXVsrgJArWptJELAvn6+RsC5Iz21QgCiIbKrAcC1of2ww4C74fCtAECjo+S1wQCt42+9AUCu4Ce8AUC3IPmmA0C5IyCvQ0Coaye0AMCyaDy2gQCgtyHhgwCguPaiwGGw4GpBzy7kzeuIhwUmo0crH0YZQ==" />
+
+<input type="hidden" name="ddlLanguage" id="ddlLanguage" value="zh-CN" />
+                
+	
+    <script type="text/javascript"> 
+<!--
+function addCookie(objName,objValue,objHours){//添加cookievar 
+		  str = objName + "=" + escape(objValue);
+		  if(objHours > 0){//为0时不设定过期时间，浏览器关闭时cookie自动消失
+		  var date = new Date();
+		  var ms = objHours*3600*1000;
+		  date.setTime(date.getTime() + ms);
+		  str += "; expires=" + date.toGMTString();
+		  }
+		  document.cookie = str;
+		  }
+		  function getCookie(objName){//获取指定名称的cookie的值
+		  var arrStr = document.cookie.split("; ");
+		  for(var i = 0;i < arrStr.length;i ++){
+			  var temp = arrStr[i].split("=");
+			  if(temp[0] == objName) return unescape(temp[1]);
+			  }
+			  }
+			  function addname22_(){	
+			  inputValue = document.logon2home.txtUsername.value;	
+			  addCookie('txtUsername',inputValue,10000);
+			  }
+			  function gethome33_(){    
+			  cookie_value = getCookie('txtUsername');	
+			 
+			  if(cookie_value==undefined){
+			  document.logon2home.txtUsername.value = '';
+			  }else{
+				document.logon2home.txtUsername.value = cookie_value;  
+			  }
+			  //document.getElementById("SelectShow").innerHTML="输入或选择";
+			  }
+// -->
+</script>
+    			<tr> 
+                  <td height="20" colspan="2"> 
+                   
+                  </td>
+                </tr>
+                <tr> 
+                  <td height="32" colspan="2">帐号: 
+                    <input type="text"  name="_user" id="_user_member" size="15" class="input_bt" style="border:1px solid #c0c0c0;
+	width:130px;height:16px;"><br />输入格式：***@green-cc.com
+                  </td>
+                </tr>
+                <tr> 
+                  <td height="42" colspan="2">密码: 
+                    <input type="password" name="_pass" id="_pass_member"  size="15" class="input_bt" style="border:1px solid #c0c0c0;
+	width:130px;
+	height:16px;">
+
+                      <input type="hidden" name="_task"  value="login" />
+                      <input type="hidden" name="_action"  value="login" />
+                      <input type="hidden" name="_url"  value="" />
+                      <input type="hidden" name="_token"  value="" />
+                      <input type="hidden" name="_timezone"  value="Asia/Shanghai" />
+                      <input type="hidden" id="_user" name="_user" value=""/>
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="left" height="40" colspan="2">
+                    <input type="submit" name="btnLogin" value="  登 录  " id="btnLogin" value="  登 录  "  class="post_bt" style="background:url($webdb[www_url]/images/default/post_bt.gif);
+	height:23px;
+	border:1px solid #cccccc;
+	color:#000;">
+                  </td></tr> <tr> 
+                  <td align="right" height="5" colspan="2" valign="bottom" >如忘记密码,请联系绿页客服人员&nbsp;&nbsp;</td>
+                </tr>
+              <input name="hdnPwdChanged" type="hidden" id="hdnPwdChanged" />
+		</form>
+            </table>
+</div> 
+        
+        
+            
+            <span id="liveclock"></span>
+<script language="javascript" type="text/javascript"> 
+function qb_time() 
+{ 
+	var Digital=new Date();
+	var hours=Digital.getHours();
+	var minutes=Digital.getMinutes();
+	var seconds=Digital.getSeconds();
+	var year=Digital.getFullYear();
+	var month=Digital.getMonth()+1; 
+	var day=Digital.getDate();	
+	if(month<=9) month="0"+month;
+	if(day<=9) day="0"+day;
+	if(minutes<=9) minutes="0"+minutes;
+	if(seconds<=9) seconds="0"+seconds ;
+	myclock="当前时间: "+year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+	if(document.layers){
+		document.layers.liveclock.document.write(myclock);
+		document.layers.liveclock.document.close();
+	}else {
+		document.getElementById('liveclock').innerHTML=myclock;
+	}
+	setTimeout("qb_time()",1000) 
+} 
+qb_time(); 
+//--> 
+</script>
+        </div>
+    </td>
+  </tr>
+</table>
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="MainContainer">
+  <tr>
+    <td id="SideMenu">
+    	<table width="100%" cellspacing="0" cellpadding="0" class="drage">
+          <tr> 
+            <td>
+<!--
+EOT;
+foreach($base_menudb AS $MenuName=>$array2){
+if($power<$array2[power])continue;
+if(strstr($array2[link],'../')||strstr($array2[link],'homepage.php')){
+$target='_blank';
+}else{
+$target='member_mainiframe';
+}print<<<EOT
+
+              <div><A HREF='$array2[link]' onclick="self.scroll(0,0);" target='$target'>$MenuName</A></div>-->
+<!--
+EOT;
+}print <<<EOT
+-->
+				<div class="action">
+                    <A href="javascript:;" onclick="ShowAll();">全部展开</A>
+					<A href="javascript:;" onclick="HiddenAll();">全部收合</A>
+                </div>
+            </td>
+          </tr>
+        </table>
+<!--
+EOT;
+$jj = 0;
+foreach($menudb AS $SortName=>$array){
+$jj++;
+print<<<EOT
+-->
+        <dl id="TheDl{$jj}"> 
+           <dt onclick='showson("TheDl{$jj}")'>$SortName</dt>
+<!--
+EOT;
+foreach($array AS $MenuName=>$array2){
+if($power<$array2[power])continue;
+if(strstr($array2[link],'../')){
+$target='_blank';
+}else{
+$target='member_mainiframe';
+}
+print<<<EOT
+-->
+          <dd><A HREF='$array2[link]' onclick="self.scroll(0,0);" target='$target'>$MenuName</A></dd>
+<!--
+EOT;
+}print<<<EOT
+-->
+
+
+        </dl>
+
+<!--
+EOT;
+}print<<<EOT
+--> 
+
+<dl>		<dt class='end_menu_text'><a href='$endmenulink'>$endmenutext</a></dt></dl>
+<!--
+EOT;
+foreach($menu_GpartDB AS $SortName=>$array){
+$jj++;
+print<<<EOT
+-->
+        <dl id="TheDl{$jj}"> 
+            <dt onclick='showson("TheDl{$jj}")'>$array[name]</dt>
+<!--
+EOT;
+foreach($array[son] AS $k2=>$rs){
+if($rs[target]){
+$target='_blank';
+}else{
+$target='member_mainiframe';
+}
+print<<<EOT
+-->
+              <dd><a href='$rs[linkurl]' onclick="self.scroll(0,0);" target='$target'>$rs[name]</a></dd>
+<!--
+EOT;
+}print<<<EOT
+-->
+        </dl>
+<!--
+EOT;
+}print<<<EOT
+-->
+
+        <div style="border-top:#004600 solid 1px;margin-bottom:140px;"></div>
+		<div class="inlineserver">
+        	<div class="h">绿页商务.麦野</div>
+           $webdb[member_contact]
+
+            <a target="_blank" href="http://gogo.darkgreen.cn" style="float: right;"><img style="border:1px solid gray;margin:2px 0 2px 0;" src="http://www.darkgreen.cn/images/default/GOGO.jpg"></a>
+        </div>
+    </td>
+    <td id="contentwrap" width="85%">
+    	<iframe width="100%" name="member_mainiframe" id="member_mainiframe" onload="this.height=100" scrolling="no" marginwidth=0 marginheight=0 frameborder="0" src="$MainUrl"></iframe>
+    </td>
+  </tr>
+</table>
+</div>
+<SCRIPT language=javascript>
+function showson(ss){
+	if (document.getElementById(ss).className==''){
+		document.getElementById(ss).className = 'Show';
+	}else{
+		document.getElementById(ss).className = '';
+	}
+}
+
+var objDl=document.getElementById("SideMenu").getElementsByTagName("dl");
+function ShowAll(){	
+	for(var i=0;i< objDl.length;i++ ){
+		objDl[i].className='Show';
+	}
+}
+function HiddenAll(){	
+	for(var i=0;i< objDl.length;i++ ){
+		objDl[i].className='';
+	}
+}
+</script>
+</body>
+</html>
+<!--
+EOT;
+?>
+-->

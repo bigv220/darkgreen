@@ -1,0 +1,40 @@
+<!--
+<?php
+print <<<EOT
+-->
+<table width="100%" cellspacing="1" cellpadding="3" class="tablewidth">
+    <tbody><tr class="head">
+        <td colspan="7">
+            <div align="center"><font color="#FFFFFF">古太行收现</font></div>
+        </td>
+    </tr>
+    <tr bgcolor="#FFFFFF">
+        <td width="16%" align="left">日期</td>
+        <td width="16%" align="left">客户名称</td>
+        <td width="16%" align="left">客户确认</td>
+        <td width="16%" align="left">汇入贷款</td>
+        <td width="16%" align="left">兑换系统金点</td>
+        <td width="16%" align="left">简要备注</td>
+    </tr>
+<!--
+EOT;
+foreach($listdb as $key=>$value) {print <<<EOT
+-->
+    <tr bgcolor="#FFFFFF">
+        <td>{$value[posttime]}</td>
+        <td>{$value[username]}</td>
+        <td><img src="images/right.jpg" /> </td>
+        <td>{$value[amount]}</td>
+        <td>{$value[amount]} (1/1RMB)</td>
+        <td>{$value[end_comment]}</td>
+    </tr>
+    <!--
+EOT;
+}print <<<EOT
+-->
+    </tbody>
+</table>
+<!--
+EOT;
+?>
+-->

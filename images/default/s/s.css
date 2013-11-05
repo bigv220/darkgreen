@@ -1,0 +1,195 @@
+BODY {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+LI {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+P {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+DL {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+DD {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+DT {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+h {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+TD {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+TH {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+H3 {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+BODY {
+	FONT-SIZE: 12px
+}
+LI {
+	LIST-STYLE-TYPE: none
+}
+UL {
+	LIST-STYLE-TYPE: none
+}
+TD {
+	COLOR: #333333; VERTICAL-ALIGN: top
+}
+INPUT {
+	BORDER-BOTTOM: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc 1px solid
+}
+TEXTAREA {
+	BORDER-BOTTOM: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc 1px solid
+}
+A {
+	COLOR: #333
+}
+A:link {
+	COLOR: #333333; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #333333; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #4e667b; TEXT-DECORATION: underline
+}
+A:active {
+	TEXT-DECORATION: none
+}
+.mt10 {
+	MARGIN-TOP: 10px
+}
+IMG {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+}
+.TopContainer {
+	LINE-HEIGHT: 30px; PADDING-LEFT: 15px; BACKGROUND: url(stop.gif); HEIGHT: 29px; COLOR: #888; OVERFLOW: hidden
+}
+.TopContainer A {
+	FONT-SIZE: 14px
+}
+.TopContainer A.b {
+	COLOR: #c00
+}
+.Hearder {
+	POSITION: relative; MARGIN: 5px 0px; HEIGHT: 100px; OVERFLOW: hidden
+}
+.Hearder .logo {
+	POSITION: absolute; WIDTH: 160px; HEIGHT: 60px; TOP: 33px; LEFT: 250px
+}
+.Hearder .searchcont {
+	POSITION: absolute; WIDTH: 600px;  HEIGHT: 100px; OVERFLOW: hidden; TOP: 0px; LEFT: 325px;
+}
+.Hearder .searchcont .module {
+	HEIGHT: 35px; OVERFLOW: hidden
+}
+.Hearder .searchcont .module LI {
+	LINE-HEIGHT: 35px; PADDING-LEFT: 15px; BACKGROUND: url(spac.gif) no-repeat left 12px; FLOAT: left;
+}
+.Hearder .searchcont .module LI SPAN {
+	PADDING-RIGHT: 15px; DISPLAY: block
+}
+.Hearder .searchcont .module LI SPAN A {
+	DISPLAY: block; COLOR: #0000cc
+}
+.Hearder .searchcont .module LI.ck {
+	BACKGROUND: url(ck.gif) no-repeat left 7px
+}
+.Hearder .searchcont .module LI.ck SPAN {
+	BACKGROUND: url(ck.gif) no-repeat right 7px
+}
+.Hearder .searchcont .module LI.ck SPAN A {
+	BACKGROUND: url(ck.gif) no-repeat center 7px; COLOR: #fff
+}
+.Hearder .searchcont .module LI.begin {
+	BACKGROUND: none transparent scroll repeat 0% 0%
+}
+.Hearder .searchcont .module LI.next {
+	BACKGROUND: none transparent scroll repeat 0% 0%
+}
+.Hearder .searchcont .keyword {
+	POSITION: absolute; WIDTH: 488px; HEIGHT: 27px; OVERFLOW: hidden; TOP: 38px; LEFT: 3px;
+background-color:#CCC;border:1px solid #ccc;
+}
+.Hearder .searchcont .keyword INPUT {
+	LINE-HEIGHT: 30px; BORDER-RIGHT-WIDTH: 0px; WIDTH: 488px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 29px; COLOR: #666; FONT-SIZE: 14px; BORDER-LEFT-WIDTH: 0px;
+    padding:1px 0 1px 5px;
+}
+.Hearder .searchcont .type {
+	POSITION: absolute; WIDTH: 200px; BOTTOM: 0px; HEIGHT: 25px; LEFT: 0px
+}
+.Hearder .searchcont .type SPAN {
+	LINE-HEIGHT: 25px; DISPLAY: block; FLOAT: left
+}
+.Hearder .searchcont .type SPAN.input {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 2px; PADDING-TOP: 3px
+}
+.Hearder .searchcont .type SPAN INPUT {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+}
+.Hearder .searchcont .submit {
+	POSITION: absolute; WIDTH: 90px; HEIGHT: 28px; TOP: 38px; RIGHT: 19px
+}
+.Hearder .searchcont .submit INPUT {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+}
+.Hearder .searchcont .showinfo {
+	POSITION: absolute; TEXT-ALIGN: right; LINE-HEIGHT: 25px; WIDTH: 300px; BOTTOM: 0px; HEIGHT: 25px; COLOR: #666; RIGHT: 20px
+}
+.Hearder .searchcont .showinfo SPAN {
+	COLOR: #999
+}
+.Container .Mhead {
+	LINE-HEIGHT: 30px; BACKGROUND: url(head1.gif) repeat-x; HEIGHT: 40px; OVERFLOW: hidden;
+    padding-left:170px;
+}
+.Container .Mhead UL {
+	PADDING-LEFT: 25px; BACKGROUND: url(icon.gif) no-repeat 10px 10px;
+}
+.Container .Mhead UL A {
+	COLOR: #00c
+}
+.Container .Mhead UL .current {
+	DISPLAY: none
+}
+.Container .Mcont {
+	PADDING-BOTTOM: 50px; WIDTH: 85%;
+}
+.MainC UL {
+	PADDING-BOTTOM: 10px
+}
+.MainC UL .t {
+	LINE-HEIGHT: 25px; HEIGHT: 25px
+}
+.MainC UL .t A {
+	COLOR: #00c; FONT-SIZE: 14px; TEXT-DECORATION: underline
+}
+.MainC UL .t A SPAN {
+	COLOR: #c00
+}
+.MainC UL .c {
+	LINE-HEIGHT: 18px
+}
+.MainC UL .c SPAN {
+	COLOR: #c00
+}
+.MainC UL .m {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; COLOR: #666
+}
+.MainC .page {
+	TEXT-ALIGN: center; LINE-HEIGHT: 30px
+}
+.FootCont {
+	TEXT-ALIGN: center; LINE-HEIGHT: 20px; WIDTH: 900px; HEIGHT: 50px; COLOR: #888
+}

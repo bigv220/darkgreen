@@ -1,0 +1,189 @@
+<!--
+<?php
+print <<<EOT
+--> 
+<link rel="stylesheet" type="text/css" href="$webdb[www_url]/images/yellow/company_list.css">
+<div id="lysw_main" class="heightbox">
+<div class="lysw_hr_main_c_tit heightbox">
+ 
+</div>
+  <div class="lysw_main_l">
+  
+    <div id="ddsidemenubar" class="markermenu">
+<ul>
+<!--
+EOT;
+$i=0;
+$array=$Fid_db[0];
+foreach($array AS $fkey=>$fvalue){
+$listid=$fidDB[fup];
+if($listid==0){$listid=$fidDB[fid];}
+if($listid == $fkey){
+$dividnmae='class=ovdown';
+}
+$i++;
+print <<<EOT
+-->
+<li rel="ddsubmenuside{$i}" $dividnmae><a href="listvip-htm-fid-$fkey.html">$fvalue</a></li>
+ <!--
+EOT;
+if($fkey>=$listid){$dividnmae='';}
+}print <<<EOT
+-->
+ 
+ 
+</ul>
+</div>
+	<script type="text/javascript"> 
+		$(document).ready(function() {
+			$('#ddsidemenubar').allenMenu();
+			$("#nav_10001").addClass("ovdown");
+		});
+</script> 
+<script type="text/javascript"> 
+ddlevelsmenu.setup("ddsidemenubar", "sidebar")
+</script>
+<!--
+EOT;
+$i=0;
+$array=$Fid_db[0];
+foreach($array AS $fkey=>$fvalue){
+$i++;
+$array2=$Fid_db[$fkey];
+if($array2){
+print <<<EOT
+--> 
+<ul id="ddsubmenuside{$i}" class="ddsubmenustyle blackwhite">
+<!--
+EOT;
+$array2=$Fid_db[$fkey];
+foreach($array2 AS $fkey2=>$fvalue2){
+print <<<EOT
+-->
+<li><a href="listvip-htm-fid-$fkey2.html">$fvalue2</a></li>
+<!--
+EOT;
+}print <<<EOT
+-->
+</ul>
+ <!--
+EOT;
+}}print <<<EOT
+-->
+
+    <div class="lysw_main_l_t2">热门企业
+    <div class="lysw_main_l_t2_btn" id="stateBut1" onClick="use('stateBut1','class1contentt1','260','<img src=images/ly_home_cop_28.jpg  alt=点击关闭 title=点击关闭 style=cursor:pointer>','<img src=images/ly_home_cop_28_1.jpg alt=点击展开 title=点击展开 style=cursor:pointer>')"><a href="#"><img src="images/ly_home_cop_28.jpg" border="0" /></a></div>
+    </div>
+    <div id="class1contentt1" class="lysw_main_l_c222" style="display:block">
+    <div class="lysw_main_l_c2" >
+ <!--
+EOT;
+$query = $db->query("SELECT * FROM home_hy_company WHERE city_id='$city_id' ORDER BY rid DESC LIMIT 10");
+while($rs = $db->fetch_array($query)){
+print <<<EOT
+-->
+      <li><a href="$webdb[www_url]/home/?uid=$rs[uid]" class="news">$rs[title]</a></li>
+<!--
+EOT;
+}print <<<EOT
+-->    </div>
+    </div>
+    
+    <div class="lysw_main_l_t2">推荐企业
+    <div class="lysw_main_l_t2_btn" id="stateBut2" onClick="use('stateBut2','new222','260','<img src=images/ly_home_cop_28.jpg  alt=点击关闭 title=点击关闭 style=cursor:pointer>','<img src=images/ly_home_cop_28_1.jpg alt=点击展开 title=点击展开 style=cursor:pointer>')"><a href="#"><img src="images/ly_home_cop_28_1.jpg" border="0" /></a></div>
+    </div>
+    <div id="new222" class="lysw_main_l_c222" style="display:none">
+    <div class="lysw_main_l_c2" >
+      <!--
+EOT;
+$query = $db->query("SELECT * FROM home_hy_company WHERE city_id='$city_id'  AND levels=1 ORDER BY rid DESC LIMIT 10");
+while($rs = $db->fetch_array($query)){
+print <<<EOT
+-->
+      <li><a href="$webdb[www_url]/home/?uid=$rs[uid]" class="news">$rs[title]</a></li>
+<!--
+EOT;
+}print <<<EOT
+-->
+    </div>
+    </div>
+    
+
+    
+</div>
+  
+  <div class="lysw_main_r">
+  <div class="lysw_main_r_tit" id="lysw_main_r_tit">
+    <li><a href="listall.php?ordertype=" style="display:block">最新企业</a></li>
+    <li><a href="listall.php?ordertype=hits" style="display:block">热门企业</a></li>
+    <li><a href="listall.php?ordertype=levelstime" style="display:block">推荐企业</a></li>
+  </div>
+  <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+
+$renzhengdb=array(
+	0=>'<font color="#cccccc">未认证</font>',
+	1=>'<font color="#000000">普通会员</font>',
+	2=>'<font color="#9a0000">商务通会员</font>',
+	3=>'<font color="#FF0000">VIP会员</font>',
+);
+$renzhengdbname=$renzhengdb[$rs[renzheng]];
+$renzhengdbsm=array(
+	0=>'未通过认证',
+	1=>'已通过实名认证',
+	2=>'已通过实名认证',
+	3=>'已通过实名认证',
+);
+$renzhengdbnamesm=$renzhengdbsm[$rs[renzheng]];
+$coabout=substr($rs[content],0,160);
+print <<<EOT
+-->
+  <div class="lysw_main_r_list">
+    <div class="lysw_main_r_list_l"></div>
+    <div class="lysw_main_r_list_c">
+      <div class="lysw_main_r_list_c_l">
+        <font style="font-size:14px; font-weight:bold; line-height:30px;">$renzhengdbname</font><br />
+        经营模式:<font style=" color:#006600">{$rs[qy_saletype]}</font><br />
+        注册资金:<font style=" color:#006600">{$rs[qy_regmoney]}万 人民币</font><br />
+        身份信息:<font style=" color:#006600">$renzhengdbnamesm</font><br />
+        登记时间:<font style=" color:#006600">$rs[posttime]</font><br />
+        点击次数:<font style=" color:#006600">{$rs[hits]}次</font><br />
+      </div>
+      <div class="lysw_main_r_list_c_r">
+        <div class="lysw_main_r_list_c_r_l"><font style="font-size:14px; font-weight:bold; line-height:30px;">$rs[title]</font><br />{$coabout}...</div>
+        <div class="lysw_main_r_list_c_r_r">
+        
+          <div class="lysw_main_r_list_c_r_r_l">
+            <li>店铺:$webdb[www_url]/shome/?uid=$rs[uid]</li>
+            <li>公司网站:$rs[qy_website]</li>
+            <li>商务平台:http://www.baidu.com</li>
+          </div>
+          <div class="lysw_main_r_list_c_r_r_r">
+            <li><a href="$webdb[www_url]/shome/?uid=$rs[uid]" target="_blank"><img src="images/ly_home_cop_14.jpg" border="0" /></a></li>
+            <li><a href="$rs[qy_website]" target="_blank"><img src="images/ly_home_cop_14.jpg" border="0" /></a></li>
+            <li><a href="#"><img src="images/ly_home_cop_14.jpg" border="0" /></a></li>
+          </div>
+        </div>
+        <div class="lysw_main_r_list_c_r_c">
+         <div class="lysw_main_r_list_c_r_c_1">所在地区:$rs[qy_address]&nbsp;&nbsp;联系方式:$rs[qy_contact_tel]&nbsp;&nbsp;联系人:$rs[qy_contact]</div>
+         <div class="lysw_main_r_list_c_r_c_2"><a href="/member/?main=pm.php?job=send&username=$rs[username]"><img src="images/ly_home_cop_18.jpg" border="0" /></a></div>
+         <div class="lysw_main_r_list_c_r_c_3"><a href="javascript:window.external.AddFavorite('$webdb[www_url]/home/?uid=$rs[uid]','$rs[title]')"><img src="images/ly_home_cop_20.jpg" border="0" /></a></div>
+        </div>
+      </div>
+    </div>
+    <div class="lysw_main_r_list_r"></div>
+  </div>
+ <!--
+EOT;
+}print <<<EOT
+--> 
+  
+  
+  <div class="lysw_main_r_page"><div class="page">$showpage</div></div>
+  
+  </div>
+<!--
+EOT;
+?>
+-->

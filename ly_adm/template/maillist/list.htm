@@ -1,0 +1,47 @@
+<!--
+<?php
+print <<<EOT
+--> 
+<table width="100%" border="0" cellspacing="1" cellpadding="3" class="tablewidth">
+  <form name="form1" method="post" action="index.php?lfj=$lfj&action=$job">
+    <tr class="head"> 
+      <td width="7%" align="center">序号 </td>
+      <td width="19%" align="center">邮箱用户名</td>
+      <td width="12%" align="center">密码</td>
+      <td width="12%" align="center">添加时间</td>
+      <td width="10%" align="center">是否开通 </td>
+      <td width="30%" align="center">备注 </td>
+      <td width="10%" align="center">删除</td>
+    </tr>
+    <!--
+EOT;
+foreach($listdb AS $key=>$rs){
+$isopen='<a href=index.php?lfj='.$lfj.'&action=update&mailid='.$id.'&id='.$rs[id].'&isopen=1><font style=color:#ff0000>未开通</font></a>';
+if($rs[isopen]==1)$isopen='<a href=index.php?lfj='.$lfj.'&action=update&mailid='.$id.'&id='.$rs[id].'&isopen=0>已开通</a>';
+
+print <<<EOT
+-->
+    <tr bgcolor="#FFFFFF" class="trA" onmouseover="this.className='trB'" onmouseout="this.className='trA'"> 
+      <td width="7%" align="center">$rs[id]</td>
+      <td width="19%" align="center">$rs[userid]</td>
+      <td width="12%" align="center">$rs[userpass]</td>
+      <td width="12%" align="center">$rs[addtime]</td>
+      <td width="10%" align="center">$isopen</td>
+      <td width="30%" align="center">$rs[remark]</td>
+      <td width="10%" align="center"><a href="index.php?lfj=$lfj&action=delete&mailid=$id&id=$rs[id]"  onclick="return confirm('删除后不可恢复,你确实要删除吗?')"><img alt='点击删除' src='../member/images/del_icon2.gif' border=0></a> 
+       </td>
+    </tr>
+    <!--
+EOT;
+}print <<<EOT
+-->
+    <tr bgcolor="#FFFFFF"> 
+      <td colspan="7" align="center"> $showpage </td>
+    </tr>
+  </form>
+</table>
+
+<!--
+EOT;
+?>
+-->

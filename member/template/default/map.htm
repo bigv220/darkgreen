@@ -1,0 +1,165 @@
+<!--
+<?php
+include(dirname(__FILE__)."/map.php");
+print <<<EOT
+-->
+<table width="100%" cellspacing="0" cellpadding="0" class="BaseInfo" style="border:0;">
+  <tr> 
+    <td><div style="float:left;width:800px;height:100px;">
+        <div >
+		<span style='font-size: 20px; color: yellow;  '>* </span><span style="width:170px;border:1px solid lightgray;padding:3px 0 0 10px;">{$pmword}</span></div>
+        <div>积分: <em>$lfjdb[money]</em>个金点 <img src="images/money.gif"></div>
+
+<!--
+EOT;
+if($lfjdb[grouptype]==1){print <<<EOT
+-->
+      <!--  <div style="display:inline;"><a href="company.php?job=view&uid=$lfjuid">您是企业会员，您可以点击查看企业资料</a> </div>-->
+<!--
+EOT;
+}elseif($lfjdb[grouptype]==-1){print <<<EOT
+-->
+       <!-- <div style="display:inline;"><a href="company.php?job=edit">您还不是企业会员，您的资料还在审核当中</a> </div>-->
+<!--
+EOT;
+}else{print <<<EOT
+-->
+       <!-- <div style="display:inline;"><a href="company.php?job=edit">您还不是企业会员，您可以点击申请成为企业会员</a> </div>-->
+<!--
+EOT;
+}print <<<EOT
+--></div>
+      <!--  <div style="float:left;">公告:
+            $webdb[memberNotice]
+        </div>-->
+    </div>
+
+
+    </td>
+  </tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="0" class="dragTable">
+  <tr> 
+    <td class="head" style="font-size:14px;">&nbsp;&nbsp;&nbsp;&nbsp;信息整理</td>
+  </tr>
+  <tr>
+    <td class="middle">
+        <table width="100%" cellspacing="0" cellpadding="0" class="InfoMore">
+          <tr>
+            <td class="TD1"><span>绿页商务</span></td>
+            <td class="TD2">您发布了<em>$data[article]</em> 篇文章；</td>            
+            <td class="TD3">点击操作：<a href="$webdb[www_url]/news/member/list.php?job=list">我的文章</a> 
+            <a href="$webdb[www_url]/news/member/post_choose.php">发表文章</a></td>
+          </tr>          
+          <tr>
+            <td rowspan="5" class="TD1"><span>信息</span></td>
+          </tr>
+          <tr>
+            <td class="TD2">您发布了<em>$data[shop_num]</em> 件商品；</td>
+            
+          <td class="TD3">点击操作：<a href="$webdb[www_url]/shop/member/list.php">我的商品</a> 
+            <a href="$webdb[www_url]/shop/member/post_choose.php">发布商品</a></td>
+          </tr>
+          <tr>
+            <td class="TD2">您发布了<em>$data[tuangou_num]</em> 条团购活动；</td>
+            
+          <td class="TD3">点击操作：<a href="$webdb[www_url]/tg/member/list.php?job=list">我的活动</a> 
+            <a href="$webdb[www_url]/tg/member/post_choose.php">发布活动</a></td>
+          </tr>
+
+        </table>
+    </td>
+  </tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="0" class="dragTable">
+  <tr> 
+    <td class="head"  style="font-size:14px;">&nbsp;&nbsp;&nbsp;&nbsp;常用功能</td>
+  </tr>
+  <tr>
+    <td class="middle">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ActionTips">
+          <tr>
+            <td>
+ 
+<!--
+EOT;
+
+if($lfjdb[grouptype] == 0){
+ 
+print <<<EOT
+-->
+            
+
+            <div class="home"><a href="$webdb[www_url]/news/member/post_choose.php" target="_blank">发布资讯</a></div>
+                
+
+                
+            <div class="sell"><a href="$webdb[www_url]/f/member/list.php">分类信息</a></div>
+                
+            <div class="coll"><a href="buygroup.php?job=list">会员升级</a></div>
+
+                
+            <div class="bz"><a href="$webdb[www_url]/tg/member/list.php?job=list">团购活动</a></div>
+
+                
+            <div class="tg"><a href="hack.php?hack=propagandize&job=list">信息推广</a></div>
+                
+            <div class="money"><a href="money.php?job=list">帐户充值</a></div>
+			
+			 
+<!--
+EOT;
+}else{
+
+print <<<EOT
+-->
+
+                <div class="home"><a href="$webdb[www_url]/shome/?uid=$lfjuid" target="_blank">我的商铺</a></div>
+
+                <div class="set"><a href="$webdb[www_url]/dianpu/member/homepage_ctrl.php?atn=base">商铺设置</a></div>
+
+                <div class="sell"><a href="$webdb[www_url]/f/member/list.php">分类信息</a></div>
+
+                <div class="buy"><a href="$webdb[www_url]/shop/member/list.php">商品信息</a></div>
+
+                <div class="coll"><a href="buygroup.php?job=list">会员升级</a></div>
+
+                <div class="pic"><a href="$webdb[www_url]/hy/member/homepage_ctrl.php?atn=pic&uid=$lfjuid">图库管理</a></div>
+
+                <div class="bz"><a href="$webdb[www_url]/tg/member/list.php?job=list">团购活动</a></div>
+
+               
+
+                <div class="tg"><a href="hack.php?hack=propagandize&job=list">信息推广</a></div>
+
+                <div class="money"><a href="money.php?job=list">帐户充值</a></div>
+				
+				 
+<!--
+EOT;
+}
+print <<<EOT
+-->
+
+            </td>
+          </tr>
+        </table>        
+    </td>
+  </tr>
+</table>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<!--
+EOT;
+?>
+-->

@@ -149,9 +149,9 @@ function Submit_onclick_tab1(){
 		var stateBut1=document.getElementById('stateBut1');
 		var stateBut2=document.getElementById('stateBut2');
 		var stateBut3=document.getElementById('stateBut3');
-		stateBut1.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
-		stateBut2.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
-		stateBut3.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut1.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut2.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut3.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
 }  
 function Submit_classnameright($classname){
 		var stateBut1=document.getElementById('classnameright');
@@ -166,9 +166,9 @@ function Submit_onclick_tab2(){
 		var stateBut3=document.getElementById('stateBut3');
 		var stateBut2=document.getElementById('stateBut2');
 		var stateBut=document.getElementById('stateBut');
-		stateBut.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
-		stateBut2.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
-		stateBut3.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut2.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut3.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
 } 
 function Submit_onclick_tab3(){
         document.getElementById("class1content").style.display='none';
@@ -178,9 +178,9 @@ function Submit_onclick_tab3(){
 		var stateBut1=document.getElementById('stateBut1');
 		var stateBut3=document.getElementById('stateBut3');
 		var stateBut=document.getElementById('stateBut');
-		stateBut.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
-		stateBut1.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
-		stateBut3.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut1.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut3.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
 } 
 function Submit_onclick_tab4(){
         document.getElementById("class1content").style.display='none';
@@ -190,9 +190,9 @@ function Submit_onclick_tab4(){
 		var stateBut1=document.getElementById('stateBut1');
 		var stateBut2=document.getElementById('stateBut2');
 		var stateBut=document.getElementById('stateBut');
-		stateBut1.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
-		stateBut2.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
-		stateBut.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut1.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut2.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+		stateBut.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
 } 
 
 
@@ -246,11 +246,11 @@ var d=divon($c);
 var sb=divon($b);
 if(d.style.display=='none'){
 //d.style.display=='block'	
-$D($c,$h);
-sb.innerHTML='<img src=/images/default/lysw_107.jpg  alt=点击关闭 title=点击关闭 style=cursor:pointer>';
+    $D($c,$h);
+    sb.innerHTML='<img src=' + website_url + '/images/default/lysw_107.jpg  alt=点击关闭 title=点击关闭 style=cursor:pointer>';
 }else{
 $D2($c,$h);
-sb.innerHTML='<img src=/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
+sb.innerHTML='<img src=' + website_url + '/images/default/lysw_104.jpg alt=点击展开 title=点击展开 style=cursor:pointer>';
 document.getElementById("classlist1").className='classlist11';
 document.getElementById("classlist2").className='classlist22';
 document.getElementById("classlist3").className='classlist33';

@@ -1,7 +1,13 @@
 <!--
 <?php 
 print <<<EOT
---> 
+-->
+<script type="text/javascript" src="$webdb[www_url]/ewebeditor/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    function toggleDisplay() {
+        $('#editText').toggle('display');
+    }
+</script>
 <style>
 .listshop{
 	height:25px;
@@ -55,6 +61,64 @@ EOT;
           </td>
         </tr>
       </table>
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable">
+            <tr>
+                <td class="head"> 上传采购订单商务文本</td>
+            </tr>
+            <tr>
+                <td class="middle">
+                    <form name="upoadtext_form" method="post" enctype="multipart/form-data" action="?action=upload_text">
+                    <div class="myproducts_uploadtext">
+                        <input type="file" name="uploadtext" /><input type="submit" value="上传" />
+                    </div>
+                    </form>
+                    <div class="myproducts_extendinput">
+                        <a href="javascript:void(0)" onclick="toggleDisplay();">
+                        展示输入框<img src="../../hy/images/default/jiantou.jpg" width="20px;" /> 可编辑
+                        </a>
+                    </div>
+<!--
+EOT;
+if(!empty($msg)) {
+print <<<EOT
+-->
+                    <div class="operate_hint">{$msg}</div>
+<!--
+EOT;
+}print <<<EOT
+-->
+                    <div class="hint_message">
+                        本文本系统设置为一将附加在以上产品形式的所有咨询洽淡单和确定订单中，一般为您的商务文件。产品或
+                        产品组可在产品上传功能组中设置。您可以选择使用，也可以选择不使用本功能。
+                    </div>
+
+                    <form name="upoadtext_form" method="post" action="?action=save_text">
+                    <div class="edit_text" id="editText">
+                        <textarea style='display:none;' name="protocolText" id='content1'>{$protocol_text}</textarea>
+                        <script type="text/javascript">
+                            var editor = CKEDITOR.replace( 'content1',
+                                    {
+                                        width:'80%',
+                                        height:'300px',
+                                        filebrowserBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html',
+                                        filebrowserImageBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Images',
+                                        filebrowserFlashBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Flash',
+                                        filebrowserUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                                        filebrowserImageUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                                        filebrowserFlashUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+                                    });
+                            editor.setData($('#content1').html());
+                        </script>
+
+                        <input type="submit" value="保存" />
+                    </div>
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+
       <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="dragTable">
         <tr> 
           <td class="head"> 帮助说明 (你目前的积分有:<b><font color="#FF0000">{$lfjdb[money]}</font></b>点)</td>

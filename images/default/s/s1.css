@@ -1,5 +1,5 @@
 .Container .Mcont .sideL {
-	WIDTH: 160px; FLOAT: left; HEIGHT: 400px; BORDER-RIGHT: #ccc 1px solid;padding-left:168px;
+	WIDTH: 160px; FLOAT: left; BORDER-RIGHT: #ccc 1px solid;padding-left:168px;
 }
 .Container .Mcont .sideR {
 	WIDTH: 160px; FLOAT: right; HEIGHT: 400px

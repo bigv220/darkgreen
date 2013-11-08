@@ -1,4 +1,6 @@
 <?php
+	error_reporting(0);
+
 if ($_REQUEST['act'] == 'remove')
 {
 	$goods_id   = intval($_POST['id']);

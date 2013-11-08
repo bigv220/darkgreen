@@ -31,6 +31,11 @@ if($action=='del'){
 	require(dirname(__FILE__)."/"."template/order_edit.htm");
 	require(ROOT_PATH."member/foot.php");
 	exit;
+} elseif($action == 'saveProtocolText') {
+    $order_id = $_POST['order_id'];
+    $protocol_text = $_POST['protocol_text'];
+
+    $db->query("UPDATE {$_pre}join SET sellertext='" . addslashes($protocol_text) . "' WHERE id=$order_id");
 }
 
 $rows=15;
@@ -57,8 +62,8 @@ $showpage=getpage("","","?job=$job",$rows,$totalNum);
 
 while($rs = $db->fetch_array($query))
 {
-	
 	$rs[shop]=$db->get_one("SELECT * FROM {$_pre}content WHERE id='$rs[cid]'");
+    $rs[shop][sellertext] = stripslashes($rs[shop][sellertext]);
 	$rs[posttime]=date("m-d H:i",$rs[posttime]);
 	if($job=='mylist'){	//ÎÒµÄ¶©µ¥
 		$rs[editurl]="../join.php?job=edit&id=$rs[id]&fid=$rs[fid]&cid=$rs[cid]' target='_blank";

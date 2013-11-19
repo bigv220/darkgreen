@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--<?php
-$sitetitle = "ËÑË÷£­".$webdb[Info_webname]."£­".$webdb['webname'];
+$sitetitle = $keyword ? $keyword. " - ÂÌÒ³ËÑË÷" : "ÂÌÒ³ËÑË÷";
 $useractword = $lfjid ? "<a href=\"$webdb[www_url]/member/\" target=\"_blank\">»áÔ±ÖÐÐÄ</a> | <a href=\"$webdb[www_url]/do/login.php?action=quit\"  >ÍË³ö</a>" : "<a href=\"$webdb[www_url]/do/reg.php\">×¢²á</a> | <a href=\"$webdb[www_url]/do/login.php\" >µÇÂ¼</a>" ;
 $type = $type ? $type : "title";
 $keywords = $keyword ? $keyword : "ÇëÊäÈëÄúÒª²éÕÒµÄÄÚÈÝ";
@@ -79,7 +79,7 @@ foreach($Fid_db[0] AS $key=>$value){
 $boldcss=$fid==$key?" style=\"font-weight:bold;\"":"";
 print <<<EOT
 -->
-              		<div><a href="search.php?action=$action&keyword=$keyword&type=$type&fid=$key"{$boldcss}>{$Fid_db[name][$key]}</a></div>
+              		<div><a target="_blank" href="search.php?action=$action&keyword=$keyword&type=$type&fid=$key"{$boldcss}>{$Fid_db[name][$key]}</a></div>
 <!--
 EOT;
 }
@@ -98,7 +98,7 @@ $rs[title]=str_replace($keyword,"<span>".$keyword."</span>",$rs[title]);
 print <<<EOT
 -->	
 			<ul>
-            	<li class="t"><a href="bencandy.php?fid=$rs[fid]&id=$rs[id]" target="_blank">$rs[title]</a></li>
+            	<li class="t"><a target="_blank" href="bencandy.php?fid=$rs[fid]&id=$rs[id]" target="_blank">$rs[title]</a></li>
                 <li class="c">{$content}</li>
                 <li class="m">
                 	ä¯ÀÀ(<span>{$rs[hits]}</span>)´Î

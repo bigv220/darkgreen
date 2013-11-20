@@ -1,7 +1,10 @@
 <!--
 <?php
 print <<<EOT
---> 
+-->
+<script type="text/javascript" src="$webdb[www_url]/ewebeditor/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="$webdb[www_url]/common/common.js"></script>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="MainTable">
   <tr> 
     <td height="100" valign="top" class="Main"> 
@@ -15,6 +18,7 @@ print <<<EOT
               <tr align="center" class="head3"> 
                 <td  width="8%">订单号</td>
                 <td >商品名称</td>
+                <td >协议文本</td>
                 <td  width="5%">单价</td>
                 <td  width="5%">数量</td>
                 <td  width="5%">总额</td>
@@ -33,6 +37,11 @@ foreach($listdb AS $key=>$rs){print <<<EOT
               <tr> 
                 <td class="middle" align="center">$rs[id]</td>
                 <td class="middle" ><a href="../bencandy.php?city_id=$rs[city_id]&fid=$rs[fid]&id=$rs[cid]&city_id={$rs[shop][city_id]}" target="_blank">{$rs[shop][title]}</a></td>
+                <td class="middle"  align="center">
+                    <textarea id="txt_$rs[id]" style="display: none;">{$rs[shop][sellertext]}</textarea>
+                    <a href="javascript:void(0);" onclick="editText($rs[id]);">修改</a> |
+                    <a href="javascript:void(0);" onclick="viewText($rs[id]);">查看</a>
+                </td>
                 <td class="middle"  align="center">{$rs[shop][price]}</td>
                 <td class="middle"  align="center">$rs[shopnum]</td>
                 <td class="middle"  align="center">$rs[totalmoney]</td>
@@ -66,6 +75,42 @@ EOT;
     </td>
   </tr>
 </table>
+<div id="faqbg"></div>
+<div id="faqdiv" style="display:none">
+    <h2>协议文本<a href="#" class="close">关闭</a></h2>
+    <div class="form" style="height: 75%; overflow-y:auto;" id="viewProtocolText">
+    </div>
+    <p>&nbsp;</p>
+</div>
+
+<form action="?action=saveProtocolText" method="post">
+<div id="fckeditor_div" style="width: 800px;display:none;">
+    <h2>修改协议文本<a href="#" class="close">关闭</a></h2>
+    <div class="form">
+        <input type="hidden" id="order_id" name="order_id" />
+        <textarea style='display:none;' id='content1' name='protocol_text'></textarea>
+
+        <script type="text/javascript">
+            var editor = CKEDITOR.replace( 'content1',
+                    {
+                        width:'100%',
+                        height:'260px',
+                        filebrowserBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html',
+                        filebrowserImageBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Images',
+                        filebrowserFlashBrowseUrl : '$webdb[www_url]/ewebeditor/ckfinder/ckfinder.html?Type=Flash',
+                        filebrowserUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                        filebrowserImageUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                        filebrowserFlashUploadUrl : '$webdb[www_url]/ewebeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+                    });
+            editor.setData($('#content1').html());
+        </script>
+        <p>&nbsp;</p>
+        <p align="center">
+            <input type="submit" value="保存" />
+        </p>
+    </div>
+</div>
+</form>
 <!--
 EOT;
 ?>

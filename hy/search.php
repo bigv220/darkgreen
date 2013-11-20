@@ -27,7 +27,7 @@ if($action=="search")
 	}
 	$min=($page-1)*$rows;
 
-	$_SQL=" WHERE title LIKE '%$keyword%' or uid= $keyword ";
+	$_SQL=" WHERE title LIKE '%$keyword%' or uid= '$keyword' ";
 
 	$showpage=getpage("{$_pre}company A",$_SQL,"?fid=$fid&keyword=$keyword&action=search&type=$type",$rows);
 

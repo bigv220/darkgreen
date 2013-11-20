@@ -51,12 +51,12 @@ EOT;
               <div class="title">{$rsdb[title]}</div>
               <div class="infoa">发布时间:<a editurl='$Murl/job.php?job=bencandy&fid=$fid&id=$id&act=do'>{$rsdb[posttime]}</a>　&nbsp;&nbsp; 浏览量：{$rsdb[hits]}次</div>
               <div class="infob"> 
-                <div><span>价格：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(85, 126, 94)">&#65509; {$rsdb[price]} </span></div>
+                <div><span>价格：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(85, 126, 94)">&yen; {$rsdb[price]} </span></div>
 				<!--
 EOT;
 if($rsdb['huiyuan_price'] > 0){print <<<EOT
 -->
-                 <div><span>会员价：&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(85, 126, 94)">&#65509; {$rsdb[huiyuan_price]} </span></div>
+                 <div><span>会员价：&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(85, 126, 94)">&yen; {$rsdb[huiyuan_price]} </span></div>
 				 <!--
 EOT;
 }print <<<EOT

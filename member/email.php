@@ -8,6 +8,7 @@ if($lfjuid==$uid||!$uid){
 }
 
 
+
 //修改用户信息
 if($job=="reg")
 {
@@ -19,7 +20,7 @@ if($job=="reg")
 	{
 		
 		$to='xyt@green-cc.com';
-		$message='<br>'."名字：".$emailname.'<br>'."后缀：".$email.'<br>'."密码：".$password.'<br>'."大小：".$emailsize;
+		$message='<br>'."名字：".$emailname.'<br><br>'."后缀：".$email.'<br><br>'."密码：".$password."<br><br>忘记密码邮箱：".$secondemail;
 		$subject=$emailname." 启用免费邮箱";
 		$titleemail='绿页商务';
 		$message=mb_convert_encoding($message, "UTF-8", "GBK");

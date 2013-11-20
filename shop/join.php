@@ -23,7 +23,6 @@ if(!$infodb){
 	showerr("FID有误!!!");
 }
 
-
 //$totalmoney = number_format($shopnum*$infodb[price],2);
 $totalmoney = $shopnum*$infodb[price];
 $hownum = 1;
@@ -49,7 +48,7 @@ if($action=="postnew")
 
 	$rs=$db->get_one("SELECT * FROM `{$pre}purse` WHERE uid='$infodb[uid]'");
 	$array=unserialize($rs[config]);
-	
+
 	if($postdb[order_sendtype]==2){			//平邮
 		$totalmoney+=floatval($array[slow_send]);
 	}elseif($postdb[order_sendtype]==3){	//快递
@@ -80,7 +79,7 @@ if($action=="postnew")
 	$sqldb[]="fid='$fid'";
 	$sqldb[]="uid='$lfjuid'";
 
-	
+
 	/*检查判断辅信息表要插入哪些字段的内容*/
 	foreach( $field_db AS $key=>$value){
 		isset($postdb[$key]) && $sqldb[]="`{$key}`='{$postdb[$key]}'";
@@ -91,7 +90,7 @@ if($action=="postnew")
 	$db->query("INSERT INTO `{$_pre}content_$mid` SET $sql");
 
 	//$db->query("UPDATE {$_pre}content SET totaluser=totaluser+1 WHERE id='$cid'");
-	
+
 
 
 	if($webdb[order_send_mail]){
@@ -115,7 +114,7 @@ if($action=="postnew")
 		exit;
 	}else{
 		refreshto("bencandy.php?city_id=$infodb[city_id]&fid=$fid&id=$cid","订购成功,请等待发货!");
-	}	
+	}
 }
 
 /*删除内容,直接删除,不保留*/
@@ -140,7 +139,7 @@ elseif($job=="edit")
 	/*表单默认变量作处理*/
 	$Module_db->formGetVale($field_db,$rsdb);
 
-	$atc="edit";	
+	$atc="edit";
 
 	require(ROOT_PATH."inc/head.php");
 	require(getTpl("post_$mid",$FidTpl['post']));
@@ -172,13 +171,13 @@ elseif($action=="edit")
 	unset($sqldb);
 	foreach( $field_db AS $key=>$value){
 		$sqldb[]="`$key`='{$postdb[$key]}'";
-	}	
+	}
 	$sql=implode(",",$sqldb);
 
 	/*更新辅信息表*/
 	$db->query("UPDATE `{$_pre}content_$mid` SET $sql WHERE id='$id'");
 	$db->query("UPDATE `{$_pre}join` SET shopnum='$shopnum' WHERE id='$id'");
-	
+
 	refreshto("bencandy.php?city_id=$infodb[city_id]&fid=$fid&id=$cid","修改成功");
 }
 else
@@ -187,8 +186,8 @@ else
 		showerr("你不能订购自己发布的产品!");
 	}
 	/*模块设置时,有些字段有默认值*/
-	foreach( $field_db AS $key=>$rs){	
-		if($rs[form_value]){		
+	foreach( $field_db AS $key=>$rs){
+		if($rs[form_value]){
 			$rsdb[$key]=$rs[form_value];
 		}
 	}

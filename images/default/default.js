@@ -596,4 +596,16 @@ function change_paytype(type) {
 
  $(document).ready(function() {
     change_price();
+
+     $('.show_order_popup_btn').click(function(){
+         var imgsrc = $('.show_order_popup_btn').attr('src');
+         if(imgsrc.indexOf('down_arrow') != -1){
+             imgsrc = imgsrc.replace('down_arrow', 'up_arrow');
+         }
+         else
+             imgsrc = imgsrc.replace('up_arrow', 'down_arrow');
+
+         $('.show_order_popup_btn').attr('src', imgsrc);
+         $('.order_popup').toggle();
+     });
  });

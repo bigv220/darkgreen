@@ -466,3 +466,20 @@ hr {
 .topList ul li{ height:25px; line-height:23px; text-align:left; border:1px solid #c3c3c1; border-bottom:none;padding-left:5px;}
 .topList ul li a{ display:block;}
 .topList .on{ border:1px solid #c9c59f; border-bottom:none; background:#fffddd;}
+
+td.border_left{border-left:1px solid #CCCCCC;}
+td.pd_top5{padding-top:8px;}
+td.text_align_center{text-align:center;}
+.show_order_popup_btn{cursor:pointer;position:absolute;margin-top:-2px;margin-left:10px;}
+td.add_more_product{background: url(../yellow/pro_fav.gif) no-repeat 15px 10px;cursor:pointer;}
+span.order_num{padding:2px 5px;border:1px solid #CCCCCC;}
+.order_popup{display:none;padding:10px;width:450px;background-color: #ECECEC;position:absolute;top:29px;left:-271px;border:1px solid #CCCCCC;}
+.order_item_row{border-bottom: 1px solid #CCCCCC;height:20px;line-height: 20px;padding: 8px 0px;font-size:12px;}
+.order_item_row .order_item_check{width:40px;float:left;}
+.order_item_row .order_item_name{width:250px;float:left;text-align:left;border-left:1px solid #CCCCCC;padding-left:5px;}
+.order_item_row  .order_item_total_name{width:345px;float:left;text-align:left;border-left:1px solid #CCCCCC;padding-left:5px;}
+.order_item_row .order_item_shop_name{width:90px;float:left;text-align:left;border-left:1px solid #CCCCCC;padding-left:5px;}
+.order_item_row .order_item_price{width:50px;float:left;text-align:right;border-left:1px solid #CCCCCC;padding-right:5px;}
+.order_actions_bar{height:20px;line-height: 20px;padding: 8px 0px;}
+.order_actions_bar .pay_method{float:left;width:250px;}
+.order_actions_bar .pay_button{float:left;width:200px;}

@@ -3,7 +3,7 @@
  * Created by JetBrains PhpStorm.
  * User: sophia
  * Date: 13-7-22
- * Time: ÏÂÎç1:19
+ * Time: ä¸‹åˆ1:19
  * To change this template use File | Settings | File Templates.
  */
 require_once(dirname(__FILE__).'/../inc/function.inc.php');
@@ -31,10 +31,10 @@ if($job=="status"&&$Apower[member_list])
     while($rs = $db->fetch_array($query))
     {
         $rs[posttime] = date("Y-m-d",$rs[posttime]);
-        $rs[send]=$rs[ifsend]?"<A style='color:red;'>ÒÑ·¢»õ</A>":"Î´·¢»õ";
-        $rs[complete] = $rs[ifpay]&&$rs[ifsend]? "Íê³É": "½øĞĞÖĞ";
-        $rs[pay]=$rs[ifpay]?"<A style='color:red;'>ÒÑ¸¶</A>":"Î´¸¶¿î";
-        $rs[admin_oper]=$rs[admin_confirm]?"<A style='color:green;'>ÒÑÈ·ÈÏ</A>":"Î´È·ÈÏ";
+        $rs[send]=$rs[ifsend]?"<A style='color:red;'>å·²å‘è´§</A>":"æœªå‘è´§";
+        $rs[complete] = $rs[ifpay]&&$rs[ifsend]? "å®Œæˆ": "è¿›è¡Œä¸­";
+        $rs[pay]=$rs[ifpay]?"<A style='color:red;'>å·²ä»˜</A>":"æœªä»˜æ¬¾";
+        $rs[admin_oper]=$rs[admin_confirm]?"<A style='color:green;'>å·²ç¡®è®¤</A>":"æœªç¡®è®¤";
         $listdb[] = $rs;
     }
 
@@ -48,6 +48,14 @@ if($job=="status"&&$Apower[member_list])
     $ajaxUlr = "../ly_adm/ajax_order.php";
     while($rs = $db->fetch_array($query)) {
         $rs[buyer_pay_date] = date("Y-m-d",$rs[buyer_pay_date]);
+
+        $gutai_rs=$db->get_one("SELECT * FROM `{$pre}gutai_bank` WHERE uid='$rs[cuid]'");
+        $gutai_conf = unserialize($gutai_rs[config]);
+        if($gutai_conf[gutai_pwd] && $gutai_conf[gutai_mobile]) {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','ç³»ç»Ÿå·²ç¡®è®¤ä¹°å®¶');
+        } else {
+            $rs[buyer_confirmed] = 'ç³»ç»Ÿæœªç¡®è®¤ä¹°å®¶';
+        }
         $listdb[] = $rs;
     }
 
@@ -60,7 +68,7 @@ if($job=="status"&&$Apower[member_list])
 
     while($rs = $db->fetch_array($query)) {
         $rs[system_pay_date] = date("Y-m-d",$rs[system_pay_date]);
-        $rs[complete] = $rs[ifpay]&&$rs[ifsend]? "Íê³É": "½øĞĞÖĞ";
+        $rs[complete] = $rs[ifpay]&&$rs[ifsend]? "å®Œæˆ": "è¿›è¡Œä¸­";
         $listdb[] = $rs;
     }
 
@@ -95,7 +103,7 @@ if($job=="status"&&$Apower[member_list])
     require(dirname(__FILE__)."/"."foot.php");
 } elseif($job == "gutai_withdraw" && $Apower[member_list]) {
     $listdb = array();
-    $query = $db->query("SELECT A.*, M.username FROM {$_pre}charge A LEFT JOIN home_members M ON A.uid=M.uid WHERE gutai_type='ÌáÏÖ'");
+    $query = $db->query("SELECT A.*, M.username FROM {$_pre}charge A LEFT JOIN home_members M ON A.uid=M.uid WHERE gutai_type='æç°'");
 
     while($rs = $db->fetch_array($query)) {
         $rs[posttime] = date("Y-m-d",$rs[posttime]);
@@ -109,7 +117,7 @@ if($job=="status"&&$Apower[member_list])
     require(dirname(__FILE__)."/"."foot.php");
 } elseif($job == "gutai_deposit" && $Apower[member_list]) {
     $listdb = array();
-    $query = $db->query("SELECT A.*, M.username FROM {$_pre}charge A LEFT JOIN home_members M ON A.uid=M.uid WHERE gutai_type='³äÖµ'");
+    $query = $db->query("SELECT A.*, M.username FROM {$_pre}charge A LEFT JOIN home_members M ON A.uid=M.uid WHERE gutai_type='å……å€¼'");
 
     while($rs = $db->fetch_array($query)) {
         $rs[posttime] = date("Y-m-d",$rs[posttime]);

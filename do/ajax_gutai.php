@@ -10,7 +10,7 @@ require_once(dirname(__FILE__)."/../".'inc/common.inc.php');
 $db=new MYSQL_DB;
 $gutai_rs=$db->get_one("SELECT * FROM `{$pre}gutai_bank` WHERE uid='$lfjuid'");
 $gutai_conf = unserialize($gutai_rs[config]);
-$job = $_POST[job];;
+$job = $_POST[job];
 
 if($gutai_conf[gutai_pwd] != md5($_POST[pwd])) {
     echo "pwd";

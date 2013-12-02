@@ -5,26 +5,68 @@ print <<<EOT
 <script language="javascript" src="$webdb[www_url]/images/default/default.js"></script>
 <table width="100%" cellspacing="1" cellpadding="3" class="tablewidth">
     <tbody><tr class="head">
-        <td colspan="5">
+        <td colspan="7">
             <div align="center"><font color="#FFFFFF">状态内容</font></div>
         </td>
     </tr>
     <tr bgcolor="#FFFFFF">
         <td width="20%" align="left">采购单编号</td>
-        <td width="20%" align="left">买家指令付款</td>
-        <td width="20%" align="left">买家确认</td>
-        <td width="20%" align="left">管理操作</td>
-        <td width="20%" align="left">简要备注</td>
+        <td width="10%" align="left">系统付款日</td>
+        <td width="10%" align="left">买家确认</td>
+        <td width="15%" align="left">买家指令付款</td>
+        <td width="15%" align="left">管理操作</td>
+        <td width="15%" align="left">卖方帐户</td>
+        <td width="15%" align="left">简要备注</td>
     </tr>
     <!--
 EOT;
 foreach($listdb as $key=>$value) {print <<<EOT
 -->
     <tr bgcolor="#FFFFFF">
-        <td width="20%" align="left">{$value[id]}</td>
-        <td width="20%" align="left">{$value[buyer_pay_date]} 指令付款</td>
-        <td width="20%" align="left"><img src="images/right.jpg" alt=""></td>
-        <td width="20%" align="left">
+        <td align="left">{$value[id]}</td>
+        <td align="left">{$value[buyer_pay_date]}</td>
+        <td align="left">{$value[buyer_confirmed]}</td>
+        <td align="left">
+<!--
+EOT;
+if($value[ifpay] == 1){print <<<EOT
+-->
+            已付款
+<!--
+EOT;
+} elseif($value[ifpay] == 1 && $value[ifsend] == 2){print <<<EOT
+-->
+            已收货--无异议
+<!--
+EOT;
+} else {print <<<EOT
+-->
+            未付款
+<!--
+EOT;
+}print <<<EOT
+-->
+        </td>
+        <td align="left" id="oper{$value[id]}">
+<!--
+EOT;
+if($value[if_pay_seller] == 0) {print <<<EOT
+-->
+            <a href="javascript:void(0)" onclick="confirm_pay_seller('{$ajaxUlr}', {$value[id]})" />请付款到卖家账户</a>
+<!--
+EOT;
+} else {print <<<EOT
+-->
+            完成
+<!--
+EOT;
+}print <<<EOT
+-->
+        </td>
+        <td align="left">
+            <a href="" onclick="openwindow('../ly_adm/gutaiinfo.php?uid={$value[uid]}', 'new','500', '300')">基本信息</a>
+        </td>
+        <td align="left">
 <!--
 EOT;
 if($value[admin_confirm] == 1) {print <<<EOT
@@ -42,7 +84,6 @@ EOT;
 }print <<<EOT
 -->
         </td>
-        <td width="20%" align="left">{$value[end_comment]}</td>
     </tr>
     <!--
 EOT;

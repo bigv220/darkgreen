@@ -1,0 +1,1 @@
+alter table home_shop_join add column if_pay_seller tinyint(1);

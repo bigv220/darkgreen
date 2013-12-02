@@ -59,3 +59,19 @@ body{ background:#fff;  color:#000; font-family:"微软雅黑" }
     padding:7px;border:1px #fff solid;
     cursor: pointer;
 }
+
+.pay_popup{width:500px;border:1px solid #CCCCCC;background: url(../../popup_left_bg.png) repeat-y;background-color:#FFFFFF;z-index: 111;position: absolute;top: 50%;left: 40%;}
+.pay_popup .content{padding:15px 15px 15px 30px;}
+.pay_popup .content p{padding-left:30px;font-weight:normal;font-size:13px;line-height:25px;}
+.pay_popup .content p.information{background: url(../../information_pop.png) no-repeat 4px 4px;}
+.pay_popup .radio_inputs{margin-left:30px;}
+.pay_popup .radio_inputs input{margin-right:10px;}
+.pay_popup .action_bars{padding:20px 20px 20px 30px;}
+.pay_popup .action_bars button{padding:5px 10px;background:none;border:1px solid #CCCCCC;cursor:pointer;margin-right:30px;}
+.pay_popup .action_bars button:hover{background-color: yellow;}
+.pay_popup .platform_name_tel{background: url(../../logo.jpg) no-repeat 4px 4px;background-size:20px 20px;}
+.pay_popup .platform_name_tel button{margin-left:40px;}
+#get_goods_verification_popup{display:block;}
+#get_shouhou_popup{display:none;}
+#upload_shouhou_resources_popup{display:none;}
+#already_submitted_popup{display:none;}

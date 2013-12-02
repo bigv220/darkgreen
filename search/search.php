@@ -31,6 +31,7 @@ if($action=="search")
 
     $showpage=getpage("home_hy_company A",$_SQL,"?fid=$fid&keyword=$keyword&action=search&type=$type",$rows);
 
+    //公司
     $query = $db->query("SELECT * FROM home_hy_company A $_SQL ORDER BY A.posttime DESC LIMIT $min,$rows ");
     while($rs = $db->fetch_array($query))
     {
@@ -42,16 +43,30 @@ if($action=="search")
         $listdb[]=$rs;
     }
 
-    $SQL_shop="SELECT * FROM home_shop_content WHERE title LIKE '%$keyword%' or uid='$keyword' LIMIT $min,$rows ";
+    //商品
+    $SQL_shop="SELECT * FROM home_shop_content WHERE title LIKE '%$keyword%' LIMIT $min,$rows ";
     $query = $db->query($SQL_shop);
 
     while($rs = $db->fetch_array($query))
     {
-       // var_dump($rs);
+        //var_dump($rs);
         $rs[posttime]=date("Y-m-d H:i",$rs[posttime]);
         $rs[content]=@preg_replace('/<([^>]*)>/is',"",$rs[content]);
         $rs[content]=get_word($rs[content],150);
         $rs[url]= "$webdb[www_url]/shop/bencandy.php?fid=$rs[fid]&id=$rs[id]";
+        $listdb[]=$rs;
+    }
+
+
+    //店铺
+    $query = $db->query("SELECT * FROM home_dianpu_company  WHERE title LIKE '%$keyword%' or uid= '$keyword'  ORDER BY  posttime DESC ");
+    while($rs = $db->fetch_array($query))
+    {
+        //var_dump($rs);
+        $rs[posttime]=date("Y-m-d H:i",$rs[posttime]);
+        $rs[content]=@preg_replace('/<([^>]*)>/is',"",$rs[content]);
+        $rs[content]=get_word($rs[content],150);
+        $rs[url]= "$webdb[www_url]/lyshop.$rs[uid]";
         $listdb[]=$rs;
     }
 

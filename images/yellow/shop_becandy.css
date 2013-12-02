@@ -138,6 +138,9 @@ td.CC div.shopbuy span.butter{
 	margin-left:10px;
 	margin-top:-5px;
 }
+
+td.CC div.shopbuy span.add_to_cart_btn{font-weight:bold;background:url(pro_fav.gif) no-repeat 15px 11px;width:105px;height:35px;border:1px solid #bbbbbb;margin-left:155px;padding-left:30px;}
+
 td.CC div.shopbuy span.butter a{
 	dislay:block;
 	font-size:18px;
@@ -336,7 +339,9 @@ table.base_table .tdr{
 
 
 .order_do{
-	margin:2px;
+	padding:5px 5px 5px 15px;
+	height:30px;
+	float:left;
 }
 .order_do a{
 	float:right;
@@ -347,7 +352,8 @@ table.base_table .tdr{
 }
 .order_do a.fav{
 	padding-left:16px;
-	background:url(pro_fav.gif) no-repeat;
+	background:url(blue_star.png) no-repeat;
+	background-size:15px 15px;
 }
 
 #cname{

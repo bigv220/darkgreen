@@ -14,11 +14,19 @@ $renzhengdbsm=array(
 	3=>'已通过实名认证',
 );
 $renzhengdbnamesm=$renzhengdbsm[$rsdb[renzheng]];
-if (!empty($rsdb['qq'])) {
+if (empty($rsdb['qq'])) {
     $qq = '';
 } else {
-    $qq= '<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:11531263:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a>';
+    $qq= '<a style="float:right; margin: 4px 20px 0 0;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=' . $rsdb['qq']. '&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:'. $rsdb['qq'].  ':41" alt="点击这里给我发消息" title="点击这里给我发消息"></a>';
 }
+if (empty($rsdb['ww'])) {
+    $ww = '';
+} else {
+    $ww='<a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&amp;touid=' . $rsdb['ww'] . '&amp;siteid=cntaobao&amp;status=1&amp;charset=utf-8"><img style="height:21px;float: right;margin-top: 4px;margin-right: 14px;" border="0"   src="http://amos.alicdn.com/online.aw?v=2&amp;uid='
+    . $rsdb['ww'] . '&amp;site=cntaobao&amp;s=1&amp;charset=utf-8" alt="点这里给我发消息"></a>';
+}
+
+
 function ytime($d){
 $Date_1=date("Y-m-d");
 $Date_2=$d;
@@ -40,9 +48,8 @@ print <<<EOT
     经营模式：$rsdb[qy_saletype]<br />
     身份信息：<font style=" color:#009900;">{$renzhengdbnamesm}</font><br />
     所在地区：$rsdb[qy_address]<br /><br />
-    联系人：$rsdb[qy_contact]<br /><img src="images/shangmao_w.jpg" />
-        <a href="http://gogo.darkgreen.cn" target="_blank"><img src="../images/default/GOGO.jpg"  style="border:1px solid gray;margin:2px 0 2px 0;"/></a>
- $qq
+    联系人：$rsdb[qy_contact]<br /><br />
+        <a href="http://gogo.darkgreen.cn" target="_blank"><img src="../images/default/GOGO_on.jpg"  style="border:1px solid gray;margin:2px 0 2px 6px;"/></a>
     </div>
 
     <!--主体-左边部分-->
@@ -80,6 +87,8 @@ EOT;
 }
 print<<<EOT
 -->
+$ww
+  $qq
   </div>
   <div class="lysw_main_r_tit_shop_banner">
 

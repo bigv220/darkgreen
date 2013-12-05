@@ -1,24 +1,33 @@
 <?php
 session_start();
+//unset($_SESSION['goods_in_cart']);exit;
 
-var_dump($_POST);
 $already_exits = false;
+$fid = $_POST['data']['fid'];
+$cid = $_POST['data']['cid'];
 if(!isset($_SESSION['goods_in_cart'])){
-    echo "no goods in cart";
+    //echo "no goods in cart";
     $_SESSION['goods_in_cart'] = array();
 }
-else{
-    //check if we already have this product in the cart, if we already have one, just add the quantity of this product
-    for($i=0;i<$_SESSION['goods_in_cart'].length;$i++){
-        if($_SESSION['goods_in_cart']['fid'] == $_POST['data']['fid'] && $_SESSION['goods_in_cart']['cid'] == $_POST['data']['cid']){
-            $_SESSION['goods_in_cart']['quantity']++;
+//check if we already have this product in the cart, if we already have one, just add the quantity of this product
+if (array_key_exists($fid, $_SESSION['goods_in_cart'])) {
+
+    foreach ($_SESSION['goods_in_cart'][$fid] as $key => $value) {
+        if ($value['fid'] == $fid && $value['cid'] == $cid) {
             $already_exits = true;
-            break;
+            // 如果多次点击加入采购订单，那么数量增加
+            $_SESSION['goods_in_cart'][$fid][$key]['quantity']++;
         }
     }
+} else {
+    if (!is_array($_SESSION['goods_in_cart'][$fid])) {
+        $_SESSION['goods_in_cart'][$fid] = array();
+    }
 }
+
 if(!$already_exits){
-    $_SESSION['goods_in_cart'][] = array("fid"=>$_POST['data']['fid'], "cid"=>$_POST['data']['cid'], "quantity"=>1);
+   array_push($_SESSION['goods_in_cart'][$fid],array("fid" => $_POST['data']['fid'], "cid" => $_POST['data']['cid'], "quantity" => 1));
 }
-var_dump($_SESSION);
+
+echo "success";
 ?>

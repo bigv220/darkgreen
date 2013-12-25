@@ -620,3 +620,6 @@ td .gutai_middle tr {
 #fckeditor_div h2{ margin-top: 0px; height:25px; font-size:14px; background-color:#8FA4F5; position:relative; padding-left:10px; line-height:25px;}
 #fckeditor_div h2 a{position:absolute; right:5px; font-size:12px; color:#FF0000}
 #fckeditor_div .form{padding:10px;}
+
+.dragTable .middle table.linetable td{line-height:28px;}
+.dragTable .middle table.linetable td.usage_description{padding: 15px 0 5px 15px;color:#888888;}

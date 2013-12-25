@@ -196,24 +196,24 @@ document.write('<div style="display:none;"><iframe src="$webdb[www_url]/do/hack.
           <a href="$webdb[www_url]/member/?main=$Murl/member/list.php" target="_blank">修改删除信息</a> 
          </div>
       </div>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="NoticeTablesearch mt10">
-          <tr>
-            <td class="heagd"></td>
-            <td class="cont" style="background:none">
-             <div id="MainSearchright">    
-     <form name="mainsearchform" id="mainsearchform" target="_blank" method="post" action='http://www.darkgreen.cn/f/search.php?action=search' onsubmit="return checkpost();">
-        <!--<div id="searchtype">
-        	<div id="SelectShow" onclick="ShowMore()">分类</div>
-            <div id="ListType" class="hidden">
-                <a href="javascript:;" onclick="selectsearcha(this,'f','分类')" class="ck">分类</a>
-                <a href="javascript:;" onclick="selectsearcha(this,'shop','商品')">商品</a> 
-                <a href="javascript:;" onclick="selectsearcha(this,'news','资讯')">资讯</a>
-                <a href="javascript:;" onclick="selectsearcha(this,'tg','团购')">团购</a>
-                <a href="javascript:;" onclick="selectsearcha(this,'hy','商家')">商家</a> 
-                <a href="javascript:;" onclick="selectsearcha(this,'coupon','促销')">促销</a>
-                <a href="javascript:;" onclick="selectsearcha(this,'hr','招聘')">招聘</a>
-            </div>
-        </div>-->
+        <!--<table width="100%" border="0" cellspacing="0" cellpadding="0" class="NoticeTablesearch mt10">
+            <tr>
+              <td class="heagd"></td>
+              <td class="cont" style="background:none">
+               <div id="MainSearchright">
+       <form name="mainsearchform" id="mainsearchform" target="_blank" method="post" action='http://www.darkgreen.cn/f/search.php?action=search' onsubmit="return checkpost();">
+          <div id="searchtype">
+              <div id="SelectShow" onclick="ShowMore()">分类</div>
+              <div id="ListType" class="hidden">
+                  <a href="javascript:;" onclick="selectsearcha(this,'f','分类')" class="ck">分类</a>
+                  <a href="javascript:;" onclick="selectsearcha(this,'shop','商品')">商品</a>
+                  <a href="javascript:;" onclick="selectsearcha(this,'news','资讯')">资讯</a>
+                  <a href="javascript:;" onclick="selectsearcha(this,'tg','团购')">团购</a>
+                  <a href="javascript:;" onclick="selectsearcha(this,'hy','商家')">商家</a>
+                  <a href="javascript:;" onclick="selectsearcha(this,'coupon','促销')">促销</a>
+                  <a href="javascript:;" onclick="selectsearcha(this,'hr','招聘')">招聘</a>
+              </div>
+          </div>
         <div class="keyword">
           <input name="keyword" type="text" value="请输入您要查找的内容" onClick="if(this.value.indexOf('请输入您要查找的')!=-1)this.value=''" id="Mainsearchkeyword" baiduSug="1"/>
         </div>
@@ -225,13 +225,13 @@ document.write('<div style="display:none;"><iframe src="$webdb[www_url]/do/hack.
 
             </td>
           </tr>
-        </table>
+        </table>-->
       <table width="100%" border="0" cellspacing="0" cellpadding="0" class="NoticeTable mt10">
         <tr> 
-          <td class="head"><span>公告</span></td>
-          <td class="cont"> 
-            <div class="list">子栏目推广显示要花费<font color="#FF0000">{$webdb[AdInfoSortShow]}</font>{$webdb[MoneyDW]}{$webdb[MoneyName]}</div>
-            <div class="list">大分类推广显示要花费<font color="#FF0000">{$webdb[AdInfoBigsortShow]}</font>{$webdb[MoneyDW]}{$webdb[MoneyName]}</div>
+          <td class="head"><span>说明</span></td>
+          <td class="cont">
+              <div class="list">在内版推广位发布需付 <font color="#FF0000">{$webdb[AdInfoSortShow]}</font>{$webdb[MoneyDW]}{$webdb[MoneyName]}</div>
+              <div class="list">在首版推广位发布需付 <font color="#FF0000">{$webdb[AdInfoBigsortShow]}</font>{$webdb[MoneyDW]}{$webdb[MoneyName]}</div>
           </td>
         </tr>
       </table>

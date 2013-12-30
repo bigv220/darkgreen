@@ -28,7 +28,7 @@ $url=get_info_url('',$key_3,$city_id);
 $color=$Fid_db[ifcolor][$key_3]?"color:red;":'';
 print <<<EOT
 -->
-                    <div><a href="$url" style="$color">{$Fid_db[name][$key_3]}</a>({$InfoNum[$key_3]})</div> 
+                    <div><a href="$url" style="$color">{$Fid_db[name][$key_3]}</a><a>(<span>{$InfoNum[$key_3]}</span>)</a></div>
 <!--
 EOT;
 }print <<<EOT
@@ -55,13 +55,13 @@ document.write('<div style="display:none;"><iframe src="$webdb[www_url]/do/hack.
           <a href="$webdb[www_url]/member/?main=$Murl/member/list.php" target="_blank">修改删除信息</a> 
         </div> 
         </div>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="NoticeTablesearch mt10">
+        <!--<table width="100%" border="0" cellspacing="0" cellpadding="0" class="NoticeTablesearch mt10">
           <tr>
             <td class="heagd"></td>
             <td class="cont" style="background:none">
              <div id="MainSearchright">    
      <form name="mainsearchform" id="mainsearchform" target="_blank" method="post" action='http://www.darkgreen.cn/f/search.php?action=search' onsubmit="return checkpost();">
-        <!--<div id="searchtype">
+        <div id="searchtype">
         	<div id="SelectShow" onclick="ShowMore()">分类</div>
             <div id="ListType" class="hidden">
                 <a href="javascript:;" onclick="selectsearcha(this,'f','分类')" class="ck">分类</a>
@@ -72,7 +72,7 @@ document.write('<div style="display:none;"><iframe src="$webdb[www_url]/do/hack.
                 <a href="javascript:;" onclick="selectsearcha(this,'coupon','促销')">促销</a>
                 <a href="javascript:;" onclick="selectsearcha(this,'hr','招聘')">招聘</a>
             </div>
-        </div>-->
+        </div>
         <div class="keyword">
           <input name="keyword" type="text" value="请输入您要查找的内容" onClick="if(this.value.indexOf('请输入您要查找的')!=-1)this.value=''" id="Mainsearchkeyword" baiduSug="1"/>
         </div>
@@ -84,7 +84,7 @@ document.write('<div style="display:none;"><iframe src="$webdb[www_url]/do/hack.
 
             </td>
           </tr>
-        </table>
+        </table>-->
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="NoticeTable mt10">
           <tr>
             <td class="head"><span>公告</span></td>

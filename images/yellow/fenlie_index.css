@@ -211,7 +211,7 @@ img{
 	width:10px;
 }
 /*
-*公告 
+*说明
 */
 .NoticeTable{
 	background:url(fenlie_notice.gif) left top no-repeat;
@@ -325,13 +325,11 @@ img{
 	background:url(tuangou_icon.gif) 10px 7px no-repeat;
 	text-align:left;
 }
+
 #FenlieSort .listsort .bigsort a{
-	padding-left:27px;
-	font-weight:bold;
-}
-#FenlieSort .listsort .bigsort a{
-	padding-left:27px;
-	font-weight:bold;
+    font-weight: normal;
+    padding-left: 27px;
+    font-size: 15px;
 }
 #FenlieSort .listsort .moresort{
 	width:90%;
@@ -350,7 +348,12 @@ img{
 	overflow:hidden;
 }
 #FenlieSort .listsort .moresort a{
-	color:#000;
+	color:#999;
+    font-size:14px;
+}
+#FenlieSort .listsort .moresort span{
+    color:#00AA00;
+    font-size:14px;
 }
 /*
 *活动专区 

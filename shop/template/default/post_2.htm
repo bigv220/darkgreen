@@ -34,48 +34,38 @@ print <<<EOT
                           <span class="TAG">商品采购列表</span>
                       </td>
                       <td class="border_left pd_top5 text_align_center add_more_product">
-                          继续添加内容
+                          <a href="$webdb[www_url]/shop/list-htm-fid-76.html">继续添加内容</a>
 
                       </td>
                       <td class="border_left pd_top5 text_align_center" style="position:relative;width:200px;">
+                          <div style="position:relative;">
                           <div>
-                              <div style="display:inline;">已形成<span class="order_num">3</span>个商铺的订单</div>
+                              <div style="display:inline;">已形成<span class="order_num">{$order_num}</span>个商铺的订单</div>
                               <img src="$webdb[www_url]/images/default/down_arrow.png" width="18px" height="18px" class="show_order_popup_btn"/>
                           </div>
                           <div class="order_popup">
+<!--
+EOT;
+foreach($order_db AS $key=>$value){
+print <<<EOT
+-->
                             <div class="order_item_row">
                                 <div class="order_item_check"><input type="checkbox" name="items" value="item1"/></div>
-                                <div class="order_item_name">蓝宝石机器猫商店</div>
-                                <div class="order_item_shop_name">lyshop100</div>
-                                <div class="order_item_price">500</div>
+                                <div class="order_item_name"><a href="$webdb[www_url]/shop/join.php?uid={$value['uid']}">{$value['title']}</a></div>
+                                <div class="order_item_shop_name">{$value['username']}</div>
+                                <div class="order_item_price">{$dianpu_arr[$value['uid']]}</div>
                                 <div style="clear:both;"></div>
                             </div>
-                              <div class="order_item_row">
-                                  <div class="order_item_check"><input type="checkbox" name="items" value="item1"/></div>
-                                  <div class="order_item_name">蓝宝石机器猫商店</div>
-                                  <div class="order_item_shop_name">lyshop100</div>
-                                  <div class="order_item_price">500</div>
-                                  <div style="clear:both;"></div>
-                              </div>
-                              <div class="order_item_row">
-                                  <div class="order_item_check"><input type="checkbox" name="items" value="item1"/></div>
-                                  <div class="order_item_name">蓝宝石机器猫商店</div>
-                                  <div class="order_item_shop_name">lyshop100</div>
-                                  <div class="order_item_price">500</div>
-                                  <div style="clear:both;"></div>
-                              </div>
-                              <div class="order_item_row">
-                                  <div class="order_item_check"><input type="checkbox" name="items" value="item1"/></div>
-                                  <div class="order_item_name">蓝宝石机器猫商店</div>
-                                  <div class="order_item_shop_name">lyshop100</div>
-                                  <div class="order_item_price">500</div>
-                                  <div style="clear:both;"></div>
-                              </div>
+<!--
+EOT;
+}
+print <<<EOT
+-->
                               <div class="order_item_row">
                                   <div class="order_item_check">&nbsp;</div>
                                   <div class="order_item_total_name">确定 - 选择 - 合计 - 需支付总额（元）：</div>
 
-                                  <div class="order_item_price">2000</div>
+                                  <div class="order_item_price">{$total}</div>
                                   <div style="clear:both;"></div>
                               </div>
                               <div class="order_actions_bar">
@@ -84,11 +74,10 @@ print <<<EOT
                                   <div style="clear:both;"></div>
                               </div>
                           </div>
-
+                          </div>
                       </td>
                       <td class="border_left pd_top5 text_align_center">
-                          编号：sd-lyshop002/2013-10-18
-
+                        订单编号: lyshop-{$today}
                       </td>
                   </tr>
               </table>
@@ -100,7 +89,7 @@ print <<<EOT
             <table width="100%" cellspacing="5" cellpadding="5">
               <tr> 
                 <td align="left"> 
-                  
+
                 <form name="form_order" method="post" action="?action=$atc" enctype="multipart/form-data" onsubmit="if( Validator.Validate(this,3) ) return isReadText(); else return false;">
                     <table width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;"   class="table_bg">
                       <tr align="center" > 
@@ -115,17 +104,27 @@ print <<<EOT
                         <td width="14%" align="right" style="padding-right:2px;"><b><font color="#FF0000">单 价 </font></b></td>
                         <td width="14%" align="right" style="padding-right:2px;"><b><font color="#FF0000">总 价 </font></b></td>
                       </tr>
-                      <tr > 
-                        <td width="21%"  class="content"><a href="bencandy.php?city_id=$infodb[city_id]&fid=$fid&id=$cid" target="_blank">$infodb[title]</a></td>
-                        <td align="center" width="16%" >$infodb[shoptype]</td>
-                        <td align="center" width="17%" >$infodb[fname]</td>
-                        <td width="18%" align="center" >
-                          <input type="text" name="shopnum" value="$hownum" size="5"  id="shopnum">
-                            <input type="button" value="更新"  onclick="change_price();"/>
-                        </td>
-                        <td width="14%"  align="right" style="padding-right:2px;"><span style="color:#FF0000" id="single_price">{$infodb[price]}</span>元</td>
-                        <td width="14%"  align="right" style="padding-right:2px;"><span style="color:#FF0000" id="total_product_price">{$infodb[price]}</span>元</td>
-                      </tr>
+<!--
+EOT;
+foreach($infodb AS $key=>$info){
+print <<<EOT
+-->
+                        <tr id="">
+                            <td width="21%"  class="content"><a href="bencandy.php?city_id=$info[city_id]&fid=$fid&id=$cid" target="_blank">$info[title]</a></td>
+                            <td align="center" width="16%" >$info[shoptype]</td>
+                            <td align="center" width="17%" >$info[fname]</td>
+                            <td width="18%" align="center" >
+                                <input type="text" name="shopnum" value="$info[hownum]" size="5"  id="shopnum_{$info[id]}">
+                                <input type="button" value="更新"  onclick="change_price({$info[id]});"/>
+                            </td>
+                            <td width="14%"  align="right" style="padding-right:2px;"><span style="color:#FF0000" id="single_price_{$info[id]}">{$info[price]}</span>元</td>
+                            <td width="14%"  align="right" style="padding-right:2px;"><span style="color:#FF0000" class="total_product_price" id="total_product_price_{$info[id]}">{$info[price]}</span>元</td>
+                        </tr>
+<!--
+EOT;
+}
+print <<<EOT
+-->
                     </table>
                     <br/>
                     <table width="100%" border="0" cellspacing="4" cellpadding="5" style="border:1px dotted #ccc;"  class="table_bg">

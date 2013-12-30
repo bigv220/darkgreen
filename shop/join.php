@@ -1,18 +1,69 @@
 <?php
 require_once("global.php");
+session_start();
+//print_r($_SESSION);
+//unset($_SESSION['goods_in_cart']);
+$order_num = count($_SESSION['goods_in_cart']);
 
 if(!$lfjuid){
     header("Location:".$webdb[www_url]."/do/login.php");
 }
+// 从dianpu_company表获取店铺名称
+$uids = array_keys($_SESSION['goods_in_cart']);
+if (!empty($uids)) {
+    $uids = implode(',', $uids);
+}
+
+$order_db = array();
 
 $fidDB=$db->get_one("SELECT A.* FROM {$_pre}sort A WHERE A.fid='$fid'");
 
 if(!$fidDB){
-	showerr("FID有误!");
+	//showerr("FID有误!");
+}
+if (!uid) {
+    showerr("商铺编号有误!");
 }
 $fidDB[mid] = 1;
 
-$infodb=$db->get_one("SELECT B.*,A.*,D.email FROM `{$_pre}content` A LEFT JOIN `{$_pre}content_$fidDB[mid]` B ON A.id=B.id LEFT JOIN `{$pre}memberdata` D ON A.uid=D.uid WHERE A.id='$cid'");
+$total = 0;
+$today = date('Y-m-d');
+$cid_str = "";
+$dianpu_arr = array();
+
+if (!empty($_SESSION)) {
+    foreach($_SESSION['goods_in_cart'] as $key=>$value) {
+        $dianpu_total = 0;
+        foreach ($value as $cid=>$c_arr) {
+            $cid_str .= $cid.',';
+            $dianpu_total += $c_arr['price']*$c_arr['quantity'];
+        }
+        $total += $dianpu_total;
+        $dianpu_arr[$key] = $dianpu_total;
+    }
+    $cid_str = substr($cid_str, 0, -1);
+}
+
+
+/**
+ * 获得下拉店铺列表
+ */
+$query = $db->query("SELECT rid,uid,title,username FROM home_hy_company WHERE uid in ($uids)");
+
+while($rs = $db->fetch_array($query)){
+    $order_db[] = $rs;
+}
+
+/**
+ * 获得当前店铺的产品列表
+ */
+$query=$db->query("SELECT B.*,A.*,D.email FROM `{$_pre}content` A LEFT JOIN `{$_pre}content_$fidDB[mid]` B ON A.id=B.id LEFT JOIN `{$pre}memberdata` D ON A.uid=D.uid WHERE A.id in ($cid_str) AND A.uid=$uid");
+while($rs = $db->fetch_array($query)) {
+    $rs['is_ask'] = $_POST['is_ask'];
+    $rs['hownum'] = $_SESSION['goods_in_cart'][$uid][$rs['id']]['quantity'];
+    $infodb[$rs['rid']] = $rs;
+}
+
 
 $fidDB[mid] = 2;
 $contact_db=$db->get_one("SELECT B.* FROM `{$_pre}content_$fidDB[mid]` B LEFT JOIN `{$pre}memberdata` D ON b.uid=D.uid WHERE B.uid='$lfjuid' order by rid desc");
@@ -20,14 +71,13 @@ $contact_db=$db->get_one("SELECT B.* FROM `{$_pre}content_$fidDB[mid]` B LEFT JO
 if(!$infodb){
 	showerr("内容不存在");
 }elseif($infodb[fid]!=$fid){
-	showerr("FID有误!!!");
+	//showerr("FID有误!!!");
 }
 
 //$totalmoney = number_format($shopnum*$infodb[price],2);
 $totalmoney = $shopnum*$infodb[price];
-$hownum = 1;
 
-$infodb['is_ask'] = $_POST['is_ask'];
+
 $mid=2;
 
 /**

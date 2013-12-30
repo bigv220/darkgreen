@@ -38,12 +38,10 @@ foreach( $fidDB[config][field_db] AS $key=>$rs){
 
 $db->query("UPDATE {$_pre}content SET hits=hits+1,lastview='$timestamp' WHERE id='$id'");
 
-
 /**
 *获取信息正文的内容
 **/
 $rsdb=$db->get_one("SELECT B.*,A.* FROM `{$_pre}content` A LEFT JOIN `{$_pre}content_$fidDB[mid]` B ON A.id=B.id WHERE A.id='$id'");
-
 
 if(!$rsdb){
 	showerr("内容不存在");
@@ -59,6 +57,15 @@ elseif($rsdb[yz]!=1&&!$web_admin){
 	}
 }
 
+
+/**
+ *根据uid检测是否有店铺
+ */
+$uid = $rsdb['uid'];
+$query = $db->query("SELECT rid,uid,title,username FROM home_dianpu_company WHERE uid in ($uid)");
+while($rs = $db->fetch_array($query)){
+    $order_db[] = $rs;
+}
 
 /**
 *内容页的风格优先于栏目的风格,栏目的风格优先于系统的风格

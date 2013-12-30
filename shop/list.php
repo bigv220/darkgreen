@@ -145,7 +145,7 @@ if($Fid_db[$fid]){
 
 	$SQL = " WHERE A.fid in ($fid_str) $SQL ";
 }
-$query=$db->query("SELECT SQL_CALC_FOUND_ROWS B.*,A.*,C.title AS companyname,C.renzheng  FROM {$_pre}content A LEFT JOIN {$_pre}content_{$fidDB[mid]} B ON A.id=B.id LEFT JOIN {$pre}hy_company C ON A.uid=C.uid $SQL  GROUP BY A.id ORDER BY $sql_list $sql_order LIMIT $min,$rows");
+$query=$db->query("SELECT SQL_CALC_FOUND_ROWS B.*,A.*,C.title AS companyname,C.renzheng  FROM {$_pre}content A LEFT JOIN {$_pre}content_{$fidDB[mid]} B ON A.id=B.id LEFT JOIN {$pre}dianpu_company C ON A.uid=C.uid $SQL  GROUP BY A.id ORDER BY $sql_list $sql_order LIMIT $min,$rows");
 
 $RS=$db->get_one("SELECT FOUND_ROWS()");
 $totalNum=$RS['FOUND_ROWS()'];

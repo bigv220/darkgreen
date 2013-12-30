@@ -490,9 +490,9 @@ function deliver_type(type, thisO) {
         $('#price_content').val($('#transfer_fee3').val());
     }
     
-     var pro_total = parseInt($('#single_price').html()) * parseInt($('#shopnum').val());
-    pro_total += parseFloat($('#deliver_total').html());
-    $('#total_money').html(pro_total);
+//     var pro_total = parseInt($('#single_price').html()) * parseInt($('#shopnum').val());
+//     pro_total += parseFloat($('#deliver_total').html());
+//     $('#total_money').html(pro_total);
 }
 function change_paytype(type) {
     if (type == 5) {
@@ -575,16 +575,21 @@ function change_paytype(type) {
          window.open(url+'/upload_files/documents/' + data);
      });
  }
- function change_price() {
-     if ($('#shopnum').val() > 0) {
-         var pro_total = parseInt($('#single_price').html()) * parseInt($('#shopnum').val());
-         $('#total_product_price').html(pro_total);
-
-         pro_total += parseFloat($('#deliver_total').html());
-         $('#total_money').html(pro_total);
+ function change_price(id) {
+     if ($('#shopnum_'+id).val() > 0) {
+         var single_total = parseInt($('#single_price_'+id).html()) * parseInt($('#shopnum_'+id).val());
+         $('#total_product_price_'+id).html(single_total);
+         countTotal();
      }
  }
-
+function countTotal() {
+    var pro_total = 0;
+    pro_total += parseFloat($('#deliver_total').html());
+    $('.table_bg').find('.total_product_price').each(function() {
+        pro_total += parseFloat($(this).html());
+    });
+    $('#total_money').html(pro_total);
+}
  function admin_confirm(id, url, jobStr) {
      $div_id = '#btnDdiv' + id;
      $.post(url, {job:jobStr,id:id}, function(data) {
@@ -618,7 +623,7 @@ function change_paytype(type) {
  }
 
  $(document).ready(function() {
-    change_price();
+     countTotal();
 
      $('.show_order_popup_btn').click(function(){
          var imgsrc = $('.show_order_popup_btn').attr('src');

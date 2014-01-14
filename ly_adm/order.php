@@ -54,7 +54,7 @@ if($job=="status"&&$Apower[member_list])
         if($gutai_conf[gutai_pwd] && $gutai_conf[gutai_mobile]) {
             $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统已确认买家');
         } else {
-            $rs[buyer_confirmed] = '系统未确认买家';
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统未确认买家');
         }
         $listdb[] = $rs;
     }
@@ -69,6 +69,16 @@ if($job=="status"&&$Apower[member_list])
     while($rs = $db->fetch_array($query)) {
         $rs[system_pay_date] = date("Y-m-d",$rs[system_pay_date]);
         $rs[complete] = $rs[ifpay]&&$rs[ifsend]? "完成": "进行中";
+        $rs[complete] = iconv('UTF-8','GBK',$rs[complete]);
+
+        $gutai_rs=$db->get_one("SELECT * FROM `{$pre}gutai_bank` WHERE uid='$rs[cuid]'");
+        $gutai_conf = unserialize($gutai_rs[config]);
+        if($gutai_conf[gutai_pwd] && $gutai_conf[gutai_mobile]) {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统已确认买家');
+        } else {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统未确认买家');
+        }
+
         $listdb[] = $rs;
     }
 

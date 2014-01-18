@@ -113,10 +113,19 @@ if($job=="status"&&$Apower[member_list])
     require(dirname(__FILE__)."/"."foot.php");
 } elseif($job == "gutai_withdraw" && $Apower[member_list]) {
     $listdb = array();
-    $query = $db->query("SELECT A.*, M.username FROM {$_pre}charge A LEFT JOIN home_members M ON A.uid=M.uid WHERE gutai_type='提现'");
+    $query = $db->query("SELECT A.*, M.username FROM {$_pre}charge A LEFT JOIN home_members M ON A.uid=M.uid WHERE gutai_type='".iconv('UTF-8','GBK','提现')."'");
 
     while($rs = $db->fetch_array($query)) {
         $rs[posttime] = date("Y-m-d",$rs[posttime]);
+
+        $gutai_rs=$db->get_one("SELECT * FROM `{$pre}gutai_bank` WHERE uid='$rs[cuid]'");
+        $gutai_conf = unserialize($gutai_rs[config]);
+        if($gutai_conf[gutai_pwd] && $gutai_conf[gutai_mobile]) {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统已确认买家');
+        } else {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统未确认买家');
+        }
+
         $listdb[] = $rs;
     }
 
@@ -127,10 +136,19 @@ if($job=="status"&&$Apower[member_list])
     require(dirname(__FILE__)."/"."foot.php");
 } elseif($job == "gutai_deposit" && $Apower[member_list]) {
     $listdb = array();
-    $query = $db->query("SELECT A.*, M.username FROM {$_pre}charge A LEFT JOIN home_members M ON A.uid=M.uid WHERE gutai_type='充值'");
+    $query = $db->query("SELECT A.*, M.username FROM {$_pre}charge A LEFT JOIN home_members M ON A.uid=M.uid WHERE gutai_type='".iconv('UTF-8','GBK','充值')."'");
 
     while($rs = $db->fetch_array($query)) {
         $rs[posttime] = date("Y-m-d",$rs[posttime]);
+
+        $gutai_rs=$db->get_one("SELECT * FROM `{$pre}gutai_bank` WHERE uid='$rs[cuid]'");
+        $gutai_conf = unserialize($gutai_rs[config]);
+        if($gutai_conf[gutai_pwd] && $gutai_conf[gutai_mobile]) {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统已确认买家');
+        } else {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统未确认买家');
+        }
+
         $listdb[] = $rs;
     }
 

@@ -24,10 +24,12 @@ foreach($listdb as $key=>$value) {print <<<EOT
 -->
     <tr bgcolor="#FFFFFF">
         <td>{$value[posttime]}</td>
-        <td>{$value[username]}</td>
-        <td><img src="images/right.jpg" /></td>
-        <td>{$value[new_total]}</td>
-        <td>{$value[amount]}</td>
+        <td>{$value[username]}&nbsp;&nbsp;
+            <a href="$webdb[www_url]/member/userinfo.php?uid=$value[uid]" style="color:#cbb;" target="_blank">查看</a></td>
+        <td>{$value[buyer_confirmed]}</td>
+        <td>{$value[new_total]}元</td>
+        <td>{$value[amount]}元</td>
+        <td>{$value[status]}</td>
         <td>
             <!--
 EOT;
@@ -46,7 +48,6 @@ EOT;
 }print <<<EOT
 -->
         </td>
-        <td>{$value[end_comment]}</td>
     </tr>
 <!--
 EOT;

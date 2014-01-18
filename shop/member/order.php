@@ -36,6 +36,15 @@ if($action=='del'){
     $protocol_text = $_POST['protocol_text'];
 
     $db->query("UPDATE {$_pre}join SET sellertext='" . addslashes($protocol_text) . "' WHERE id=$order_id");
+} elseif($action == 'saveSendInfo') {
+    $order_id = $_POST['orderId'];
+    $unit_name = iconv("UTF-8","GB2312",$_POST['unit_name']);
+    $bill_number = $_POST['bill_number'];
+    $other = $_POST['other'];
+
+    $db->query("REPLACE INTO home_order_unit_info values($order_id,'".$unit_name."','".$bill_number."','".$other."')");
+    echo "succ";
+    exit;
 }
 
 $rows=15;
@@ -77,10 +86,15 @@ while($rs = $db->fetch_array($query))
 		$rs[send]=$rs[ifsend]?"<A style='color:red;'>已发</A>":"未发";
 	}else{	//客户订单
 		$rs[pay]=$rs[ifpay]?"<A HREF='?job=pay&id=$rs[id]&ifpay=0' style='color:red;'>已付</A>":"<A HREF='?job=pay&id=$rs[id]&ifpay=1' style='color:#333333;'>未付</A>";
-		$rs[send]=$rs[ifsend]?"<A HREF='?job=send&id=$rs[id]&ifsend=0' style='color:red;'>已发</A>":"<A HREF='?job=send&id=$rs[id]&ifsend=1' style='color:#333333;'>未发</A>";
+		$rs[send]=$rs[ifsend]?"<A HREF='?job=send&id=$rs[id]&ifsend=0' style='color:red;'>已发</A>":"<A HREF='javascript:void(0)' onclick='sendBtnClick(event,this)' alt='".$rs[id]."' style='color:#333333;'>未发</A>";
 		$rs[editurl]="?job=edit&id=$rs[id]";
 	}
 
+    if(empty($rs[deliver_total])) {
+        $rs[deliver_total] = 0;
+    }
+
+    $rs[all_total] = number_format(($rs[deliver_total] + $rs[totalmoney]),2);
 	$listdb[]=$rs;
 }
 

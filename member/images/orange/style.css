@@ -623,3 +623,14 @@ td .gutai_middle tr {
 
 .dragTable .middle table.linetable td{line-height:28px;}
 .dragTable .middle table.linetable td.usage_description{padding: 15px 0 5px 15px;color:#888888;}
+
+.sendinfo {
+    width: 300px;
+    border: 1px solid #ccc;
+    background-color: white;
+    position: absolute;
+}
+.sendinfo ul { list-style: none;}
+.sendinfo ul li { height: 20px; line-height: 20px;}
+.sendinfo ul li span { margin-left: 10px;}
+.sendinfo ul li.line { border-bottom: 1px solid #ccc;}

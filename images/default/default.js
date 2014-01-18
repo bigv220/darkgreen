@@ -489,10 +489,13 @@ function deliver_type(type, thisO) {
         $('#deliver_desc').val($('#transfer_comment3').val());
         $('#price_content').val($('#transfer_fee3').val());
     }
+
+    $('#deliverTotal').val($('#deliver_total').html());
     
 //     var pro_total = parseInt($('#single_price').html()) * parseInt($('#shopnum').val());
 //     pro_total += parseFloat($('#deliver_total').html());
 //     $('#total_money').html(pro_total);
+    countTotal();
 }
 function change_paytype(type) {
     if (type == 5) {
@@ -588,7 +591,9 @@ function countTotal() {
     $('.table_bg').find('.total_product_price').each(function() {
         pro_total += parseFloat($(this).html());
     });
+
     $('#total_money').html(pro_total);
+    $('#totalMoney').val(pro_total);
 }
  function admin_confirm(id, url, jobStr) {
      $div_id = '#btnDdiv' + id;
@@ -620,6 +625,63 @@ function countTotal() {
      //获得窗口的水平位置
      var iLeft = (window.screen.availWidth-10-iWidth)/2;
      window.open(url,name,'height='+iHeight+',,innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',status=no,toolbar=no,menubar=no,location=no,resizable=no,scrollbars=0,titlebar=no');
+ }
+
+ function saveUnitInfo(url) {
+     var sendForm = $('#sendForm');
+     var order_id = $('#orderId').val();
+     var unit_name = $('#unit_name').val();
+     var bill_num = $('#bill_number').val();
+     if(order_id == null) {
+         return;
+     }
+
+     if(unit_name == "" || bill_num == "") {
+         alert('请输入物流信息');
+         return;
+     }
+     $.post(url, sendForm.serialize(), function(data) {
+         if (data =='succ') {
+             var url = window.location.href;
+             url = url.substring(0, url.indexOf('?'));
+             window.location.href = url + "?job=send&id=" + order_id + "&ifsend=1";
+         }
+     });
+ }
+
+ function cancelUnitInfo() {
+     $('#senddiv').css('display', 'none');
+ }
+
+ function sendBtnClick(event, thisO) {
+     var order_id = $(thisO).attr('alt');
+
+     $('#orderId').val(order_id);
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+
+     $('#senddiv').css('display', 'block');
+     $('#senddiv').css('left', objLeft-250);
+     $('#senddiv').css('top', objTop+20);
+ }
+
+ function getOffsetTop(obj){
+     var tmp = obj.offsetTop;
+     var val = obj.offsetParent;
+     while(val != null){
+         tmp += val.offsetTop;
+         val = val.offsetParent;
+     }
+     return tmp;
+ }
+ function getOffsetLeft(obj){
+     var tmp = obj.offsetLeft;
+     var val = obj.offsetParent;
+     while(val != null){
+         tmp += val.offsetLeft;
+         val = val.offsetParent;
+     }
+     return tmp;
  }
 
  $(document).ready(function() {

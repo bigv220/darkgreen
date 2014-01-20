@@ -89,10 +89,20 @@ if($job=="status"&&$Apower[member_list])
     require(dirname(__FILE__)."/"."foot.php");
 } elseif($job == "buyer_end" && $Apower[member_list]) {
     $listdb = array();
-    $query = $db->query("SELECT * FROM {$_pre}join WHERE if_buyer_end=1");
+    $query = $db->query("SELECT A.*,C.title FROM {$_pre}join A LEFT JOIN {$_pre}content C ON A.cid=C.id WHERE if_buyer_end=1");
 
+    $ajaxUlr = "../ly_adm/ajax_order.php";
     while($rs = $db->fetch_array($query)) {
-        $rs[end_date] = date("Y-m-d",$rs[end_date]);
+        $rs[end_date] = date("Y-m-d h:i:s",$rs[end_date]);
+
+        $gutai_rs=$db->get_one("SELECT * FROM `{$pre}gutai_bank` WHERE uid='$rs[cuid]'");
+        $gutai_conf = unserialize($gutai_rs[config]);
+        if($gutai_conf[gutai_pwd] && $gutai_conf[gutai_mobile]) {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统已确认买家');
+        } else {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统未确认买家');
+        }
+
         $listdb[] = $rs;
     }
 
@@ -101,10 +111,20 @@ if($job=="status"&&$Apower[member_list])
     require(dirname(__FILE__)."/"."foot.php");
 } elseif($job == "seller_end" && $Apower[member_list]) {
     $listdb = array();
-    $query = $db->query("SELECT * FROM {$_pre}join WHERE if_seller_end=1");
+    $query = $db->query("SELECT A.*,C.title FROM {$_pre}join A LEFT JOIN {$_pre}content C ON A.cid=C.id WHERE if_seller_end=1");
 
+    $ajaxUlr = "../ly_adm/ajax_order.php";
     while($rs = $db->fetch_array($query)) {
-        $rs[end_date] = date("Y-m-d",$rs[end_date]);
+        $rs[end_date] = date("Y-m-d h:i:s",$rs[end_date]);
+
+        $gutai_rs=$db->get_one("SELECT * FROM `{$pre}gutai_bank` WHERE uid='$rs[cuid]'");
+        $gutai_conf = unserialize($gutai_rs[config]);
+        if($gutai_conf[gutai_pwd] && $gutai_conf[gutai_mobile]) {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统已确认买家');
+        } else {
+            $rs[buyer_confirmed] = iconv('UTF-8','GBK','系统未确认买家');
+        }
+
         $listdb[] = $rs;
     }
 

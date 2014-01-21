@@ -530,8 +530,51 @@ function change_paytype(type) {
      );
  }
 
- function withdraw(url) {
-     $.post(url, {job:'withdraw',money:$('#withdraw_money').val(),pwd:$('#withdraw_pwd').val()}, function(data) {
+ function withdraw(thisO,url,uid) {
+     var balanceValue = parseInt($('#balanceValue').val());
+     if(balanceValue == 0) {
+         alert('余额为0，不能完成提现!');
+         return;
+     }
+     var withdrawMoney = parseInt($('#withdraw_money').val());
+     var withdrawPwd = $('#withdraw_pwd').val();
+
+     if(withdrawMoney == "" || withdrawPwd == "") {
+         alert('请输入提现金额和支付密码');
+         return;
+     }
+
+     if(withdrawMoney > balanceValue) {
+         alert('余额不足，交易金额最高为 '+ balanceValue + ' 元，请重新输入!');
+         return;
+     }
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#withdrawdiv').css('display', 'block');
+     $('#withdrawdiv').css('left', objLeft-420);
+     $('#withdrawdiv').css('top', objTop+20);
+
+     $('#withdrawMoney').html(withdrawMoney);
+
+     $.post(url, {job:'get_gutai_info',uid: uid}, function(data) {
+         if (data != '') {
+             var arr = data.split('|');
+             $('#customName').html(arr[0]);
+             $('#bankName').html(arr[1]);
+             $('#withdrawAccount').html(arr[2]);
+         }
+     });
+
+ }
+
+ function withdrawYes(url) {
+     $('#withdrawdiv').css('display', 'none');
+
+     var withdrawMoney = $('#withdraw_money').val();
+     var withdrawPwd = $('#withdraw_pwd').val();
+
+     $.post(url, {job:'withdraw',money:withdrawMoney,pwd:withdrawPwd}, function(data) {
          if (data =='phone') {alert('请验证手机');}
          if (data =='pwd') {alert('支付密码错误，请重新输入');}
          else {
@@ -540,15 +583,46 @@ function change_paytype(type) {
      });
  }
 
- function charge(url) {
-     $.post(url, {job:'charge',price:$('#charge_money').val(),pwd:$('#charge_pwd').val()}, function(data) {
+ function withdrawNo() {
+     $('#withdrawdiv').css('display', 'none');
+ }
+
+ function charge(thisO) {
+     var chargeMoney = $('#charge_money').val();
+     var chargePwd = $('#charge_pwd').val();
+
+     if(chargeMoney == "" || chargePwd == "") {
+         alert('请输入充值金额和支付密码');
+         return;
+     }
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#chargediv').css('display', 'block');
+     $('#chargediv').css('left', objLeft-420);
+     $('#chargediv').css('top', objTop+20);
+
+     $('#chargeMoney').html(chargeMoney);
+ }
+
+ function chargeYes(url) {
+     $('#chargediv').css('display', 'none');
+
+     var chargeMoney = $('#charge_money').val();
+     var chargePwd = $('#charge_pwd').val();
+
+     $.post(url, {job:'charge',price:chargeMoney,pwd:chargePwd}, function(data) {
          if (data =='phone') {alert('请验证手机');return;}
          if (data =='pwd') {alert('支付密码错误，请重新输入');return;}
          else {
-                 window.location.href = data;
+             window.location.href = data;
 
          }
      });
+ }
+
+ function chargeNo() {
+     $('#chargediv').css('display', 'none');
  }
 
  function pop_up() {
@@ -682,6 +756,52 @@ function countTotal() {
          val = val.offsetParent;
      }
      return tmp;
+ }
+
+ function refundmentClick(thisO,url,uid, money,id) {
+    $('#refundment_money').html(money);
+     $('#order_id').val(id);
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#refundmentdiv').css('display', 'block');
+     $('#refundmentdiv').css('left', objLeft-420);
+     $('#refundmentdiv').css('top', objTop+20);
+
+     $.post(url, {job:'get_gutai_info',uid: uid}, function(data) {
+         if (data != '') {
+             var arr = data.split('|');
+             $('#custom_name').html(arr[0]);
+             $('#bank_name').html(arr[1]);
+             $('#account').html(arr[2]);
+         }
+     });
+ }
+
+ function refundmentYes(url) {
+     $.post(url, {job:'refundment_yes',id: $('#order_id').val()}, function(data) {
+         if (data == 'succ') {
+             $('#refundmentdiv').css('display', 'none');
+         }
+     });
+ }
+
+ function selectTab(id) {
+     $("#tab_area span").each(function(){
+         $(this).removeAttr('class');
+     });
+
+     if(id == '充值') {
+         $('#tab2').addClass('current_tab');
+     } else if(id == '提现') {
+         $('#tab1').addClass('current_tab');
+     } else {
+         $('#tab3').addClass('current_tab');
+     }
+ }
+
+ function refundmentNo() {
+     $('#refundmentdiv').css('display', 'none');
  }
 
  $(document).ready(function() {

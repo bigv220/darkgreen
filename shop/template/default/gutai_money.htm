@@ -25,37 +25,70 @@ print <<<EOT
         </ul>
     </div>
 <div class="rtWrap fr mt">
-    <h2>&nbsp;</h2>
+    <h2 style="text-align:left">现在余额</h2>
     <div class="oBox4">
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
             <tbody>
-            <!--
-EOT;
-foreach($listdb AS $key=>$rs){
-if($rs[shop][price]!=null) {
-print <<<EOT
--->
             <tr>
-                <td width="500"><span class="ml20">现有余额： {$rs[shop][price]} 元</span></td>
-                <td><a href="$webdb[www_url]/shop/gutai_joinshow.php?id=$rs[id]&fid=$rs[fid]">订单查看</a></td>
+                <td colspan="2">&nbsp;&nbsp; &nbsp;&nbsp;您在古太企业行</td>
             </tr>
+            <tr>
+                <td width="500"><span class="ml20">余额是 {$balance_arr[gutai]} 元</span>
+                    <input type="hidden" id="balanceValue" value="{$balance_arr[gutai]}" />
+                </td>
+                <td>已存在 {$totalNum}组 订单交易款&nbsp;&nbsp;&nbsp;&nbsp;支付进行中&nbsp;&nbsp;&nbsp;&nbsp; 总金额是{$totalmoney}元</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="orderTable" width="95%" cellspacing="1" cellpadding="3">
 <!--
 EOT;
-} }print <<<EOT
+foreach($listdb AS $key=>$rs){
+print <<<EOT
 -->
-            <tr>
-                <td width="500">&nbsp;</td>
-                <td><span class="sGray">您在</span>收贷快线<span class="sGray">中的余额是：</span> {$totalmoney} 元</td>
+                        <tr bgcolor="#FFFFFF">
+                            <td width="10%" align="left">{$rs[id]}</td>
+                            <td width="15%" align="left">{$rs[title]}</td>
+                            <td width="30%" align="left">{$rs[posttime]} - {$rs[endtime]}</td>
+                            <td width="15%" align="left">{$rs[complete]}</td>
+                            <td width="15%" align="left">{$rs[totalmoney]} 元</td>
+                            <td width="15%" align="left" class="oBox2">
+<!--
+EOT;
+if($rs[if_refundment] == 0){
+print <<<EOT
+-->
+                                <span class="sp1">
+                                    <a onclick="refundmentClick(this,'{$rs[refundment_ajaxurl]}','{$rs[uid]}', '{$rs[totalmoney]}','{$rs[id]}')" href="javascript:void(0);">退款</a>
+                                </span>
+<!--
+EOT;
+} else {
+print <<<EOT
+-->
+                                <span class="sp1">
+                                    已申请退款
+                                </span>
+                            </td>
+                        </tr>
+<!--
+EOT;
+}}print <<<EOT
+-->
+                    </table>
+                </td>
             </tr>
-            </tbody></table>
+            </tbody>
+
+        </table>
 
     </div>
     <ul class="oBox2 mt20">
 
         <li>
             <div class=" t2">
-                <span class="sGreen">手机验证</span><input type="text" style="display:none;" class="yzIpt" value="重新输入">
-                <span class="ml30 sGray">输入您采购单中预留的手机号码 </span><input   type='text'  name='postdb[order_mobphone]' id='atc_order_mobphone'  value='$rsdb[order_mobphone]'>
+                <span class="sGreen">系统操作验证</span><input type="text" style="display:none;" class="yzIpt" value="重新输入">
+                <span class="ml30 sGray"></span><input   type='text'  name='postdb[order_mobphone]' id='atc_order_mobphone'  value='$balance_arr[mobphone]' readonly />
                 <input type="button" class="btnSend" value="发送" id="send_validate_code"  onclick="send_order_sms('$webdb[www_url]', 2);"/>
                 <span class="ml30 sGray">写入收到的验证码</span>
                 <input type="text" name="yznum"  id="yznum" class="yzIpt"/><input type="button" value="确定" id="confirm_phone" onclick="confirm_sms_code('$webdb[www_url]');"/>
@@ -66,16 +99,16 @@ EOT;
         </li>
         <li>
             <div class=" t2">
-                提现金额：<input type="text" class="yzIpt" value=" " id="withdraw_money"> 元    输入支付密码 ：<input type="password" class="Ipt2" value="" id="withdraw_pwd">  <span class="sp1"><a href="javascript:void(0);" onclick="withdraw('$rs[ajaxurl]');">确定</a></span>  汇入您的“基本设置” 中的账号  <i class="sp3 ml20"></i>
+                提现金额：<input type="text" class="yzIpt" value="" id="withdraw_money"> 元    输入支付密码 ：<input type="password" class="Ipt2" value="" id="withdraw_pwd">  <span class="sp1"><a href="javascript:void(0);" onclick="withdraw(this,'$refundment_ajaxurl','{$login_uid}');">确定</a></span>  24小时内汇入您“基本设置” 中的账号  <i class="sp3 ml20"></i>
             </div>
         </li>
         <li>
             <div class=" t2">
-                充值金额：<input type="text" class="yzIpt" value=" " id="charge_money"> 元    输入支付密码 ：<input type="password" class="Ipt2" value="" id="charge_pwd">  <span class="sp1"><a href="javascript:void(0);" onclick="charge('$rs[ajaxurl]');">确定</a></span>  跳转到 收贷快线  <i class="sp3 ml20"></i>
+                充值金额：<input type="text" class="yzIpt" value="" id="charge_money"> 元    输入支付密码 ：<input type="password" class="Ipt2" value="" id="charge_pwd">  <span class="sp1"><a href="javascript:void(0);" onclick="charge(this);">确定</a></span>  跳转到 充值页面  <i class="sp3 ml20"></i>
             </div>
         </li>
         <div class="mt20">
-            <span class="sp1"><a href="gutai_money_list.php">查看交易记录</a></span>
+            <span class="sp1"><a href="gutai_money_list.php?opera=提现">查看交易记录</a></span>
         </div>
     </ul>
 
@@ -83,6 +116,102 @@ EOT;
 </div>
 </div>
 </div>
+
+<div id="refundmentdiv" class="refundmentDiv" style="display:none">
+    <div class="left" style="width: 15px; height:282px;">&nbsp;</div>
+    <div class="right">
+        <div class="rightTop">
+            <img src="images/bg/gt_logo.gif" />
+            <div class="right_text">您在 古太企业行 的 订单交易款 总额 {$totalmoney} 元</div>
+        </div>
+        <div class="rightMiddle">
+            <div class="rightLeft">汇入</div>
+            <div class="rightRight">
+                <br />系统显示操作人已认证 此订单 退款 <span id="refundment_money"></span> 元<br /><br />
+                客户名称：<span id="custom_name"></span><br />
+                银行名称：<span id="bank_name"></span><br />
+                帐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 户：<span id="account"></span>
+            </div>
+        </div>
+        <div class="rightBottom rtWrap">
+            <div class="rightLeft">&nbsp;</div>
+            <div class="rightRight oBox2"><br />古太企业行管理中心将在24小时内，按以上数目和内容汇入帐户。
+                <br /><br />
+                <br />
+                <span class="sp1">
+                    <input type="hidden" id="order_id" />
+                    <a href="javascript:void(0);" onclick="refundmentYes('{$refundment_ajaxurl}')">确定</a>
+                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="sp1">
+                    <a href="javascript:void(0);" onclick="refundmentNo()">取消</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="withdrawdiv" class="refundmentDiv" style="display:none">
+    <div class="left" style="width: 15px; height:282px;">&nbsp;</div>
+    <div class="right">
+        <div class="rightTop">
+            <img src="images/bg/gt_logo.gif" />
+            <div class="right_text">您在 古太企业行 的 余额 是 {$balance_arr[gutai]} 元</div>
+        </div>
+        <div class="rightMiddle">
+            <div class="rightLeft">汇入</div>
+            <div class="rightRight">
+                <br />系统显示操作人已认证 提现 <span id="withdrawMoney"></span> 元<br /><br />
+                客户名称：<span id="customName"></span><br />
+                银行名称：<span id="bankName"></span><br />
+                帐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 户：<span id="withdrawAccount"></span>
+            </div>
+        </div>
+        <div class="rightBottom rtWrap">
+            <div class="rightLeft">&nbsp;</div>
+            <div class="rightRight oBox2"><br />古太企业行管理中心将在24小时内，按以上数目和内容汇入帐户。
+                <br /><br />
+                <br />
+                <span class="sp1">
+                    <a href="javascript:void(0);" onclick="withdrawYes('{$rs[ajaxurl]}')">确定</a>
+                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="sp1">
+                    <a href="javascript:void(0);" onclick="withdrawNo()">取消</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="chargediv" class="refundmentDiv" style="display:none">
+    <div class="left">&nbsp;</div>
+    <div class="right">
+        <div class="rightTop">
+            <img src="images/bg/gt_logo.gif" />
+            <div class="right_text">您在 古太企业行 的 余额 是 {$balance_arr[gutai]} 元</div>
+        </div>
+        <div class="rightMiddle">
+            <div class="rightLeft">汇入</div>
+            <div class="rightRight">
+                <br />系统显示操作人已认证 充值 <span id="chargeMoney"></span> 元<br /><br />
+                中国银联 / 麦野商务信息有限公司 / 古太企业行 mysw2012
+            </div>
+        </div>
+        <div class="rightBottom rtWrap">
+            <div class="rightLeft">&nbsp;</div>
+            <div class="rightRight oBox2"><br />点击确定，将跳转到银联支付页面，请遵守相应业务服务协议。
+                <br /><br />
+                <br />
+                <span class="sp1">
+                    <a href="javascript:void(0);" onclick="chargeYes('{$rs[ajaxurl]}')">确定</a>
+                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="sp1">
+                    <a href="javascript:void(0);" onclick="chargeNo()">取消</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script language="javascript" src="$webdb[www_url]/images/default/default.js"></script>
 <!--
 EOT;

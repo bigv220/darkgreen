@@ -75,3 +75,18 @@ body{ background:#fff;  color:#000; font-family:"微软雅黑" }
 #get_shouhou_popup{display:none;}
 #upload_shouhou_resources_popup{display:none;}
 #already_submitted_popup{display:none;}
+
+.orderTable { border: 1px solid #ccc;margin: 0px auto; }
+.orderTable tr td { text-align: center;}
+
+.refundmentDiv { border: 1px solid #ccc; width:500px; height: 272px;position:absolute;background-color: white;}
+.refundmentDiv .left { background-color: #0033FF; float:left;width: 15px; height:272px;}
+.refundmentDiv .right { width:485px; float: left; }
+.refundmentDiv .right .rightTop{ height:55px; line-height:55px;width:485px; border-bottom: 1px solid #ccc;}
+.refundmentDiv .right .rightTop img {padding: 5px 0px 0px 15px;}
+.refundmentDiv .right .rightTop .right_text {padding-bottom: 5px;float:right;margin-right:160px;}
+.refundmentDiv .right .rightMiddle{ height:102px; border-bottom: 1px solid #ccc;}
+.rightLeft {float:left;width: 55px;line-height:102px;height: 102px;text-align: center;}
+.rightRight {float:left;width:430px;}
+
+.current_tab {background-color: #C3C3C3;}

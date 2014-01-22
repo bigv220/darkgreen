@@ -804,6 +804,34 @@ function countTotal() {
      $('#refundmentdiv').css('display', 'none');
  }
 
+ function apply_after_service(thisO, id) {
+     $('#orderId').val(id);
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#get_shouhou_popup').css('display', 'block');
+     $('#get_shouhou_popup').css('left', objLeft-420);
+     $('#get_shouhou_popup').css('top', objTop+20);
+ }
+
+ function applyYes() {
+     var id = $('#orderId').val();
+     window.location.href = '?job=after_service&id='+ id + '&ifservice=1';
+ }
+
+ function applyNo() {
+     $('#get_shouhou_popup').css('display', 'none');
+ }
+
+ function search_order() {
+     var search_con = $('#searchArea').val();
+     if(search_con == '') {
+         alert('请输入查询内容!');
+         return;
+     }
+     window.location.href = '?job=search&con='+ search_con;
+ }
+
  $(document).ready(function() {
      countTotal();
 

@@ -12,3 +12,7 @@ CREATE TABLE `home_order_unit_info` (
 
 #2014-1-21
 alter table home_shop_join add column if_refundment tinyint(1) default 0;
+
+#2014-1-22
+alter table home_shop_join add column if_receive tinyint(1) default 0;
+alter table home_shop_join add column if_after_service tinyint(1) default 0;

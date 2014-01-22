@@ -63,7 +63,7 @@ while($rs = $db->fetch_array($query)) {
     $rs['hownum'] = $_SESSION['goods_in_cart'][$uid][$rs['id']]['quantity'];
     $infodb[$rs['rid']] = $rs;
 }
-
+print_r($infodb);exit;
 
 $fidDB[mid] = 2;
 $contact_db=$db->get_one("SELECT B.* FROM `{$_pre}content_$fidDB[mid]` B LEFT JOIN `{$pre}memberdata` D ON b.uid=D.uid WHERE B.uid='$lfjuid' order by rid desc");

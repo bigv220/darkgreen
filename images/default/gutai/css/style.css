@@ -90,3 +90,4 @@ body{ background:#fff;  color:#000; font-family:"微软雅黑" }
 .rightRight {float:left;width:430px;}
 
 .current_tab {background-color: #C3C3C3;}
+.protocol_text_display {display: none;}

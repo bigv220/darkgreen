@@ -207,16 +207,22 @@ EOT;
 
             <div class="shopbuy">
 
-              <form name="buyform" id="buyform" method="post" action="join.php?fid=$fid&cid=$id">
+              <form name="buyform" id="buyform" method="post" action="join.php?fid=$fid&cid=$id&uid=$uid">
                 <span class="input">
                 <input type="hidden" name="hownum" size="8" value="1">
                 <input type="hidden" name="is_ask" id="is_ask" value="0">
                 </span>
                   <span class="butter"><a href="javascript:void(0);" onclick="postbuy('only_ask');">询价洽谈</a>
                 </span>
-                  <span class="butter"><a href="javascript:;" onClick="postbuy('buy')">现在购买</a>
-                </span>
-
+<!--
+EOT;
+if(!empty($order_db)){print <<<EOT
+-->
+    <span class="butter"><a href="javascript:;" onClick="postbuy('buy')">现在购买</a>             </span>
+<!--
+EOT;
+}print <<<EOT
+-->
                 <script defer src="images/jquery.flexslider-min.js"></script>
                 <script language="JavaScript">
 <!--
@@ -229,16 +235,22 @@ $(document).ready(function() {
 });
 function postbuy(status){
     if (status=='buy') {
-        document.getElementById("buyform").submit();
+        var uid = $rsdb[uid];
+        var price = $rsdb[price];
+        $.post("$webdb[www_url]/do/add_to_cart.php", {data: {fid:$fid, cid:$id, uid:uid, price:price}}, function(data) {
+            document.getElementById("buyform").submit();
+        });
     } else if (status=='only_ask') {
         $('#is_ask').val('1');
         document.getElementById("buyform").submit();
     }
     else{
         if('$lfjuid'!= ''){
-            $.post("$webdb[www_url]/do/add_to_cart.php", {data: {fid:$fid, cid:$id}}, function(data) {
+            var uid = $rsdb[uid];
+            var price = $rsdb[price];
+            $.post("$webdb[www_url]/do/add_to_cart.php", {data: {fid:$fid, cid:$id, uid:uid, price:price}}, function(data) {
                 if (data =='success') {
-
+                    alert('已加入采购列表');
                 } else {
                     alert('未能成功加入，请重新加入采购列表');
                 }
@@ -257,7 +269,15 @@ function postbuy(status){
                     <a href="job.php?job=report&fid=$fid&id=$id" class="report" target="_blank">举报</a>
                     <a href="job.php?job=collect&id=$id" class="fav" target="_blank">收藏</a>
                 </div>
+<!--
+EOT;
+if(!empty($order_db)){print <<<EOT
+-->
                 <span class="add_to_cart_btn"><a href="javascript:;" onClick="postbuy('pushtocart')">加入采购列表</a>
+<!--
+EOT;
+}print <<<EOT
+-->
                 </span>
                   <div style="clear:both;"></div>
               </form>
@@ -289,7 +309,20 @@ function postbuy(status){
           <div>联系电话:$companydb[qy_contact_tel]</div>
           <div>传真:$companydb[qy_contact_fax]</div>
           <div>联系邮箱:$companydb[qy_contact_email]</div>
-          <div class="img"><a href="$webdb[www_url]/shome/?uid=$rsdb[uid]" target="_blank"><img src="images/default/goshop.gif" border="0"></a></div>
+<!--
+EOT;
+if(!empty($order_db)){print <<<EOT
+-->
+            <div class="img"><a href="$webdb[www_url]/shome/?uid=$rsdb[uid]" target="_blank"><img src="images/default/goshop.gif" border="0"></a></div>
+<!--
+EOT;
+}else{print <<<EOT
+-->
+            <div class="img"><a href="$webdb[www_url]/company.$rsdb[uid]" target="_blank"><img src="images/default/pingtai.gif" border="0"></a></div>
+<!--
+EOT;
+}print <<<EOT
+-->
         </div>
       </div>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">

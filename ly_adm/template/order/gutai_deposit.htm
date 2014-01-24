@@ -23,7 +23,7 @@ foreach($listdb as $key=>$value) {print <<<EOT
     <tr bgcolor="#FFFFFF">
         <td>{$value[posttime]}</td>
         <td>{$value[username]}</td>
-        <td><img src="images/right.jpg" /> </td>
+        <td>{$value[buyer_confirmed]}</td>
         <td>{$value[amount]}</td>
         <td>{$value[amount]} (1/1RMB)</td>
         <td>{$value[end_comment]}</td>

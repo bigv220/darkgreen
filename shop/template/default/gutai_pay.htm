@@ -30,8 +30,8 @@ EOT;
 if($job=='list' || $job=='send') {
 print <<<EOT
 -->
-            <div class="seller typeOn"><a href="$webdb[www_url]/shop/gutai_pay.php?job=list">我是卖家</a></div>
-            <div class="buyer"><a href="$webdb[www_url]/shop/gutai_pay.php?job=mylist">我是买家</a></div>
+            <div class="seller typeOn"><a href="$webdb[www_url]/shop/gutai_pay.php?job=list">卖出</a></div>
+            <div class="buyer"><a href="$webdb[www_url]/shop/gutai_pay.php?job=mylist">买入</a></div>
 <!--
 EOT;
 } else {
@@ -46,12 +46,15 @@ print <<<EOT
 -->
 
          </div>
+        <div style="float: right;"><input type="text" id="searchArea" class="yzIpt" style="width: 300px" />
+            <input type="button" value="搜索" class="btnSend" onclick="search_order();" />
+        </div>
         <br/>
         <ul class="oBox2">
             <li>
                 <div class=" t2">
-                <span class="sGreen">手机验证</span><input type="text" style="display:none;" class="yzIpt" value="重新输入">
-                        <span class="ml30 sGray">输入您采购单中预留的手机号码 </span><input   type='text'  name='postdb[order_mobphone]' id='atc_order_mobphone'  value='$rsdb[order_mobphone]'>
+                <span class="sGreen">系统操作验证</span><input type="text" style="display:none;" class="yzIpt" value="重新输入">
+                        <span class="ml30 sGray"></span><input   type='text'  name='postdb[order_mobphone]' id='atc_order_mobphone'  value='$gutai_conf[gutai_mobile]' readonly />
                         <input type="button" class="btnSend" value="发送" id="send_validate_code"  onclick="send_order_sms('$webdb[www_url]', 2);"/>
                         <span class="ml30 sGray">写入收到的验证码</span>
                         <input type="text" name="yznum"  id="yznum" class="yzIpt"/><input type="button" value="确定" id="confirm_phone" onclick="confirm_sms_code('$webdb[www_url]');"/>
@@ -61,30 +64,26 @@ print <<<EOT
                 </div>
             </li>
         </ul>
-        <div class="oBox3">
+        <div class="rtWrap" style="width: 920px;">
+            <h2 style="text-align:left">&nbsp;&nbsp;付款 和 终止</h2>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="oBox3" style="width: 920px;">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody><tr>
-                    <th width="140" scope="col">序号</th>
-                    <th width="140" scope="col">商品名称</th>
+                    <th width="30" scope="col">序号</th>
+                    <th width="120" scope="col">订单</th>
                     <th width="100" scope="col">协约日期</th>
                     <th width="120" scope="col">系统设置的付款日</th>
-                    <th width="80" scope="col">金额</th>
                     <th width="60" scope="col">状态</th>
-                    <th width="80" scope="col">发货</th>
-                    <th width="80" scope="col">支付密码</th>
-                    <th width="60" scope="col">终止</th>
-<!--
-EOT;
-if($job=='mylist') {
-print <<<EOT
--->
-                    <th width="80" scope="col">付款</th>
-<!--
-EOT;
-}
-print <<<EOT
--->
+                    <th width="70" scope="col">金额</th>
+                    <th width="50" scope="col">付款</th>
+                    <th width="50" scope="col">发货</th>
+                    <th width="70" scope="col">支付密码</th>
+                    <th width="80" scope="col">确认收货</th>
+                    <th width="60" scope="col">终止.售后</th>
                     <th scope="col">简要备注</th>
+                    <th scope="col">终止</th>
                 </tr>
 <!--
 EOT;
@@ -97,18 +96,21 @@ print <<<EOT
                     <td><span >{$rs[shop][title]}</span></td>
                     <td>$rs[posttime]</td>
                     <td><span class="sBlue">$rs[posttime]</span></td>
-                    <td><span>{$rs[shop][price]}</span>元</td>
                     <td><span  id="status{$rs[id]}">$rs[complete]</span></td>
-                    <td width="80" scope="col">$rs[send]</td>
+                    <td><span>{$rs[shop][price]}</span>元</td>
+                    <td><span>{$rs[pay]}</span></td>
+                    <td scope="col">$rs[send]</td>
 
                     <td><input type="password" class="yzIpt " value="" id="pwd{$rs[id]}" ></td>
-<!--
+                    <td><span>{$rs[receive]}</span></td>
+                    <td>{$rs[afterService]}</td>
+                    <td><input type="text" class="yzIpt" id="comment{$rs[id]}" value="$rs[end_comment]"></td>
+                    <!--
 EOT;
 if($job=='mylist') {
 print <<<EOT
 -->
                     <td><span class="sp2" style="cursor:pointer;" onclick="end_order({$rs[id]}, '$rs[ajaxurl]',0);">终止</span></td>
-                    <td><span class="sp1">$rs[pay]</span></td>
 <!--
 EOT;
 } else {
@@ -120,7 +122,6 @@ EOT;
 }
 print <<<EOT
 -->
-                    <td><input type="text" class="yzIpt" id="comment{$rs[id]}" value="$rs[end_comment]"></td>
                 </tr>
 <!--
 EOT;
@@ -132,7 +133,7 @@ EOT;
 </div>
 </div>
 
-<div id="get_goods_verification_popup" class="pay_popup">
+<div id="get_goods_verification_popup" class="pay_popup" style="display: none;">
     <div class="content">
         <p class="information">请核实，您收到的货物符合双方光宇本商品交易的约定。<br/>
             点击[确认收货]，即指令平台将货款立即转入卖家账户！<br/>
@@ -144,18 +145,20 @@ EOT;
     </div>
 </div>
 
-<div id="get_shouhou_popup" class="pay_popup">
+<div id="get_shouhou_popup" class="pay_popup" style="display: none;">
     <div class="content">
-        <p class="information">请核实，您收到的货物符合双方光宇本商品交易的约定。<br/>
+        <p class="information">请核实，您收到的货物符合双方关于商品交易的约定。<br/>
             点击[申请售后]，即平台、卖方将复核您的申请。<br/>
             请谨慎操作，平台积极维护消费者权益和优良的商务协议！<br/>
             首先，将相关资料（照片、文档）上传至平台管理中心和卖方客户中心。</p>
         <div class="action_bars">
-            <button class="ok">确定</button>
-            <button class="cancel">取消</button>
+            <input type="hidden" id="orderId" />
+            <button class="ok" onclick="applyYes()">确定</button>
+            <button class="cancel" onclick="applyNo()">取消</button>
         </div>
     </div>
 </div>
+
 <div id="upload_shouhou_resources_popup" class="pay_popup">
     <div class="content">
         <p>申请支付终止或卖方售后服务应确定原因，请选择</p>

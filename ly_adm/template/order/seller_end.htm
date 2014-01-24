@@ -4,25 +4,51 @@ print <<<EOT
 -->
 <table width="100%" cellspacing="1" cellpadding="3" class="tablewidth">
     <tbody><tr class="head">
-        <td colspan="4">
+        <td colspan="7">
             <div align="center"><font color="#FFFFFF">卖家终止</font></div>
         </td>
     </tr>
     <tr bgcolor="#FFFFFF">
-        <td width="25%" align="left">采购单编号</td>
-        <td width="25%" align="left">卖家指令付款</td>
-        <td width="25%" align="left">卖家确认</td>
-        <td width="25%" align="left">简要备注</td>
+        <td width="15%" align="left">采购单编号</td>
+        <td width="15%" align="left">标题</td>
+        <td width="15%" align="left">系统付款日期</td>
+        <td width="15%" align="left">买家确认</td>
+        <td width="15%" align="left">买家信息</td>
+        <td width="15%" align="left">管理操作</td>
+        <td width="15%" align="left">简要备注</td>
     </tr>
 <!--
 EOT;
 foreach($listdb as $key=>$value) {print <<<EOT
 -->
     <tr bgcolor="#FFFFFF">
-        <td width="25%" align="left">{$value[id]}</td>
-        <td width="25%" align="left">{$value[end_date]} 指令终止</td>
-        <td width="25%" align="left"><img src="images/right.jpg" /> </td>
-        <td width="25%" align="left">{$value[end_comment]}</td>
+        <td>{$value[id]}</td>
+        <td>{$value[title]}</td>
+        <td>{$value[end_date]}</td>
+        <td>{$value[buyer_confirmed]}</td>
+        <td>
+            暂停!
+        </td>
+        <td align="left" id="oper{$value[id]}">协调中
+        </td>
+        <td>
+<!--
+EOT;
+if($value[admin_confirm] == 1) {print <<<EOT
+-->
+            已确认
+<!--
+EOT;
+} else {print <<<EOT
+-->
+            <div id="btnDdiv{$value[id]}">
+                <input type="button" id="confirmBtn" onclick="admin_confirm({$value[id]},'{$ajaxUlr}','admin_confirm')" value="确认" />
+            </div>
+<!--
+EOT;
+}print <<<EOT
+-->
+        </td>
     </tr>
 <!--
 EOT;

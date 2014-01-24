@@ -19,10 +19,12 @@ while($rs = $db->fetch_array($query)){
 	$array[]=$rs;
 }
 $fid_str = implode(',',$fid_arr);
-$query2 = $db->query("SELECT * FROM {$pre}shop_sort WHERE fid in ($fid_str)");
 $fid_content = array();
+if (!empty($fid_str)) {
+$query2 = $db->query("SELECT * FROM {$pre}shop_sort WHERE fid in ($fid_str)");
 while ($rs2 = $db->fetch_array($query2)) {
     $fid_content[] = $rs2;
+}
 }
 $link = "shome/?m=$m&uid=$uid";
 $showpage=getpage("","","?m=$m&uid=$uid",$rows,$RS['FOUND_ROWS()']);

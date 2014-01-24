@@ -5,7 +5,7 @@ if($action=='del'){
     del_order($id);
     refreshto($FROMURL,'',0);
 
-}elseif($job=='pay'||$job=='send'||$job=='del'){
+}elseif($job=='pay'||$job=='send'||$job=='del'||$job=='receive'||$job=='after_service'){
     $rsdb=$db->get_one("SELECT * FROM {$_pre}join WHERE id='$id'");
     if($rsdb[cuid]!=$lfjuid){
         showerr("你没权限!");
@@ -14,6 +14,10 @@ if($action=='del'){
         $db->query("UPDATE {$_pre}join SET ifpay='$ifpay' WHERE id='$id'");
     }elseif($job=='send'){
         $db->query("UPDATE {$_pre}join SET ifsend='$ifsend' WHERE id='$id'");
+    }elseif($job=='receive'){
+        $db->query("UPDATE {$_pre}join SET if_receive='$ifreceive' WHERE id='$id'");
+    }elseif($job=='after_service'){
+        $db->query("UPDATE {$_pre}join SET if_after_service='$ifservice' WHERE id='$id'");
     }
 }
 
@@ -58,7 +62,11 @@ if(!$array[yeepay_id]&&!$array[tenpay_id]&&!$array[alipay_id]&&!$array[pay99_id]
     while($rs = $db->fetch_array($query))
     {
         if ($rs[fid]==null ) continue;
-        $rs[shop]=$db->get_one("SELECT * FROM {$_pre}content WHERE id='$rs[cid]'");
+
+        if($job=='search') {
+            $search_sql = " AND title like '%".$con."%'";
+        }
+        $rs[shop]=$db->get_one("SELECT * FROM {$_pre}content WHERE id='$rs[cid]'" . $search_sql);
         $i_posttime = $rs[posttime];
         $rs[posttime]=date("Y-m-d H:i",$rs[posttime]);
         $rs[system_posttime]=date("Y-m-d H:i",$i_posttime+3600*24*10);
@@ -82,9 +90,12 @@ if(!$array[yeepay_id]&&!$array[tenpay_id]&&!$array[alipay_id]&&!$array[pay99_id]
                 $rs[complete] = $rs[ifpay]&&$rs[ifsend]? "完成": "<span style='color:green'>进行中</span>";
             }
             $rs[send]=$rs[ifsend]?"<A style='color:red;'>已发</A>":"未发";
+            $rs[afterService]=$rs[if_after_service]?"<A class='sp2' HREF='?job=after_service&id=$rs[id]&ifservice=0' style='color:red;'>已申请售后</A>":"<A class='sp2' HREF='javascript:void(0);' onclick='apply_after_service(this,".$rs[id].")' style='color:#333333;'>申请售后</A>";
         }else{	//客户订单
             $rs[pay]=$rs[ifpay]?"<A class='sp2' HREF='?job=pay&id=$rs[id]&ifpay=0' style='color:red;'>已付</A>":"<A class='sp2' HREF='?job=pay&id=$rs[id]&ifpay=1' style='color:#333333;'>未付</A>";
             $rs[send]=$rs[ifsend]?"<A class='sp2' HREF='?job=send&id=$rs[id]&ifsend=0' style='color:red;'>已发</A>":"<A class='sp2' HREF='?job=send&id=$rs[id]&ifsend=1' style='color:#333333;'>未发</A>";
+            $rs[receive]=$rs[if_receive]?"<A class='sp2' HREF='?job=receive&id=$rs[id]&ifreceive=0' style='color:red;'>已收货</A>":"<A class='sp2' HREF='?job=receive&id=$rs[id]&ifreceive=1' style='color:#333333;'>确认收货</A>";
+            $rs[afterService]=$rs[if_after_service]?"<A class='sp2' HREF='?job=after_service&id=$rs[id]&ifservice=0' style='color:red;'>已申请售后</A>":"<A class='sp2' HREF='javascript:void(0);' onclick='apply_after_service(this,".$rs[id].")' style='color:#333333;'>申请售后</A>";
             $rs[complete] = $rs[ifpay]&&$rs[ifsend]? "完成": "进行中";
             $rs[editurl]="?job=edit&id=$rs[id]";
         }

@@ -15,7 +15,7 @@ body{ background:#fff;  color:#000; font-family:"微软雅黑" }
 .rtWrap h2{ height:23px; background:#c3c3c3; text-align:center; line-height:23px; color:#fff; position:relative;}
 .rtWrap .num{ position:absolute; left:20px; height:23px; line-height:23px;}
 .rtWrap .oBox1{ border:1px dashed #c1c1c1; border-top:none; padding:20px 0; line-height:20px;}
-.rtWrap .oBox2{ margin-bottom:20px;}
+.rtWrap .oBox2{ margin-bottom:20px; clear: both;}
 .rtWrap .oBox2 li{  line-height:24px; border-bottom:1px dashed #c1c1c1; padding:8px 0}
 .rtWrap .oBox2 .sp1{ height:16px; padding:0 5px; line-height:16px; border:1px solid #d2cc76;}
 .rtWrap .oBox2 .sp2{ height:16px; padding:0 5px; line-height:16px; border:1px solid #c4c4c4;}
@@ -24,7 +24,7 @@ body{ background:#fff;  color:#000; font-family:"微软雅黑" }
 .yzIpt{ height:18px; line-height:16px; border:1px solid #c4c4c4; width:60px; color:#7c7b83; padding:0 5px;}
 .Ipt2{ height:18px; line-height:16px; border:1px solid #c4c4c4; width:100px; color:#7c7b83; padding:0 5px;}
 .btnSend{ height:20px; line-height:18px; border:1px solid #c4c4c4; width:40px; color:#7c7b83; text-align:center; cursor:pointer; background:#fff;}
-.foot{  border-bottom:7px solid #ab7f64; color:#7c7c7el; line-height:24px; text-align:right; padding-top:20px;  color:#7e7e7e;}
+.foot{  border-bottom:7px solid #ab7f64; color:#7c7c7e; line-height:24px; text-align:right; padding-top:20px;  color:#7e7e7e;}
 .rtWrap .oBox3{ width:840px;}
 .rtWrap .oBox3 th{ height:30px; line-height:30px; border-bottom:1px dashed #c1c1c1; text-align:center;white-space:nowrap;}
 .rtWrap .oBox3 td{ padding:10px 0; line-height:18px; border-bottom:1px dashed #c1c1c1; text-align:center;white-space:nowrap;}
@@ -37,7 +37,7 @@ body{ background:#fff;  color:#000; font-family:"微软雅黑" }
 .seller { border:1px solid #c9c59f; width:110px;height:15px;padding: 5px;text-align:center;float:left;cursor: pointer;}
 .buyer { border:1px solid #c9c59f;width:110px;height:15px;padding: 5px;text-align:center;float:right;cursor: pointer;}
 .typeOn {background:#fffddd;}
-.typeMain {width:260px;display:block;padding-bottom:10px;}
+.typeMain {width:260px;display:block;padding-bottom:10px;float: left;}
 #basic-modal-content {display:none;}
 
 /* Overlay */
@@ -75,3 +75,19 @@ body{ background:#fff;  color:#000; font-family:"微软雅黑" }
 #get_shouhou_popup{display:none;}
 #upload_shouhou_resources_popup{display:none;}
 #already_submitted_popup{display:none;}
+
+.orderTable { border: 1px solid #ccc;margin: 0px auto; }
+.orderTable tr td { text-align: center;}
+
+.refundmentDiv { border: 1px solid #ccc; width:500px; height: 272px;position:absolute;background-color: white;}
+.refundmentDiv .left { background-color: #0033FF; float:left;width: 15px; height:272px;}
+.refundmentDiv .right { width:485px; float: left; }
+.refundmentDiv .right .rightTop{ height:55px; line-height:55px;width:485px; border-bottom: 1px solid #ccc;}
+.refundmentDiv .right .rightTop img {padding: 5px 0px 0px 15px;}
+.refundmentDiv .right .rightTop .right_text {padding-bottom: 5px;float:right;margin-right:160px;}
+.refundmentDiv .right .rightMiddle{ height:102px; border-bottom: 1px solid #ccc;}
+.rightLeft {float:left;width: 55px;line-height:102px;height: 102px;text-align: center;}
+.rightRight {float:left;width:430px;}
+
+.current_tab {background-color: #C3C3C3;}
+.protocol_text_display {display: none;}

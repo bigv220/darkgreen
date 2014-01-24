@@ -489,10 +489,13 @@ function deliver_type(type, thisO) {
         $('#deliver_desc').val($('#transfer_comment3').val());
         $('#price_content').val($('#transfer_fee3').val());
     }
+
+    $('#deliverTotal').val($('#deliver_total').html());
     
-     var pro_total = parseInt($('#single_price').html()) * parseInt($('#shopnum').val());
-    pro_total += parseFloat($('#deliver_total').html());
-    $('#total_money').html(pro_total);
+//     var pro_total = parseInt($('#single_price').html()) * parseInt($('#shopnum').val());
+//     pro_total += parseFloat($('#deliver_total').html());
+//     $('#total_money').html(pro_total);
+    countTotal();
 }
 function change_paytype(type) {
     if (type == 5) {
@@ -527,8 +530,51 @@ function change_paytype(type) {
      );
  }
 
- function withdraw(url) {
-     $.post(url, {job:'withdraw',money:$('#withdraw_money').val(),pwd:$('#withdraw_pwd').val()}, function(data) {
+ function withdraw(thisO,url,uid) {
+     var balanceValue = parseInt($('#balanceValue').val());
+     if(balanceValue == 0) {
+         alert('余额为0，不能完成提现!');
+         return;
+     }
+     var withdrawMoney = parseInt($('#withdraw_money').val());
+     var withdrawPwd = $('#withdraw_pwd').val();
+
+     if(withdrawMoney == "" || withdrawPwd == "") {
+         alert('请输入提现金额和支付密码');
+         return;
+     }
+
+     if(withdrawMoney > balanceValue) {
+         alert('余额不足，交易金额最高为 '+ balanceValue + ' 元，请重新输入!');
+         return;
+     }
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#withdrawdiv').css('display', 'block');
+     $('#withdrawdiv').css('left', objLeft-420);
+     $('#withdrawdiv').css('top', objTop+20);
+
+     $('#withdrawMoney').html(withdrawMoney);
+
+     $.post(url, {job:'get_gutai_info',uid: uid}, function(data) {
+         if (data != '') {
+             var arr = data.split('|');
+             $('#customName').html(arr[0]);
+             $('#bankName').html(arr[1]);
+             $('#withdrawAccount').html(arr[2]);
+         }
+     });
+
+ }
+
+ function withdrawYes(url) {
+     $('#withdrawdiv').css('display', 'none');
+
+     var withdrawMoney = $('#withdraw_money').val();
+     var withdrawPwd = $('#withdraw_pwd').val();
+
+     $.post(url, {job:'withdraw',money:withdrawMoney,pwd:withdrawPwd}, function(data) {
          if (data =='phone') {alert('请验证手机');}
          if (data =='pwd') {alert('支付密码错误，请重新输入');}
          else {
@@ -537,15 +583,46 @@ function change_paytype(type) {
      });
  }
 
- function charge(url) {
-     $.post(url, {job:'charge',price:$('#charge_money').val(),pwd:$('#charge_pwd').val()}, function(data) {
+ function withdrawNo() {
+     $('#withdrawdiv').css('display', 'none');
+ }
+
+ function charge(thisO) {
+     var chargeMoney = $('#charge_money').val();
+     var chargePwd = $('#charge_pwd').val();
+
+     if(chargeMoney == "" || chargePwd == "") {
+         alert('请输入充值金额和支付密码');
+         return;
+     }
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#chargediv').css('display', 'block');
+     $('#chargediv').css('left', objLeft-420);
+     $('#chargediv').css('top', objTop+20);
+
+     $('#chargeMoney').html(chargeMoney);
+ }
+
+ function chargeYes(url) {
+     $('#chargediv').css('display', 'none');
+
+     var chargeMoney = $('#charge_money').val();
+     var chargePwd = $('#charge_pwd').val();
+
+     $.post(url, {job:'charge',price:chargeMoney,pwd:chargePwd}, function(data) {
          if (data =='phone') {alert('请验证手机');return;}
          if (data =='pwd') {alert('支付密码错误，请重新输入');return;}
          else {
-                 window.location.href = data;
+             window.location.href = data;
 
          }
      });
+ }
+
+ function chargeNo() {
+     $('#chargediv').css('display', 'none');
  }
 
  function pop_up() {
@@ -575,16 +652,23 @@ function change_paytype(type) {
          window.open(url+'/upload_files/documents/' + data);
      });
  }
- function change_price() {
-     if ($('#shopnum').val() > 0) {
-         var pro_total = parseInt($('#single_price').html()) * parseInt($('#shopnum').val());
-         $('#total_product_price').html(pro_total);
-
-         pro_total += parseFloat($('#deliver_total').html());
-         $('#total_money').html(pro_total);
+ function change_price(id) {
+     if ($('#shopnum_'+id).val() > 0) {
+         var single_total = parseInt($('#single_price_'+id).html()) * parseInt($('#shopnum_'+id).val());
+         $('#total_product_price_'+id).html(single_total);
+         countTotal();
      }
  }
+function countTotal() {
+    var pro_total = 0;
+    pro_total += parseFloat($('#deliver_total').html());
+    $('.table_bg').find('.total_product_price').each(function() {
+        pro_total += parseFloat($(this).html());
+    });
 
+    $('#total_money').html(pro_total);
+    $('#totalMoney').val(pro_total);
+}
  function admin_confirm(id, url, jobStr) {
      $div_id = '#btnDdiv' + id;
      $.post(url, {job:jobStr,id:id}, function(data) {
@@ -617,8 +701,150 @@ function change_paytype(type) {
      window.open(url,name,'height='+iHeight+',,innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',status=no,toolbar=no,menubar=no,location=no,resizable=no,scrollbars=0,titlebar=no');
  }
 
+ function saveUnitInfo(url) {
+     var sendForm = $('#sendForm');
+     var order_id = $('#orderId').val();
+     var unit_name = $('#unit_name').val();
+     var bill_num = $('#bill_number').val();
+     if(order_id == null) {
+         return;
+     }
+
+     if(unit_name == "" || bill_num == "") {
+         alert('请输入物流信息');
+         return;
+     }
+     $.post(url, sendForm.serialize(), function(data) {
+         if (data =='succ') {
+             var url = window.location.href;
+             url = url.substring(0, url.indexOf('?'));
+             window.location.href = url + "?job=send&id=" + order_id + "&ifsend=1";
+         }
+     });
+ }
+
+ function cancelUnitInfo() {
+     $('#senddiv').css('display', 'none');
+ }
+
+ function sendBtnClick(event, thisO) {
+     var order_id = $(thisO).attr('alt');
+
+     $('#orderId').val(order_id);
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+
+     $('#senddiv').css('display', 'block');
+     $('#senddiv').css('left', objLeft-250);
+     $('#senddiv').css('top', objTop+20);
+ }
+
+ function getOffsetTop(obj){
+     var tmp = obj.offsetTop;
+     var val = obj.offsetParent;
+     while(val != null){
+         tmp += val.offsetTop;
+         val = val.offsetParent;
+     }
+     return tmp;
+ }
+ function getOffsetLeft(obj){
+     var tmp = obj.offsetLeft;
+     var val = obj.offsetParent;
+     while(val != null){
+         tmp += val.offsetLeft;
+         val = val.offsetParent;
+     }
+     return tmp;
+ }
+
+ function refundmentClick(thisO,url,uid, money,id) {
+    $('#refundment_money').html(money);
+     $('#order_id').val(id);
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#refundmentdiv').css('display', 'block');
+     $('#refundmentdiv').css('left', objLeft-420);
+     $('#refundmentdiv').css('top', objTop+20);
+
+     $.post(url, {job:'get_gutai_info',uid: uid}, function(data) {
+         if (data != '') {
+             var arr = data.split('|');
+             $('#custom_name').html(arr[0]);
+             $('#bank_name').html(arr[1]);
+             $('#account').html(arr[2]);
+         }
+     });
+ }
+
+ function refundmentYes(url) {
+     $.post(url, {job:'refundment_yes',id: $('#order_id').val()}, function(data) {
+         if (data == 'succ') {
+             $('#refundmentdiv').css('display', 'none');
+         }
+     });
+ }
+
+ function selectTab(id) {
+     $("#tab_area span").each(function(){
+         $(this).removeAttr('class');
+     });
+
+     if(id == '充值') {
+         $('#tab2').addClass('current_tab');
+     } else if(id == '提现') {
+         $('#tab1').addClass('current_tab');
+     } else {
+         $('#tab3').addClass('current_tab');
+     }
+ }
+
+ function refundmentNo() {
+     $('#refundmentdiv').css('display', 'none');
+ }
+
+ function apply_after_service(thisO, id) {
+     $('#orderId').val(id);
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#get_shouhou_popup').css('display', 'block');
+     $('#get_shouhou_popup').css('left', objLeft-420);
+     $('#get_shouhou_popup').css('top', objTop+20);
+ }
+
+ function applyYes() {
+     var id = $('#orderId').val();
+     window.location.href = '?job=after_service&id='+ id + '&ifservice=1';
+ }
+
+ function applyNo() {
+     $('#get_shouhou_popup').css('display', 'none');
+ }
+
+ function search_order() {
+     var search_con = $('#searchArea').val();
+     if(search_con == '') {
+         alert('请输入查询内容!');
+         return;
+     }
+     window.location.href = '?job=search&con='+ search_con;
+ }
+
+ function protocol_text(thisO) {
+     var txt = $(thisO).prev().val();
+     $('#protocolTxt').html(txt);
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#protocoldiv').toggleClass('protocol_text_display');
+     $('#protocoldiv').css('left', objLeft-420);
+     $('#protocoldiv').css('top', objTop+20);
+ }
+
  $(document).ready(function() {
-    change_price();
+     countTotal();
 
      $('.show_order_popup_btn').click(function(){
          var imgsrc = $('.show_order_popup_btn').attr('src');

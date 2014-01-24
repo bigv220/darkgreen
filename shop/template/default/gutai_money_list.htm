@@ -7,7 +7,9 @@ print <<<EOT
     $(document).ready(function() {
         $('#btn_use_gutai').click(function() {
 
-        })
+        });
+
+        selectTab('{$opera}');
     });
 </script>
 <div class="w1000 mg_at clearfix">
@@ -32,12 +34,17 @@ print <<<EOT
 
     <div class="oBox3">
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
-            <tbody><tr>
-                <th width="140" scope="col">序号</th>
-                <th width="120" scope="col">操作</th>
-                <th width="80" scope="col">金额</th>
-                <th width="60" scope="col">状态</th>
-                <th width="80" scope="col">时间</th>
+            <tbody>
+            <tr>
+                <td colspan="4">
+                    <div style="float: left;">帐户名称：{$gutai_conf[gutai_name]} 银行名称：{$gutai_conf[gutai_bankid]} 帐号：{$gutai_conf[gutai_obligate_account]}
+                         系统显示操作人已认证</div>
+                    <div id="tab_area" style="float:right;">
+                        <span id="tab1"><a href="gutai_money_list.php?opera=提现">提现</a></span> |
+                        <span id="tab2"><a href="gutai_money_list.php?opera=充值">充值</a></span> |
+                        <span id="tab3"><a href="gutai_money_list.php?opera=退款">退款</a></span>
+                    </div>
+                </td>
             </tr>
 <!--
 EOT;
@@ -46,11 +53,10 @@ if(true) {
 print <<<EOT
 -->
 <tr>
-    <td><span >{$rs[id]}</span></td>
-    <td>$rs[gutai_type]</td>
-    <td><span>{$rs[amount]}</span>元</td>
-    <td><span  id="status{$rs[id]}">$rs[status]</span></td>
-    <td><span class="sBlue">$rs[posttime]</span></td>
+    <td><span class="sBlue">时间：$rs[posttime]</span></td>
+    <td>操作内容：$rs[gutai_type]</td>
+    <td>金额：<span>{$rs[amount]}</span>元</td>
+    <td>状态：<span  id="status{$rs[id]}">$rs[status]</span></td>
 </tr>
 <!--
 EOT;

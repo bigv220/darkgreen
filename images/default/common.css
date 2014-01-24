@@ -83,6 +83,7 @@ a.logintop:active{text-decoration: none;color: #333333;font-size:12px;}
 #site-nav .services .menu-bd-panel {PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px}
 #site-nav .services .menu-bd .last {BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px}
 #site-nav { margin-right:-10px; margin-top:-4px;*margin-top:-2px}
+#ly_top_f{ margin:0 auto; width:100%; background:url(ly_top_bg.jpg) repeat-x left top; height:70px;}
 #ly_top{ margin:0 auto; width:100%; background:url(ly_top_bg.jpg) repeat-x left top; height:150px;}
   .ly_top_c{ margin:0 auto; width:1200px; height:25px;}
 	.ly_top_c_l{ float:left; width:650px; font-size:12px; color:#333; line-height:25px;position:relative;}
@@ -90,7 +91,7 @@ a.logintop:active{text-decoration: none;color: #333333;font-size:12px;}
 	  .ly_top_c_c li{ float:left; list-style:none;  width:85px;}
 	.ly_top_c_r{float:right; width:320px;font-size:12px; color:#333; line-height:25px;background:url(lysw_12.jpg) no-repeat left top; padding-left:10px;}
 	  .ly_top_c_r li{ float:left; list-style:none; width:60px; padding-left:20px; text-align:right}
-	
+
 	.ly_top_logo{ margin:0 auto; width:1200px; height:85px;}
 	  .ly_top_logo_l{ float:left; width:275px; height:50px; text-align:left; overflow:hidden; padding-top:35px;}
 	  .ly_top_logo_r{float:left; width:925px; background:url(lysw_19.jpg) no-repeat right center;height:85px; line-height:85px; font-size:14px; text-align:left}
@@ -113,7 +114,7 @@ a.logintop:active{text-decoration: none;color: #333333;font-size:12px;}
 		.inputsearch{ width:330px; height:19px; border:1px solid #CCC; }
 		.ly_top_menu_b{ width:140px; float:left; padding-top:7px; height:33px;}
 		.ly_top_menu_l{ width:108px; float:right; }
-		
+        .ly_top_menu_k_f{ float:left; height:33px; padding-top:17px; text-align:left;font-size: 15px;}
 #ly_main{margin:0 auto; width:1200px;}
 #ly_main_home{margin:0 auto; width:1200px; background-color:#eaeaea}
   #ly_main_left{ float:left; width:960px; padding:10px;}

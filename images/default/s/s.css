@@ -92,7 +92,7 @@ IMG {
 	POSITION: absolute; WIDTH: 600px;  HEIGHT: 100px; OVERFLOW: hidden; TOP: 0px; LEFT: 325px;
 }
 .Hearder .searchcont .module {
-	HEIGHT: 35px; OVERFLOW: hidden
+	HEIGHT: 35px; OVERFLOW: hidden;font-size: 16px;
 }
 .Hearder .searchcont .module LI {
 	LINE-HEIGHT: 35px; PADDING-LEFT: 15px; BACKGROUND: url(spac.gif) no-repeat left 12px; FLOAT: left;

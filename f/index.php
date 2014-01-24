@@ -10,7 +10,7 @@ $titleDB['keywords']	= "{$city_DB[name][$city_id]} $webdb[Info_metakeywords]";
 $titleDB['description'] = $city_DB[name][$city_id].$webdb[Info_description]?$webdb[Info_description] : $webdb[description];
 
 //主页个性头部与尾部
-$head_tpl=html('head');
+$head_tpl=html('f_head');
 $foot_tpl=html('foot');
 if($webdb[IF_Private_tpl]){
 	if(is_file(Mpath.$webdb[Private_tpl_head])){

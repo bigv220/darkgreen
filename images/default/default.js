@@ -832,6 +832,17 @@ function countTotal() {
      window.location.href = '?job=search&con='+ search_con;
  }
 
+ function protocol_text(thisO) {
+     var txt = $(thisO).prev().val();
+     $('#protocolTxt').html(txt);
+
+     var objTop = getOffsetTop(thisO);//对象x位置
+     var objLeft = getOffsetLeft(thisO);//对象y位置
+     $('#protocoldiv').toggleClass('protocol_text_display');
+     $('#protocoldiv').css('left', objLeft-420);
+     $('#protocoldiv').css('top', objTop+20);
+ }
+
  $(document).ready(function() {
      countTotal();
 

@@ -21,7 +21,10 @@ print <<<EOT
                 <td >协议文本</td>
                 <td  width="5%">单价</td>
                 <td  width="5%">数量</td>
-                <td  width="5%">总额</td>
+                <td  width="5%">商品总价</td>
+                <td  width="5%">货运总价</td>
+                  <td  width="5%">其他</td>
+                  <td  width="5%">支付总额</td>
                 <td  width="10%">订购时间</td>
 				<td  width="10%">客户</td>
                 <td  width="5%">付款</td>
@@ -45,6 +48,9 @@ foreach($listdb AS $key=>$rs){print <<<EOT
                 <td class="middle"  align="center">{$rs[shop][price]}</td>
                 <td class="middle"  align="center">$rs[shopnum]</td>
                 <td class="middle"  align="center">$rs[totalmoney]</td>
+                  <td class="middle"  align="center">$rs[deliver_total]</td>
+                  <td class="middle"  align="center">0</td>
+                  <td class="middle"  align="center">$rs[all_total]</td>
                 <td class="middle" align="center">$rs[posttime]</td>
 				 <td class="middle" align="center">$rs[username]</td>
                 <td class="middle"  align="center">$rs[pay]</td>
@@ -76,6 +82,21 @@ EOT;
   </tr>
 </table>
 <div id="faqbg"></div>
+<div id="senddiv" class="sendinfo" style="display:block">
+    <form id="sendForm">
+        <input type="hidden" id="orderId" name="orderId" />
+        <ul>
+            <li class="line"><span>物流单位:</span><input type="text" name="unit_name" id="unit_name" /></li>
+            <li class="line"><span>单据号码:</span><input type="text" name="bill_number" id="bill_number" /></li>
+            <li class="line"><span>其他: &nbsp;&nbsp;&nbsp;</span><input type="text" name="other" /></li>
+            <li style="text-align: right;">
+                <a href="javascript:void(0)" onclick="saveUnitInfo('?action=saveSendInfo')">确定</a>
+                <a href="javascript:void(0)" onclick="cancelUnitInfo()">取消</a>
+            </li>
+        </ul>
+    </form>
+</div>
+
 <div id="faqdiv" style="display:none">
     <h2>协议文本<a href="#" class="close">关闭</a></h2>
     <div class="form" style="height: 75%; overflow-y:auto;" id="viewProtocolText">

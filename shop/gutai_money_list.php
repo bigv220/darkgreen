@@ -27,7 +27,9 @@ if(!$array[yeepay_id]&&!$array[tenpay_id]&&!$array[alipay_id]&&!$array[pay99_id]
 
     unset($listdb,$i);
 
-    $SQL=" A.uid='$lfjuid'";
+    $opera = $_GET['opera'];
+
+    $SQL=" A.uid='$lfjuid' AND gutai_type='$opera'";
 
     $query = $db->query("SELECT SQL_CALC_FOUND_ROWS A.* FROM {$_pre}charge A WHERE $SQL ORDER BY A.uid='$lfjuid' DESC LIMIT $min,$rows");
 

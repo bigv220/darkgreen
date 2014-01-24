@@ -158,7 +158,10 @@ EOT;
                         <tr >
                             <td width="16%" class="content">价格内容:<br></td>
                             <td  colspan="3" width="74%"> <input type="text" id="price_content" name="price_content" style="width:600px">
-                            &nbsp;&nbsp;<div align="right">货运总价: <span id="deliver_total">0</span> 元</div></td>
+                            &nbsp;&nbsp;<div align="right">货运总价: <span id="deliver_total">0</span> 元
+                                </div>
+                                <input type="hidden" id="deliverTotal" name="deliverTotal" />
+                            </td>
                         </tr>
                         <tr><td colspan="4"><hr/>
                             <div style="color:#808080;padding:0px 0px 10px 50px;">说明：送货方式选择邮寄的话,普通快递加收<b><font color="#FF0000">{$conf[norm_send]}</font></b>元,EMS快递加收<b><font color="#FF0000">{$conf[ems_send]}</font></b>元,平邮加收<b><font color="#FF0000">{$conf[slow_send]}</font></b>元</div>
@@ -196,7 +199,10 @@ EOT;
                         </tr>
                         <tr>
                             <td width="16%" class="content">组成:<br></td>
-                            <td  colspan="3" width="74%">  商品价格  +  货运总价<div style="float:right;">实际支付总额为:   <span id="total_money">{$infodb[price]}</span> 元</div> </td>
+                            <td  colspan="3" width="74%">  商品价格  +  货运总价
+                                <div style="float:right;">实际支付总额为:   <span id="total_money">{$infodb[price]}</span> 元</div>
+                                <input type="hidden" name="totalMoney" id="totalMoney" />
+                            </td>
                         </tr>
 
                         <tr><td colspan="4"><hr/>

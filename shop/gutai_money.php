@@ -33,7 +33,9 @@ if(!$array[yeepay_id]&&!$array[tenpay_id]&&!$array[alipay_id]&&!$array[pay99_id]
         $SQL=" A.cuid='$lfjuid'  and ifgutai=1 and ifpay=1";
     }
 
-    $query = $db->query("SELECT SQL_CALC_FOUND_ROWS A.*,B.* FROM {$_pre}join A LEFT JOIN {$_pre}content_2 B ON A.id=B.id WHERE $SQL ORDER BY A.id DESC LIMIT $min,$rows");
+    $balance_arr = $db->get_one("SELECT gutai,mobphone FROM home_memberdata WHERE uid='$lfjuid'");
+
+    $query = $db->query("SELECT SQL_CALC_FOUND_ROWS A.*,B.*,A.id as id,C.title,A.uid as uid FROM {$_pre}join A LEFT JOIN {$_pre}content_2 B ON A.id=B.id LEFT JOIN {$_pre}content C ON A.id=C.id WHERE $SQL ORDER BY A.id DESC LIMIT $min,$rows");
 
     $RS=$db->get_one("SELECT FOUND_ROWS()");
     $totalNum=$RS['FOUND_ROWS()'];
@@ -42,9 +44,11 @@ if(!$array[yeepay_id]&&!$array[tenpay_id]&&!$array[alipay_id]&&!$array[pay99_id]
     $totalmoney = 0;
     while($rs = $db->fetch_array($query))
     {
-        $rs[shop]=$db->get_one("SELECT * FROM {$_pre}content WHERE id='$rs[cid]'");
-        $totalmoney += $rs[shop][price];
-        $rs[posttime]=date("m-d H:i",$rs[posttime]);
+        //$rs[shop]=$db->get_one("SELECT * FROM {$_pre}content WHERE id='$rs[cid]'");
+        $rs[totalmoney] = str_replace(',', '', $rs[totalmoney]);
+        $totalmoney += intval($rs[totalmoney]);
+        $rs[posttime]=date("Y-m-d H:i",$rs[posttime]);
+        $rs[endtime]=date("Y-m-d H:i",$rs[end_date]);
         if($job=='mylist'){	//ÎÒµÄ¶©µ¥
             $rs[editurl]="../join.php?job=edit&id=$rs[id]&fid=$rs[fid]&cid=$rs[cid]' target='_blank";
             if($rs[ifpay]){
@@ -62,11 +66,13 @@ if(!$array[yeepay_id]&&!$array[tenpay_id]&&!$array[alipay_id]&&!$array[pay99_id]
             $rs[editurl]="?job=edit&id=$rs[id]";
         }
         $rs[ajaxurl] = "$Murl/../do/ajax_gutai.php";
+        $rs[refundment_ajaxurl] = "$Murl/../ly_adm/ajax_order.php";
         $listdb[]=$rs;
     }
+
     $rs[ajaxurl] = "$Murl/../do/ajax_gutai.php";
-
-
+    $refundment_ajaxurl = "$Murl/../ly_adm/ajax_order.php";
+    $login_uid = $lfjuid;
 
     /***************************************************************/
     require(getTpl("gutai_money"));

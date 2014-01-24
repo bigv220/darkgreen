@@ -44,7 +44,6 @@ if (!empty($_SESSION)) {
     $cid_str = substr($cid_str, 0, -1);
 }
 
-
 /**
  * 获得下拉店铺列表
  */
@@ -57,26 +56,21 @@ while($rs = $db->fetch_array($query)){
 /**
  * 获得当前店铺的产品列表
  */
-$query=$db->query("SELECT B.*,A.*,D.email FROM `{$_pre}content` A LEFT JOIN `{$_pre}content_$fidDB[mid]` B ON A.id=B.id LEFT JOIN `{$pre}memberdata` D ON A.uid=D.uid WHERE A.id in ($cid_str) AND A.uid=$uid");
+$query=$db->query("SELECT B.*,A.*,D.email FROM `{$_pre}content` A LEFT JOIN `{$_pre}content_$fidDB[mid]` B ON A.id=B.id LEFT JOIN `{$pre}memberdata` D ON A.uid=D.uid WHERE A.id in ($cid_str) AND A.uid=$lfjuid");
 while($rs = $db->fetch_array($query)) {
     $rs['is_ask'] = $_POST['is_ask'];
     $rs['hownum'] = $_SESSION['goods_in_cart'][$uid][$rs['id']]['quantity'];
-    $infodb[$rs['rid']] = $rs;
+    $infodb[] = $rs;
 }
-print_r($infodb);exit;
 
 $fidDB[mid] = 2;
 $contact_db=$db->get_one("SELECT B.* FROM `{$_pre}content_$fidDB[mid]` B LEFT JOIN `{$pre}memberdata` D ON b.uid=D.uid WHERE B.uid='$lfjuid' order by rid desc");
 
 if(!$infodb){
 	showerr("内容不存在");
-}elseif($infodb[fid]!=$fid){
+}elseif($infodb[0][fid]!=$fid){
 	//showerr("FID有误!!!");
 }
-
-//$totalmoney = number_format($shopnum*$infodb[price],2);
-$totalmoney = $shopnum*$infodb[price];
-
 
 $mid=2;
 
@@ -89,38 +83,46 @@ $field_db = $module_DB[$mid][field];
 /**处理提交的新发表内容**/
 if($action=="postnew")
 {
+    $shopnum = $_POST[shopnum];
 	if($shopnum<1){
 		showerr("订购的产品不能小于一件!");
 	}
 
+    $postdb = $_POST['postdb'];
+
+    $totalmoney = $_POST[totalMoney]?$_POST[totalMoney]:0;
+
 	//自定义字段的合法检查与数据处理
 	$Module_db->checkpost($field_db,$postdb,'');
 
-	$rs=$db->get_one("SELECT * FROM `{$pre}purse` WHERE uid='$infodb[uid]'");
-	$array=unserialize($rs[config]);
-
-	if($postdb[order_sendtype]==2){			//平邮
-		$totalmoney+=floatval($array[slow_send]);
-	}elseif($postdb[order_sendtype]==3){	//快递
-		$totalmoney+=floatval($array[norm_send]);
-	}elseif($postdb[order_sendtype]==4){	//EMS
-		$totalmoney+=floatval($array[ems_send]);
-	} else if($postdb[order_sendtype] == 5) {
-        $totalmoney+=floatval($array[transfer_fee1]);
-    } else if($postdb[order_sendtype] == 6) {
-        $totalmoney+=floatval($array[transfer_fee2]);
-    } else if($postdb[order_sendtype] == 7) {
-        $totalmoney+=floatval($array[transfer_fee3]);
-    }
+//	$rs=$db->get_one("SELECT * FROM `{$pre}purse` WHERE uid='$infodb[0][uid]'");
+//	$array=unserialize($rs[config]);
+//
+//	if($postdb[order_sendtype]==2){			//平邮
+//		$totalmoney+=floatval($array[slow_send]);
+//	}elseif($postdb[order_sendtype]==3){	//快递
+//		$totalmoney+=floatval($array[norm_send]);
+//	}elseif($postdb[order_sendtype]==4){	//EMS
+//		$totalmoney+=floatval($array[ems_send]);
+//	} else if($postdb[order_sendtype] == 5) {
+//        $totalmoney+=floatval($array[transfer_fee1]);
+//    } else if($postdb[order_sendtype] == 6) {
+//        $totalmoney+=floatval($array[transfer_fee2]);
+//    } else if($postdb[order_sendtype] == 7) {
+//        $totalmoney+=floatval($array[transfer_fee3]);
+//    }
 
 	$totalmoney = number_format($totalmoney,2);
+
+    $deliver_total = $_POST[deliverTotal]?$_POST[deliverTotal]:0;
+    $infodb_uid = $infodb[0][uid];
 
     $sellertext = stripcslashes($postdb[sellertext]);
     $buyertext = stripcslashes($postdb[buyertext]);
 	/*往主信息表插入内容*/
-	$db->query("INSERT INTO `{$_pre}join` ( `mid` , `cid` , `cuid` , `fid` ,  `posttime` ,  `uid` , `username` , `yz` , `ip` , `shopnum` , `totalmoney`,`isagreement`,`sellertext`,`buyertext`,`ismodify`,`send_type`,`deliver_desc`)
+	$db->query("INSERT INTO `{$_pre}join` ( `mid` , `cid` , `cuid` , `fid` ,  `posttime` ,  `uid` , `username` , `yz` , `ip` , `shopnum` , `totalmoney`,`isagreement`,`sellertext`,`buyertext`,`ismodify`,`send_type`,`deliver_desc`,`deliver_total`)
 	VALUES (
-	'$mid','$cid','$infodb[uid]', '$fid','$timestamp','$lfjdb[uid]','$lfjdb[username]','0','$onlineip','$shopnum','$totalmoney','$postdb[isagreement]',\"$sellertext\",\"$buyertext\",'$postdb[ismodify]','$postdb[send_type]','$postdb[deliver_desc]')");
+	'$mid','$cid','$infodb_uid', '$fid','$timestamp','$lfjdb[uid]','$lfjdb[username]','0','$onlineip','$shopnum','$totalmoney','$postdb[isagreement]',\"$sellertext\",\"$buyertext\",'$postdb[ismodify]','$postdb[send_type]','$postdb[deliver_desc]','$deliver_total')");
 
 	$id = $db->insert_id();
 
@@ -144,16 +146,16 @@ if($action=="postnew")
 
 
 	if($webdb[order_send_mail]){
-		send_mail($infodb[email],"你有客户下订单了","请尽快查看<A HREF='$Murl/member/joinshow.php?fid=$fid&id=$id' target='_blank'>$Murl/member/joinshow.php?fid=$fid&id=$id</A>",0);
+		send_mail($infodb[0][email],"你有客户下订单了","请尽快查看<A HREF='$Murl/member/joinshow.php?fid=$fid&id=$id' target='_blank'>$Murl/member/joinshow.php?fid=$fid&id=$id</A>",0);
 	}
 	if($webdb[order_send_msg]){
-		send_msg($infodb[uid],"你有客户下订单了","请尽快查看<A HREF='$Murl/member/joinshow.php?fid=$fid&id=$id' target='_blank'>$Murl/member/joinshow.php?fid=$fid&id=$id</A>");
+		send_msg($infodb[0][uid],"你有客户下订单了","请尽快查看<A HREF='$Murl/member/joinshow.php?fid=$fid&id=$id' target='_blank'>$Murl/member/joinshow.php?fid=$fid&id=$id</A>");
 	}
 
 	if($webdb[order_send_sms]){
-		$rs=$db->get_one("SELECT mobphone FROM {$pre}memberdata WHERE uid='$infodb[uid]'");
+		$rs=$db->get_one("SELECT mobphone FROM {$pre}memberdata WHERE uid='$infodb[0][uid]'");
 		if($rs[mobphone]){
-			$content=get_word("你有客户下订单了:$infodb[title]",68);
+			$content=get_word("你有客户下订单了:$infodb[0][title]",68);
 			sms_send($rs[mobphone],$content);
 		}
 	}
@@ -163,7 +165,7 @@ if($action=="postnew")
 		header("location:olpay.php?id=$id&fid=$fid");
 		exit;
 	}else{
-		refreshto("bencandy.php?city_id=$infodb[city_id]&fid=$fid&id=$cid","订购成功,请等待发货!");
+		refreshto("bencandy.php?city_id=$infodb[0][city_id]&fid=$fid&id=$cid","订购成功,请等待发货!");
 	}
 }
 
@@ -228,11 +230,11 @@ elseif($action=="edit")
 	$db->query("UPDATE `{$_pre}content_$mid` SET $sql WHERE id='$id'");
 	$db->query("UPDATE `{$_pre}join` SET shopnum='$shopnum' WHERE id='$id'");
 
-	refreshto("bencandy.php?city_id=$infodb[city_id]&fid=$fid&id=$cid","修改成功");
+	refreshto("bencandy.php?city_id=$infodb[0][city_id]&fid=$fid&id=$cid","修改成功");
 }
 else
 {
-	if(!$web_admin && $infodb[uid]==$lfjuid){
+	if(!$web_admin && $infodb[0][uid]==$lfjuid){
 		showerr("你不能订购自己发布的产品!");
 	}
 	/*模块设置时,有些字段有默认值*/
@@ -242,7 +244,7 @@ else
 		}
 	}
 
-	$rs=$db->get_one("SELECT * FROM `{$pre}purse` WHERE uid='$infodb[uid]'");
+	$rs=$db->get_one("SELECT * FROM `{$pre}purse` WHERE uid=".$infodb[0][uid]);
 	$conf=unserialize($rs[config]);
 
     $conf[slow_send] = intval($conf[slow_send]);
@@ -265,8 +267,8 @@ else
     }
 
     //卖家文本
-    $seller_text = $infodb[sellertext];
-    $if_changeable = $infodb[if_changeable] ? $infodb[if_changeable] : 1;
+    $seller_text = $infodb[0][sellertext];
+    $if_changeable = $infodb[0][if_changeable] ? $infodb[0][if_changeable] : 1;
 
     $conf[default_sendtype] = $rsdb[order_sendtype];
 	/*表单默认变量作处理*/
